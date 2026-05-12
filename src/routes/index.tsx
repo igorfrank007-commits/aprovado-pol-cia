@@ -318,8 +318,6 @@ function Index() {
         </div>
       </section>
 
-      </section>
-
       {/* OFERTA */}
       <section id="oferta" className="bg-gradient-hero py-24">
         <div className="mx-auto max-w-3xl px-6">
