@@ -2,6 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import heroImg from "@/assets/hero-policial.jpg";
 import autoridadeImg from "@/assets/autoridade.jpg";
 import estudanteImg from "@/assets/estudante.jpg";
+import capaLivro from "@/assets/capa-livro.png";
+import trajetoriaImg from "@/assets/trajetoria.png";
+import sumarioImg from "@/assets/sumario.png";
 import {
   Target, Calendar, BookOpen, ListChecks, Scale, FileSpreadsheet,
   Filter, MessageCircle, Headphones, Clock, Trophy, Check,
@@ -114,13 +117,13 @@ function Index() {
             </div>
           </div>
           <div className="relative hidden lg:block">
-            <div className="absolute -inset-4 rounded-3xl bg-gradient-gold opacity-20 blur-3xl" />
+            <div className="absolute -inset-4 rounded-3xl bg-gradient-gold opacity-30 blur-3xl" />
             <img
-              src={heroImg}
-              alt="Policial aprovado em concurso"
-              width={1536}
-              height={1024}
-              className="relative rounded-3xl border border-gold/20 shadow-elegant"
+              src={capaLivro}
+              alt="Capa do livro Como Passar em Concursos Policiais - Igor Andrade"
+              width={1024}
+              height={1400}
+              className="relative mx-auto max-h-[640px] w-auto rounded-2xl shadow-elegant"
             />
           </div>
         </div>
@@ -260,7 +263,7 @@ function Index() {
         <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[1fr_1.2fr] lg:items-center">
           <div className="relative order-2 lg:order-1">
             <div className="absolute -inset-4 rounded-3xl bg-gradient-gold opacity-15 blur-3xl" />
-            <img src={autoridadeImg} alt="Autoridade do método" loading="lazy" width={1024} height={1024} className="relative rounded-3xl border border-gold/20 shadow-elegant" />
+            <img src={trajetoriaImg} alt="Minha trajetória de aprovações - Igor Andrade" loading="lazy" width={1024} height={1024} className="relative rounded-3xl border border-gold/20 shadow-elegant" />
           </div>
           <div className="order-1 lg:order-2">
             <span className="text-xs font-semibold uppercase tracking-widest text-gold">Quem está por trás</span>
