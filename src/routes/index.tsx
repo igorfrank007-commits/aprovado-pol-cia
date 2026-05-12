@@ -129,7 +129,21 @@ function Index() {
         </div>
       </section>
 
-      {/* POR QUE NÃO ESTÁ PASSANDO */}
+      {/* TRAJETÓRIA */}
+      <section className="border-y border-border/50 bg-card/40 py-16">
+        <div className="mx-auto max-w-5xl px-6">
+          <div className="relative">
+            <div className="absolute -inset-6 rounded-3xl bg-gradient-gold opacity-20 blur-3xl" />
+            <img
+              src={trajetoriaImg}
+              alt="Minha trajetória de aprovações - Igor Andrade"
+              loading="lazy"
+              className="relative mx-auto w-full rounded-2xl border border-gold/30 shadow-elegant"
+            />
+          </div>
+        </div>
+      </section>
+
       <section className="border-y border-border/50 bg-card/40 py-20">
         <div className="mx-auto max-w-5xl px-6 text-center">
           <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-destructive">
@@ -282,30 +296,24 @@ function Index() {
 
       {/* AUTORIDADE */}
       <section className="py-20">
-        <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[1fr_1.2fr] lg:items-center">
-          <div className="relative order-2 lg:order-1">
-            <div className="absolute -inset-4 rounded-3xl bg-gradient-gold opacity-15 blur-3xl" />
-            <img src={trajetoriaImg} alt="Minha trajetória de aprovações - Igor Andrade" loading="lazy" width={1024} height={1024} className="relative rounded-3xl border border-gold/20 shadow-elegant" />
-          </div>
-          <div className="order-1 lg:order-2">
-            <span className="text-xs font-semibold uppercase tracking-widest text-gold">Quem está por trás</span>
-            <h2 className="mt-3 font-display text-3xl font-bold sm:text-5xl">Um método forjado dentro do mundo real dos concursos policiais</h2>
-            <p className="mt-4 text-muted-foreground">
-              Anos de imersão no padrão das principais bancas, dezenas de aprovações e um sistema testado em quem realmente
-              precisava: o concurseiro que não tinha tempo a perder.
-            </p>
-            <div className="mt-8 grid grid-cols-3 gap-4">
-              {[
-                { n: "+1.510", l: "Aprovados" },
-                { n: "10+", l: "Anos de método" },
-                { n: "98%", l: "Satisfação" },
-              ].map((s) => (
-                <div key={s.l} className="rounded-2xl border border-border bg-card p-5 text-center">
-                  <p className="font-display text-2xl font-bold text-gradient-gold sm:text-3xl">{s.n}</p>
-                  <p className="mt-1 text-xs text-muted-foreground">{s.l}</p>
-                </div>
-              ))}
-            </div>
+        <div className="mx-auto max-w-4xl px-6 text-center">
+          <span className="text-xs font-semibold uppercase tracking-widest text-gold">Quem está por trás</span>
+          <h2 className="mt-3 font-display text-3xl font-bold sm:text-5xl">Um método forjado dentro do mundo real dos concursos policiais</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
+            Anos de imersão no padrão das principais bancas, dezenas de aprovações e um sistema testado em quem realmente
+            precisava: o concurseiro que não tinha tempo a perder.
+          </p>
+          <div className="mx-auto mt-10 grid max-w-3xl grid-cols-3 gap-4">
+            {[
+              { n: "+1.510", l: "Aprovados" },
+              { n: "10+", l: "Anos de método" },
+              { n: "98%", l: "Satisfação" },
+            ].map((s) => (
+              <div key={s.l} className="rounded-2xl border border-border bg-card p-5 text-center">
+                <p className="font-display text-2xl font-bold text-gradient-gold sm:text-3xl">{s.n}</p>
+                <p className="mt-1 text-xs text-muted-foreground">{s.l}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
