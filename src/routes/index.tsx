@@ -102,7 +102,7 @@ function Index() {
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
               <a
-                href="#oferta"
+                href="https://pay.kiwify.com.br/mPgVeXg" target="_blank" rel="noopener noreferrer"
                 className="animate-pulse-gold inline-flex items-center justify-center rounded-xl bg-gradient-gold px-8 py-4 font-display text-lg font-bold uppercase tracking-wide text-gold-foreground shadow-gold transition hover:scale-[1.02]"
               >
                 Quero ser aprovado
@@ -318,7 +318,7 @@ function Index() {
                 <p className="mt-1 font-display text-5xl font-bold text-gradient-gold sm:text-6xl">12x R$ 49,70</p>
                 <p className="mt-1 text-sm text-muted-foreground">ou R$ 497,00 à vista</p>
                 <a
-                  href="#"
+                  href="https://pay.kiwify.com.br/mPgVeXg" target="_blank" rel="noopener noreferrer"
                   className="animate-pulse-gold mt-8 inline-flex w-full items-center justify-center rounded-xl bg-gradient-gold px-8 py-5 font-display text-lg font-bold uppercase tracking-wide text-gold-foreground shadow-gold transition hover:scale-[1.02] sm:w-auto"
                 >
                   Quero garantir minha vaga
@@ -345,7 +345,7 @@ function Index() {
             Mas isso depende da decisão que você toma hoje. Daqui a 6 meses você vai agradecer — ou se arrepender — pelo que decidir agora.
           </p>
           <a
-            href="#oferta"
+            href="https://pay.kiwify.com.br/mPgVeXg" target="_blank" rel="noopener noreferrer"
             className="animate-pulse-gold mt-10 inline-flex items-center justify-center rounded-xl bg-gradient-gold px-10 py-5 font-display text-lg font-bold uppercase tracking-wide text-gold-foreground shadow-gold transition hover:scale-[1.02]"
           >
             Quero começar agora
