@@ -206,6 +206,28 @@ function Index() {
         </div>
       </section>
 
+      {/* SUMÁRIO */}
+      <section className="py-20">
+        <div className="mx-auto max-w-6xl px-6 text-center">
+          <span className="text-xs font-semibold uppercase tracking-widest text-gold">Sumário completo</span>
+          <h2 className="mt-3 font-display text-3xl font-bold sm:text-5xl">
+            O guia <span className="text-gradient-gold">definitivo</span> da sua aprovação
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
+            16 capítulos. Do primeiro passo ao dia da prova. Tudo que você precisa saber está aqui dentro.
+          </p>
+          <div className="relative mt-12">
+            <div className="absolute -inset-6 rounded-3xl bg-gradient-gold opacity-20 blur-3xl" />
+            <img
+              src={sumarioImg}
+              alt="Sumário do guia Como Passar em Concursos Policiais"
+              loading="lazy"
+              className="relative mx-auto w-full max-w-3xl rounded-2xl border border-gold/30 shadow-elegant"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* PROVA SOCIAL */}
       <section className="py-20">
         <div className="mx-auto max-w-7xl px-6">
