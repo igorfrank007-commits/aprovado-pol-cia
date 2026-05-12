@@ -61,10 +61,23 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+@theme inline {
+  --color-gold: var(--gold);
+  --color-gold-foreground: var(--gold-foreground);
+  --color-navy: var(--navy);
+  --color-graphite: var(--graphite);
+  --font-display: "Oswald", "Inter", sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  --background: oklch(0.16 0.02 260);
+  --foreground: oklch(0.98 0.005 250);
+  --gold: oklch(0.78 0.14 80);
+  --gold-foreground: oklch(0.16 0.02 260);
+  --navy: oklch(0.22 0.05 260);
+  --graphite: oklch(0.25 0.01 260);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
