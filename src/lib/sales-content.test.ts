@@ -1,3 +1,4 @@
+/// <reference types="bun" />
 import { test, expect } from 'bun:test';
 import { checkoutUrl, offer } from './sales-content';
 test('all enrollment links use the supplied Kiwify checkout', () => { expect(checkoutUrl).toBe('https://pay.kiwify.com.br/mPgVeXg'); });
