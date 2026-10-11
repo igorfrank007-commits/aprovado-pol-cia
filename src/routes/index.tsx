@@ -1,121 +1,38 @@
-import { createFileRoute } from "@tanstack/react-router";
-import heroImg from "@/assets/hero-policial.jpg";
-import trajetoriaImg from "@/assets/trajetoria.png";
-import { Button } from "@/components/ui/button";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Brain, BookOpen, Monitor, Calendar, Target, Route as RouteIcon, Headphones, ListChecks, Check, ShieldCheck, Trophy, MessageCircle, FileSpreadsheet, Scale, Filter } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
-
-export const Route = createFileRoute("/")({
-  head: () => ({ meta: [
-    { title: "Concurso Público Facilitado | Método de Igor Andrade" },
-    { name: "description", content: "Conheça o método de estudos de Igor Andrade para concursos públicos. Planejamento, revisões inteligentes, questões e preparação para sua aprovação." },
-    { property: "og:title", content: "Concurso Público Facilitado | Igor Andrade" },
-    { property: "og:description", content: "Transforme sua preparação com o método de estudos que aprovou Igor Andrade na Polícia Federal, para Delegado de Polícia e na ABIN." },
-    { property: "og:type", content: "website" },
-    { name: "twitter:card", content: "summary_large_image" },
-  ] }),
-  component: Index,
+import { createFileRoute } from '@tanstack/react-router';
+import type { ReactNode } from 'react';
+import { ArrowRight, Shield, CircleCheck, TriangleAlert, Flame, Star, BadgeCheck, MessageCircle, CheckCheck, Gift, Lock, Clock } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { SalesVideo } from '@/components/sales-video';
+import authority from '@/assets/authority.webp.asset.json';
+import hero from '@/assets/delegado.webp.asset.json';
+import student from '@/assets/student.webp.asset.json';
+import { benefits, modules, problems, testimonials, audience, included, offer, checkoutUrl } from '@/lib/sales-content';
+export const Route = createFileRoute('/')({
+ head: () => ({meta:[
+  {title:'Como Passar em Concursos Policiais e Delegado | Método Aprovado'},
+  {name:'description',content:'Método validado para aprovação em concursos policiais e delegado. Planejamento, revisões e estratégia para você ser o próximo aprovado.'},
+  {property:'og:title',content:'Como Passar em Concursos Policiais e Delegado | Método Aprovado'},
+  {property:'og:description',content:'Método validado para aprovação em concursos policiais e delegado. Planejamento, revisões e estratégia para você ser o próximo aprovado.'},
+  {property:'og:type',content:'website'}, {name:'twitter:card',content:'summary_large_image'},
+ ]}),component:Index,
 });
-
-const pilares = [
-  { icon: FileSpreadsheet, title: "Planejamento realista", desc: "Organize suas prioridades em um plano de estudos que respeite seu tempo disponível e sua rotina." },
-  { icon: BookOpen, title: "Revisão ativa e flashcards", desc: "Use revisões ativas e flashcards para recuperar o conteúdo estudado e reforçar os assuntos que exigem atenção." },
-  { icon: ListChecks, title: "Questões comentadas", desc: "Analise as questões e seus comentários para compreender as bancas, identificar erros e direcionar sua preparação." },
-];
-const inclusos = [
-  { icon: BookOpen, title: "Curso completo", desc: "10 módulos sobre organização, ciclo de estudos, revisões, questões e estratégias de reta final." },
-  { icon: MessageCircle, title: "Suporte por 30 dias", desc: "Acompanhamento na implementação do método e plantão de dúvidas pelo WhatsApp." },
-  { icon: Calendar, title: "Planejamento individual", desc: "Organize suas prioridades e monte um cronograma de estudos e revisões para sua rotina." },
-  { icon: FileSpreadsheet, title: "Controle de desempenho", desc: "Planilhas para acompanhar exercícios, reconhecer dificuldades e visualizar sua evolução." },
-  { icon: Scale, title: "Lei seca estratégica", desc: "Direcione a leitura da legislação de acordo com a relevância dos assuntos nas bancas." },
-  { icon: Filter, title: "Filtro de questões QConcursos", desc: "Aprenda a selecionar questões relevantes e dedicar tempo ao que importa para seu concurso." },
-];
-const perguntas = [
-  { q: "O curso é presencial ou on-line?", a: "O curso é digital. Você pode estudar de onde estiver e organizar a preparação de acordo com sua rotina." },
-  { q: "Tenho acompanhamento por quanto tempo?", a: "O curso inclui suporte por 30 dias na implementação do método e plantão de dúvidas pelo WhatsApp." },
-  { q: "Existe grupo de alunos?", a: "O acompanhamento inclui um plantão de dúvidas pelo WhatsApp. A participação em um grupo de alunos não está especificada nesta oferta." },
-  { q: "Por onde são feitos os simulados?", a: "O método orienta sua prática de questões e o controle de desempenho, incluindo o uso de filtros no QConcursos. Não é necessário depender de uma plataforma própria de simulados para aplicar essas estratégias." },
-  { q: "Qual a média de aprovados com o método?", a: "As aprovações apresentadas nesta página são da trajetória de Igor Andrade: 3 na Polícia Federal, 4 para Delegado de Polícia e 1 na ABIN. Não há uma taxa de aprovação de alunos informada. Resultados dependem da preparação e das condições de cada candidato." },
-];
-
-function Checkout({ children }: { children: React.ReactNode }) {
-  return <Button asChild size="lg" className="animate-pulse-gold h-auto min-h-14 max-w-full whitespace-normal rounded-xl bg-gradient-gold px-8 py-4 text-center font-display text-lg font-bold uppercase tracking-wide text-gold-foreground shadow-gold transition hover:scale-[1.02]"><a href="https://pay.kiwify.com.br/mPgVeXg" target="_blank" rel="noopener noreferrer">{children}</a></Button>;
-}
-function Heading({ eyebrow, children }: { eyebrow?: string; children: React.ReactNode }) {
-  return <div className="text-center">{eyebrow && <span className="text-xs font-semibold uppercase tracking-widest text-gold">{eyebrow}</span>}<h2 className="mt-3 font-display text-3xl font-bold sm:text-5xl">{children}</h2></div>;
-}
-function FeatureGrid({ items }: { items: { icon: LucideIcon; title: string; desc: string }[] }) {
-  return <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{items.map(({ icon: Icon, title, desc }) => <div key={title} className="group rounded-2xl border border-border bg-card/60 p-6 transition hover:-translate-y-1 hover:border-gold/50 hover:shadow-gold"><div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-gold text-gold-foreground shadow-gold"><Icon className="h-6 w-6" /></div><h3 className="mt-5 font-display text-xl font-bold">{title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p></div>)}</div>;
-}
-function Index() {
-  return <div className="min-h-screen bg-background text-foreground">
-    <section className="relative overflow-hidden bg-gradient-hero">
-      <div className="absolute inset-0 bg-cover bg-center opacity-30" style={{ backgroundImage: `url(${heroImg})` }} aria-hidden />
-      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/30" />
-      <div className="relative mx-auto max-w-7xl px-6 py-20 md:py-28">
-        <div className="max-w-4xl animate-fade-up">
-          <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-gold"><ShieldCheck className="h-4 w-4" /> Concurso Público Facilitado</span>
-          <h1 className="mt-6 font-display text-4xl font-bold leading-[1.05] sm:text-5xl md:text-6xl">DESCUBRA O <span className="text-gradient-gold">MÉTODO SIMPLIFICADO</span> QUE ME AJUDOU A <span className="text-gradient-gold">PASSAR 3X NA POLÍCIA FEDERAL, 4X PARA DELEGADO DE POLÍCIA E 1X NA ABIN</span> E FATURAR 20 MIL POR MÊS</h1>
-          <p className="mt-6 max-w-2xl text-lg text-muted-foreground">Transforme sua preparação para concursos públicos com planejamento, revisões inteligentes e um caminho claro até a prova.</p>
-          <div className="mt-8"><Checkout>Eu quero passar no concurso</Checkout></div>
-        </div>
-      </div>
-    </section>
-
-    <section className="border-y border-border/50 bg-card/40 py-16">
-      <div className="mx-auto max-w-5xl px-6">
-        <span className="text-xs font-semibold uppercase tracking-widest text-gold">Antes de revelar o método, deixa eu me apresentar</span>
-        <h2 className="mt-3 font-display text-3xl font-bold sm:text-5xl">Me chamo <span className="text-gradient-gold">Igor Andrade</span>. Minha trajetória é feita de aprovações.</h2>
-        <p className="mt-5 text-muted-foreground">Fui aprovado 3 vezes na Polícia Federal, 4 vezes para Delegado de Polícia e 1 vez na ABIN. Ao longo dessa trajetória, organização, prática de questões e revisões fizeram parte da minha preparação.</p>
-        <p className="mt-4 text-muted-foreground">Reuni essa experiência em um método para ajudar você a sair dos estudos sem direção e construir uma preparação estratégica para concursos públicos.</p>
-        <img src={trajetoriaImg} alt="Trajetória de aprovações de Igor Andrade" loading="lazy" className="mx-auto mt-10 w-full rounded-2xl border border-gold/30 shadow-elegant" />
-      </div>
-    </section>
-
-    <section aria-label="Aprovações de Igor Andrade" className="border-y border-border bg-card">
-      <div className="mx-auto grid max-w-7xl divide-y divide-border md:grid-cols-3 md:divide-x md:divide-y-0">
-        {[
-          { title: "3 aprovações", desc: "na Polícia Federal" },
-          { title: "ABIN", desc: "aprovação para Oficial de Inteligência" },
-          { title: "4 aprovações", desc: "em concursos para Delegado de Polícia" },
-        ].map(({ title, desc }) => <div key={title} className="px-6 py-9 text-center"><p className="font-display text-3xl font-bold text-gold sm:text-4xl">{title}</p><p className="mt-3 text-sm text-muted-foreground sm:text-base">{desc}</p></div>)}
-      </div>
-    </section>
-
-    <section id="pilares" className="py-20"><div className="mx-auto max-w-7xl px-6">
-      <div className="mx-auto max-w-4xl text-center">
-        <span className="inline-flex items-center justify-center gap-3 font-display text-sm font-semibold uppercase tracking-widest text-muted-foreground"><span aria-hidden className="h-px w-8 bg-muted-foreground" />Os pilares da preparação</span>
-        <h2 className="mt-4 font-display text-3xl font-bold sm:text-5xl">Um método claro para você saber<br className="hidden sm:block" /> <span className="text-gradient-gold">o que fazer a seguir</span></h2>
-        <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">Construa uma rotina sustentável, acompanhe o que está funcionando e direcione seu esforço para o que precisa melhorar.</p>
-      </div>
-      <div className="mt-14 grid gap-6 md:grid-cols-3">{pilares.map(({ icon: Icon, title, desc }) => <div key={title} className="rounded-lg border border-border bg-card p-7 transition hover:border-gold/50"><div className="grid h-14 w-14 place-items-center rounded-lg bg-gold/10 text-gold"><Icon className="h-6 w-6" /></div><h3 className="mt-7 font-display text-xl font-bold">{title}</h3><p className="mt-3 leading-relaxed text-muted-foreground">{desc}</p></div>)}</div>
-    </div></section>
-
-    <section id="como-funciona" className="border-y border-border/50 bg-card/40 py-20"><div className="mx-auto max-w-7xl px-6">
-      <div className="mx-auto max-w-4xl text-center">
-        <span className="inline-flex items-center justify-center gap-3 font-display text-sm font-semibold uppercase tracking-widest text-muted-foreground"><span aria-hidden className="h-px w-8 bg-muted-foreground" />Da intenção à execução</span>
-        <h2 className="mt-4 font-display text-3xl font-bold sm:text-5xl">Como colocar o método em<br className="hidden sm:block" /> prática</h2>
-        <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">Comece com uma visão clara do seu momento e evolua com acompanhamento dos seus próprios indicadores.</p>
-      </div>
-      <ol className="mt-14 grid gap-10 md:grid-cols-3">{[
-        ["01", "Defina seu alvo", "Escolha o concurso prioritário e identifique edital, matérias, tempo disponível e principais dificuldades."],
-        ["02", "Organize a rotina", "Distribua estudo novo, revisões, lei seca e questões em um plano possível de cumprir ao longo das semanas."],
-        ["03", "Meça e ajuste", "Use seu desempenho para priorizar lacunas, reforçar assuntos e adaptar o plano conforme a preparação avança."],
-      ].map(([n, t, d], i) => <li key={n}><div className="flex items-center gap-6"><span className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-background font-display text-2xl font-bold text-gold">{n}</span>{i < 2 && <span aria-hidden className="hidden flex-1 border-t border-dashed border-gold/30 md:block" />}</div><h3 className="mt-7 font-display text-xl font-bold">{t}</h3><p className="mt-4 leading-relaxed text-muted-foreground">{d}</p></li>)}</ol>
-    </div></section>
-
-    <section className="py-20"><div className="mx-auto max-w-4xl px-6 text-center"><Heading eyebrow="Você nunca esteve sozinho(a)">Sua preparação não precisa ser solitária</Heading><MessageCircle className="mx-auto mt-8 h-12 w-12 text-gold" /><p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">Ter uma direção faz diferença. Além do conteúdo, você conta com suporte por 30 dias e um plantão de dúvidas pelo WhatsApp para aplicar o método à sua rotina.</p></div></section>
-
-    <section className="border-y border-border/50 bg-card/40 py-20"><div className="mx-auto max-w-7xl px-6"><Heading>Conheça os números da minha trajetória</Heading><div className="mt-12 grid grid-cols-2 gap-8 md:grid-cols-4">{[{n:"3x",l:"Polícia Federal"},{n:"4x",l:"Delegado de Polícia"},{n:"1x",l:"ABIN"},{n:"2009",l:"Primeira aprovação na PF"}].map(({n,l}) => <div key={l} className="text-center"><p className="font-display text-5xl font-bold text-gradient-gold">{n}</p><p className="mt-3 text-sm text-muted-foreground">{l}</p></div>)}</div></div></section>
-
-    <section className="py-20"><div className="mx-auto max-w-7xl px-6"><Heading eyebrow="Concurso Público Facilitado">O que está incluso</Heading><FeatureGrid items={inclusos} /></div></section>
-
-    <section id="oferta" className="bg-gradient-hero py-24"><div className="mx-auto max-w-3xl px-6"><Heading>Qual é o valor do seu investimento?</Heading><div className="mt-12 overflow-hidden rounded-3xl border border-gold/40 bg-card shadow-gold"><div className="bg-gradient-gold px-6 py-3 text-center font-display text-sm font-bold uppercase tracking-widest text-gold-foreground">Concurso Público Facilitado</div><div className="p-8 sm:p-12"><div className="text-center"><p className="font-display text-5xl font-bold text-gradient-gold sm:text-6xl">R$ 497,00</p><p className="mt-3 text-muted-foreground">Ou 12x de R$ 49,70</p></div><ul className="mt-8 space-y-4">{["Curso completo (10 módulos)", "Planejamento individual personalizado", "Cronograma de estudos e revisões", "Planilhas de controle e desempenho", "Bônus: Lei seca estratégica", "Bônus: Filtro de questões QConcursos", "Bônus: Plantão de dúvidas WhatsApp 30 dias"].map(item => <li key={item} className="flex items-start gap-3"><Check className="mt-0.5 h-5 w-5 shrink-0 text-gold" /><span>{item}</span></li>)}</ul><div className="mt-10 text-center"><Checkout>Eu quero me inscrever</Checkout><p className="mt-5 text-xs text-muted-foreground">Acesso imediato · Pagamento pelo Kiwify</p></div></div></div></div></section>
-
-    <section className="py-20"><div className="mx-auto max-w-3xl px-6 text-center"><ShieldCheck className="mx-auto h-14 w-14 text-gold" /><Heading>Garantia de 7 dias</Heading><p className="mt-6 text-lg text-muted-foreground">Você recebe 7 dias para avaliar o método. Se decidir que o curso não é para você, solicite o reembolso dentro desse prazo.</p></div></section>
-
-    <section className="border-t border-border/50 bg-card/40 py-20"><div className="mx-auto max-w-3xl px-6"><Heading>Não tenha dúvidas</Heading><Accordion type="single" collapsible className="mt-10">{perguntas.map(({q,a},i) => <AccordionItem key={q} value={`pergunta-${i}`} className="border-border"><AccordionTrigger className="gap-4 py-6 font-display text-lg font-semibold">{q}</AccordionTrigger><AccordionContent className="leading-relaxed text-muted-foreground">{a}</AccordionContent></AccordionItem>)}</Accordion><div className="mt-12 text-center"><Trophy className="mx-auto mb-6 h-12 w-12 text-gold" /><Checkout>Eu quero ser aprovado(a)</Checkout></div></div></section>
-    <footer className="border-t border-border py-10 text-center text-xs text-muted-foreground">© {new Date().getFullYear()} Igor Andrade · Concurso Público Facilitado. Todos os direitos reservados.</footer>
-  </div>;
-}
+function Checkout({children}:{children:ReactNode}) { return <Button asChild className="animate-pulse-gold h-auto min-h-14 max-w-full whitespace-normal rounded-md bg-gradient-gold px-8 py-5 font-display text-base font-bold uppercase text-primary-foreground shadow-gold transition-transform hover:scale-[1.03] sm:text-lg"><a href={checkoutUrl} target="_blank" rel="noopener noreferrer">{children}<ArrowRight className="size-5 shrink-0" /></a></Button>; }
+function Kicker({children}:{children:ReactNode}) { return <span className="inline-block rounded-full border border-gold/30 bg-gold/5 px-3 py-1 text-xs font-semibold uppercase text-gold">{children}</span>; }
+function Heading({kicker,children,subtitle,center=true}:{kicker?:string;children:ReactNode;subtitle?:string;center?:boolean}) { return <div className={`mb-12 ${center?'mx-auto max-w-3xl text-center':''}`}>{kicker && <Kicker>{kicker}</Kicker>}<h2 className="mt-4 text-3xl font-bold uppercase leading-tight sm:text-4xl md:text-5xl">{children}</h2>{subtitle && <p className="mt-4 text-base text-muted-foreground sm:text-lg">{subtitle}</p>}</div>; }
+function Gold({children}:{children:ReactNode}) { return <span className="text-gradient-gold">{children}</span>; }
+function Index() { return <main className="min-h-screen bg-background text-foreground">
+ <section className="overflow-hidden py-10 sm:py-14"><div className="mx-auto max-w-5xl px-4"><img src={authority.url} alt="Trajetória de aprovações em concursos policiais" className="h-auto w-full rounded-2xl border border-gold/30 shadow-gold" /></div></section>
+ <section className="relative overflow-hidden bg-gradient-hero"><div aria-hidden className="grid-bg absolute inset-0 opacity-40" /><div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:py-24 lg:grid-cols-2 lg:items-center lg:gap-8 lg:py-32">
+  <div className="animate-fade-up"><Kicker><Shield className="mr-2 inline size-3.5" />Método Validado</Kicker><h1 className="mt-5 font-display text-4xl font-bold uppercase leading-[1.05] sm:text-5xl md:text-6xl">Descubra o método que <Gold>já aprovou centenas de alunos</Gold> em concursos policiais</h1><p className="mt-6 max-w-xl text-base text-muted-foreground sm:text-lg">Coloque seu nome na lista dos aprovados — mesmo que você esteja perdido nos estudos hoje. Planejamento completo, revisões inteligentes e foco total em concursos policiais e delegado.</p><ul className="mt-6 grid gap-2 text-sm sm:text-base">{['Método validado por aprovados','Organização completa pronta para usar','Estudo inteligente e mais rápido'].map(t=><li key={t} className="flex items-center gap-2"><CircleCheck className="size-5 shrink-0 text-gold" />{t}</li>)}</ul><div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center"><Checkout>Quero ser aprovado</Checkout><span className="text-xs uppercase text-muted-foreground">Acesso imediato · Garantia {offer.guaranteeDays} dias</span></div></div>
+  <div className="grid grid-cols-1 gap-4 md:grid-cols-2"><div className="relative aspect-[1055/1491] overflow-hidden rounded-2xl border border-gold/20 shadow-elegant"><SalesVideo /></div><div className="relative overflow-hidden rounded-2xl border border-gold/20 shadow-elegant"><img src={hero.url} width={1055} height={1491} alt="Guia Como Passar em Concursos Policiais de Igor Andrade" className="h-auto w-full object-cover" /><div className="absolute inset-x-4 bottom-4 flex flex-wrap items-center justify-between gap-2 rounded-lg border border-gold/20 bg-background/70 px-4 py-3 backdrop-blur"><div className="flex items-center gap-2 text-xs"><BadgeCheck className="size-4 text-gold" /><span className="font-semibold">+1.500 alunos</span></div><div className="flex text-gold">{Array.from({length:5},(_,i)=><Star key={i} className="size-3 fill-current" />)}</div></div></div></div>
+ </div></section>
+ <section className="py-20 sm:py-28"><div className="mx-auto max-w-6xl px-4"><Heading kicker="Diagnóstico" subtitle="O problema NÃO é falta de inteligência. O problema é falta de método.">Por que você <Gold>ainda não está passando?</Gold></Heading><div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{problems.map(p=><div key={p} className="flex items-start gap-3 rounded-xl border border-border bg-card p-5"><TriangleAlert className="size-5 shrink-0 text-destructive" /><p className="text-sm">{p}</p></div>)}</div><div className="mx-auto mt-12 max-w-3xl rounded-2xl border border-gold/30 bg-card p-8 text-center"><Flame className="mx-auto mb-4 size-7 text-gold" /><p className="text-lg font-semibold">Quando você tem o método certo, tudo muda. Esforço deixa de ser sofrimento — e vira <Gold>aprovação.</Gold></p></div></div></section>
+ <section className="bg-secondary/30 py-20 sm:py-28"><div className="mx-auto max-w-7xl px-4"><Heading kicker="O que você recebe" subtitle="Um sistema completo, do planejamento à aprovação. Você só precisa sentar e estudar.">Tudo o que você precisa <Gold>para passar</Gold></Heading><div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{benefits.map(({icon:Icon,title,desc})=><article key={title} className="rounded-xl border border-border bg-card p-6 transition hover:-translate-y-1 hover:border-gold/40"><div className="grid size-12 place-items-center rounded-lg border border-gold/20 bg-gold/10 text-gold"><Icon className="size-6" /></div><h3 className="mt-4 text-lg font-bold">{title}</h3><p className="mt-2 text-sm text-muted-foreground">{desc}</p></article>)}</div></div></section>
+ <section className="py-20 sm:py-28"><div className="mx-auto max-w-7xl px-4"><Heading kicker="Conteúdo do curso" subtitle="10 módulos práticos, diretos ao ponto, para te levar à aprovação.">O que você <Gold>vai aprender</Gold></Heading><div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{modules.map(([title,desc],i)=><article key={title} className="rounded-xl border border-border bg-card p-6 transition hover:border-gold/40"><div className="flex items-center gap-3"><span className="font-display text-3xl font-bold text-gradient-gold">{String(i+1).padStart(2,'0')}</span><span className="h-px flex-1 bg-gold/30" /></div><h3 className="mt-3 text-lg font-bold uppercase">{title}</h3><p className="mt-2 text-sm text-muted-foreground">{desc}</p></article>)}</div></div></section>
+ <section className="bg-secondary/30 py-20 sm:py-28"><div className="mx-auto max-w-7xl px-4"><Heading kicker="Prova social" subtitle="Mensagens reais de quem aplicou o método e foi aprovado.">Guia completo — Como passar em concursos policiais — <Gold>16 capítulos</Gold></Heading><div className="grid gap-6 md:grid-cols-3">{testimonials.map(t=><article key={t.name} className="rounded-2xl border border-border bg-card p-5 shadow-elegant"><div className="flex items-center gap-3 border-b border-border pb-3"><div className="grid size-11 place-items-center rounded-full bg-gradient-gold font-display text-lg font-bold text-primary-foreground">{t.initial}</div><div className="flex-1"><p className="font-semibold">{t.name}</p><p className="text-xs text-chat">online</p></div><MessageCircle className="size-5 text-chat" /></div><div className="mt-4 flex flex-col gap-2">{t.messages.map(message=><div key={message} className="ml-auto max-w-[90%] rounded-2xl rounded-tr-sm bg-chat-bubble px-3 py-2 text-sm leading-relaxed ring-1 ring-chat/20">{message}<div className="mt-1 flex items-center justify-end gap-1 text-[10px] text-muted-foreground">{t.time}<CheckCheck className="size-3 text-chat" /></div></div>)}</div></article>)}</div></div></section>
+ <section className="py-20 sm:py-28"><div className="mx-auto grid max-w-7xl gap-12 px-4 lg:grid-cols-2 lg:items-center"><img src={student.url} loading="lazy" width={1024} height={1024} alt="Aluno estudando para concurso policial" className="order-2 w-full rounded-2xl border border-gold/20 shadow-elegant lg:order-1" /><div className="order-1 lg:order-2"><Heading kicker="Para quem é" center={false}>Esse curso é <Gold>para você</Gold></Heading><ul className="grid gap-3 sm:grid-cols-2">{audience.map(t=><li key={t} className="flex items-start gap-2 text-sm sm:text-base"><CircleCheck className="mt-0.5 size-5 shrink-0 text-gold" />{t}</li>)}</ul></div></div></section>
+ <section className="relative overflow-hidden py-20 sm:py-28"><img src={authority.url} alt="" aria-hidden loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-25" /><div className="absolute inset-0 bg-gradient-to-b from-background via-background/85 to-background" /><div className="relative mx-auto max-w-5xl px-4 text-center"><Heading kicker="Autoridade" subtitle="Anos de experiência em concursos policiais, aprovações reais, conhecimento profundo das principais bancas e um método testado em alunos de todo o Brasil.">Um método criado por quem <Gold>já passou</Gold></Heading><div className="grid gap-6 sm:grid-cols-3">{[['+1.500','Alunos no método'],['6','Aprovações pessoais'],['10+','Anos de experiência']].map(([n,l])=><div key={l} className="rounded-xl border border-gold/20 bg-card/60 p-6 backdrop-blur"><p className="font-display text-4xl font-bold text-gradient-gold sm:text-5xl">{n}</p><p className="mt-2 text-sm uppercase text-muted-foreground">{l}</p></div>)}</div></div></section>
+ <section id="oferta" className="py-20 sm:py-28"><div className="mx-auto max-w-4xl px-4"><div className="relative overflow-hidden rounded-3xl border border-gold/40 bg-card shadow-gold"><div aria-hidden className="grid-bg absolute inset-0 opacity-30" /><div className="relative p-8 text-center sm:p-12"><Gift className="mx-auto size-10 text-gold" /><h2 className="mt-4 text-3xl font-bold uppercase sm:text-5xl">Guia completo — Como passar em concursos policiais — <Gold>16 capítulos</Gold></h2><p className="mt-3 text-muted-foreground">Acesso completo ao método, atualização pós edital e suporte direto.</p><ul className="mx-auto mt-8 grid max-w-2xl gap-3 text-left">{included.map(t=><li key={t} className="flex items-center gap-3 rounded-lg border border-border bg-background/40 px-4 py-3"><CircleCheck className="size-5 shrink-0 text-gold" /><span className="text-sm sm:text-base">{t}</span></li>)}</ul><div className="mx-auto mt-10 max-w-md py-6"><p className="text-sm uppercase text-muted-foreground line-through">De R$ {offer.original}</p><p className="mt-1 text-xs uppercase text-gold">Por apenas {offer.installments}x de</p><p className="mt-1 font-display text-5xl font-bold text-gradient-gold sm:text-6xl">R$ {offer.installment.toFixed(2).replace('.',',')}</p><p className="mt-1 text-sm text-muted-foreground">ou R$ {offer.cash.toFixed(2).replace('.',',')} à vista</p></div><div className="mt-8 flex flex-col items-center gap-4"><Checkout>Quero garantir minha vaga</Checkout><div className="flex flex-wrap justify-center gap-4 text-xs uppercase text-muted-foreground"><span className="inline-flex items-center gap-1"><Lock className="size-4 text-gold" />Pagamento seguro</span><span className="inline-flex items-center gap-1"><Shield className="size-4 text-gold" />Garantia de {offer.guaranteeDays} dias</span><span className="inline-flex items-center gap-1"><Clock className="size-4 text-gold" />Vagas limitadas</span></div></div></div></div></div></section>
+ <section className="relative overflow-hidden bg-gradient-hero py-20 sm:py-28"><div aria-hidden className="grid-bg absolute inset-0 opacity-30" /><div className="relative mx-auto max-w-4xl px-4 text-center"><h2 className="text-3xl font-bold uppercase leading-tight sm:text-5xl md:text-6xl">Seu nome pode ser o <Gold>próximo aprovado</Gold>.</h2><p className="mx-auto mt-5 max-w-2xl text-muted-foreground sm:text-lg">Mas isso depende da decisão que você toma hoje. Comece agora com o método certo e transforme esforço em aprovação.</p><div className="mt-10"><Checkout>Quero começar agora</Checkout></div></div></section>
+ <footer className="border-t border-border py-10 text-center text-xs text-muted-foreground">© {new Date().getFullYear()} Método Aprovação Policial. Todos os direitos reservados.</footer>
+ </main>; }
