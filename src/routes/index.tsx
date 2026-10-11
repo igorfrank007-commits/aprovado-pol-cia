@@ -97,7 +97,7 @@ function Index() {
             </span>
             <h1 className="mt-6 font-display text-4xl font-bold leading-[1.05] sm:text-5xl md:text-6xl">
               DESCUBRA O MÉTODO QUE ME AJUDOU A{" "}
-              <span className="text-gradient-gold">PASSAR EM 3X NA POLÍCIA FEDERAL, 4X  PARA DELEGADO DE POLÍCIA E 1X NA ABIN</span>{" "}
+              <span className="text-gradient-gold">PASSAR  3X NA POLÍCIA FEDERAL, 4X PARA DELEGADO DE POLÍCIA E 1X NA ABIN</span>{" "}
               E FATURAR 20 MIL POR MÊS
             </h1>
             <p className="mt-6 max-w-xl text-lg text-muted-foreground">
