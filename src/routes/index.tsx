@@ -18,8 +18,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "O método validado que organiza seus estudos, acelera sua aprovação e coloca seu nome na lista dos aprovados em concursos policiais e delegado." },
       { property: "og:title", content: "Como Passar em Concursos Policiais e Delegado" },
       { property: "og:description", content: "Método validado para aprovação em concursos policiais. Planejamento, cronograma, revisões e suporte completo." },
-      { property: "og:image", content: heroImg },
       { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,
@@ -96,8 +96,9 @@ function Index() {
               <ShieldCheck className="h-4 w-4" /> Método validado
             </span>
             <h1 className="mt-6 font-display text-4xl font-bold leading-[1.05] sm:text-5xl md:text-6xl">
-              Descubra o método que já <span className="text-gradient-gold">aprovou alunos</span> em concursos policiais —
-              e pode colocar seu nome na lista dos aprovados.
+              DESCUBRA O MÉTODO SIMPLIFICADO QUE ME AJUDOU A{" "}
+              <span className="text-gradient-gold">PASSAR EM 3X NA POLÍCIA FEDERAL, 4X VEZES PARA DELEGADO DE POLÍCIA E 1X NA ABIN</span>{" "}
+              E FATURAR 20 MIL POR MÊS + ESTABILIDADE
             </h1>
             <p className="mt-6 max-w-xl text-lg text-muted-foreground">
               Mesmo que você esteja perdido nos estudos. Planejamento individual, cronograma pronto,
