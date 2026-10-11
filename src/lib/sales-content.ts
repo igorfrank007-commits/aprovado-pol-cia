@@ -25,7 +25,7 @@ export const modules = [
  ['Técnicas de Memorização','Memorize conteúdo extenso usando gatilhos comprovados.'],
  ['Estratégias de Reta Final','O que fazer nos últimos 30 dias antes da prova.'],
 ];
-export const problems = ['Estudar sem planejamento e ir no improviso','Acumular materiais demais e travar','Não revisar o que já estudou','Não saber o que priorizar','Estudar bastante, mas estudar errado','Perder tempo com métodos que não funcionam'];
+export const problems = ['Dificuldade para focar em uma área ou um cargo','Estuda sem foco e sem saber se esta estudando correto','Medo de estar perdendo tempo','Incertezas de não saber se vai passar','Não sabe revisar e acaba esquecendo a matéria','Não sabe como resolver questões e simulados'];
 // Testimonials reproduced from the user-selected source, not independently verified.
 export const testimonials = [
  {name:'Lucas A.',initial:'L',time:'09:42',messages:['Professor, passei!! 🎉','Em 7 meses seguindo o método à risca consegui minha aprovação na Polícia Federal.','Eu estava completamente perdido antes. Muito obrigado, mudou minha vida 🙏']},
