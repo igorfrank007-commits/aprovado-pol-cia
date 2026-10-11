@@ -2,16 +2,13 @@ import { BookOpen, Target, Calendar, ListChecks, Filter, Brain, Headphones, Mess
 export const checkoutUrl = 'https://pay.kiwify.com.br/mPgVeXg';
 export const offer = { original: 997, installments: 12, installment: 19.70, cash: 197, guaranteeDays: 7, supportDays: 30 };
 export const benefits = [
- {icon:BookOpen,title:'Guia Passo a Passo',desc:'Caminho completo do zero à aprovação em concursos policiais.'},
- {icon:Target,title:'Planejamento Individual',desc:'Plano sob medida para as matérias do seu concurso.'},
- {icon:Calendar,title:'Cronograma de Estudos',desc:'Estudos e revisões diárias prontos. É só sentar e estudar.'},
- {icon:ListChecks,title:'Lei Seca Estratégica',desc:'Cronograma inteligente de leitura para fixar de verdade.'},
- {icon:Filter,title:'Filtro QConcursos',desc:'O filtro estratégico que os aprovados usam para resolver questões.'},
- {icon:Brain,title:'Planilha de Controle',desc:'Acompanhe seu desempenho em exercícios e revisões.'},
- {icon:Headphones,title:'Suporte 30 Dias',desc:'Te ajudamos a implementar o planejamento na sua rotina.'},
- {icon:MessageCircle,title:'Plantão de Dúvidas',desc:'Tire dúvidas direto pelo WhatsApp com a equipe.'},
- {icon:Clock,title:'Para Rotina Corrida',desc:'Método prático mesmo para quem trabalha o dia inteiro.'},
- {icon:Trophy,title:'Técnicas dos Aprovados',desc:'As mesmas estratégias usadas por quem já passou.'},
+ {icon:BookOpen,title:'Curso Completo em Vídeo Aulas',desc:'Curso completo em vídeo aulas em que eu mostro meu método passo a passo.'},
+ {icon:Calendar,title:'Cronograma e Planejamento Automáticos',desc:'Sistema que gera automaticamente seu cronograma de estudos e planejamento. Você anexa seu edital, informa o cronograma de aulas do curso preparatório, informa quantas horas e quais dias você vai estudar e o sistema gera automaticamente seu cronograma de estudos e planejamento.'},
+ {icon:ListChecks,title:'Edital Verticalizado',desc:'Sistema que gera automaticamente seu edital verticalizado com marcações para você acompanhar seu progresso.'},
+ {icon:Target,title:'Estatísticas de Progresso',desc:'Estatísticas para você acompanhar seu progresso.'},
+ {icon:Clock,title:'Diário de Estudos',desc:'Diário de estudos para você registrar onde parou e de onde continuar, número de questões resolvidas e porcentagem de acertos.'},
+ {icon:Filter,title:'Questões sobre a Lei Seca',desc:'Sistema de questões sobre a lei seca. Você escolhe a lei ou constituição que deseja e já pode começar a fazer as questões.'},
+ {icon:Brain,title:'Flashcards e Revisão Espaçada',desc:'Sistema de criação de flashcards para revisão espaçada e memorização avançada da matéria.'},
 ];
 export const modules = [
  ['Mentalidade do Aprovado','Construa a base mental que separa quem passa de quem desiste.'],
