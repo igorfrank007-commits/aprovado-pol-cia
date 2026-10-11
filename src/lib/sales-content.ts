@@ -1,7 +1,7 @@
 import { BookOpen, Target, Calendar, ListChecks, Filter, Brain, Headphones, MessageCircle, Clock, Trophy } from 'lucide-react';
 export const checkoutUrl = 'https://pay.kiwify.com.br/mPgVeXg';
 export const whatsappUrl = 'https://wa.me/5555981205146';
-export const offer = { original: 997, installments: 12, installment: 19.70, cash: 197, guaranteeDays: 7, supportDays: 30 };
+export const offer = { monthly: 39.90, annualInstallments: 12, annualInstallment: 29.90, guaranteeDays: 7, supportDays: 30 };
 export const benefits = [
  {icon:BookOpen,title:'Curso Completo em Vídeo Aulas',desc:'Curso completo em vídeo aulas em que eu mostro meu método passo a passo.'},
  {icon:Calendar,title:'Cronograma e Planejamento Automáticos',desc:'Sistema que gera automaticamente seu cronograma de estudos e planejamento. Você anexa seu edital, informa o cronograma de aulas do curso preparatório, informa quantas horas e quais dias você vai estudar e o sistema gera automaticamente seu cronograma de estudos e planejamento.'},
