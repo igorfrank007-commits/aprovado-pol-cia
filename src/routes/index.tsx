@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import heroImg from "@/assets/hero-policial.jpg";
-import estudanteImg from "@/assets/estudante.jpg";
 import trajetoriaImg from "@/assets/trajetoria.png";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -20,14 +19,9 @@ export const Route = createFileRoute("/")({
 });
 
 const pilares = [
-  { icon: Brain, title: "Método anti esquecimento", desc: "Revisões inteligentes para consolidar o que você aprende e chegar à prova com o conteúdo na memória." },
-  { icon: BookOpen, title: "Provas antigas e correções", desc: "Aprenda a usar questões anteriores para entender as bancas, identificar erros e direcionar seus estudos." },
-  { icon: Monitor, title: "Preparação completa", desc: "Um caminho organizado que conecta planejamento, teoria, lei seca, exercícios e revisões." },
-  { icon: Calendar, title: "Ciclo estratégico de estudos", desc: "Distribua as matérias de forma equilibrada e encaixe a preparação na sua rotina." },
-  { icon: Target, title: "Mudança de mentalidade", desc: "Construa foco, disciplina e constância para continuar avançando, mesmo nos dias difíceis." },
-  { icon: RouteIcon, title: "Rotas e destinos do objetivo final", desc: "Defina seu concurso e transforme uma meta distante em etapas claras de preparação." },
-  { icon: Headphones, title: "Equipe de apoio", desc: "Conte com o suporte na implementação do método para não enfrentar suas dúvidas sozinho." },
-  { icon: ListChecks, title: "Simulados estratégicos", desc: "Aprenda a usar simulados para avaliar seu desempenho e ajustar o caminho até a prova." },
+  { icon: FileSpreadsheet, title: "Planejamento realista", desc: "Organize suas prioridades em um plano de estudos que respeite seu tempo disponível e sua rotina." },
+  { icon: BookOpen, title: "Revisão ativa e flashcards", desc: "Use revisões ativas e flashcards para recuperar o conteúdo estudado e reforçar os assuntos que exigem atenção." },
+  { icon: ListChecks, title: "Questões comentadas", desc: "Analise as questões e seus comentários para compreender as bancas, identificar erros e direcionar sua preparação." },
 ];
 const inclusos = [
   { icon: BookOpen, title: "Curso completo", desc: "10 módulos sobre organização, ciclo de estudos, revisões, questões e estratégias de reta final." },
@@ -79,13 +73,37 @@ function Index() {
       </div>
     </section>
 
-    <section className="py-20"><div className="mx-auto max-w-7xl px-6"><Heading eyebrow="Concurso Público Facilitado">Conheça os pilares do método</Heading><FeatureGrid items={pilares} /></div></section>
+    <section aria-label="Aprovações de Igor Andrade" className="border-y border-border bg-card">
+      <div className="mx-auto grid max-w-7xl divide-y divide-border md:grid-cols-3 md:divide-x md:divide-y-0">
+        {[
+          { title: "3 aprovações", desc: "na Polícia Federal" },
+          { title: "ABIN", desc: "aprovação para Oficial de Inteligência" },
+          { title: "4 aprovações", desc: "em concursos para Delegado de Polícia" },
+        ].map(({ title, desc }) => <div key={title} className="px-6 py-9 text-center"><p className="font-display text-3xl font-bold text-gold sm:text-4xl">{title}</p><p className="mt-3 text-sm text-muted-foreground sm:text-base">{desc}</p></div>)}
+      </div>
+    </section>
 
-    <section className="border-y border-border/50 bg-card/40 py-20"><div className="mx-auto max-w-7xl px-6"><Heading eyebrow="Concurso Público Facilitado">Vou te explicar como o método funciona na prática.</Heading><div className="mt-12 grid gap-10 lg:grid-cols-2 lg:items-center"><img src={estudanteImg} alt="Preparação e estudo para concursos públicos" loading="lazy" className="w-full rounded-2xl border border-gold/20 shadow-elegant" /><ol className="space-y-8">{[
-      ["01", "Defina seu objetivo", "Escolha seu concurso, entenda o edital e identifique as matérias que precisam de mais atenção."],
-      ["02", "Organize a preparação", "Monte seu ciclo de estudos e um cronograma que caiba na sua rotina, com espaço para revisões."],
-      ["03", "Pratique, revise e ajuste", "Resolva questões, acompanhe seu desempenho e use seus erros para direcionar os próximos passos."],
-    ].map(([n, t, d]) => <li key={n} className="flex gap-5"><span className="font-display text-4xl font-bold text-gradient-gold">{n}</span><div><h3 className="font-display text-xl font-bold">{t}</h3><p className="mt-2 text-muted-foreground">{d}</p></div></li>)}</ol></div></div></section>
+    <section id="pilares" className="py-20"><div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-4xl text-center">
+        <span className="inline-flex items-center justify-center gap-3 font-display text-sm font-semibold uppercase tracking-widest text-muted-foreground"><span aria-hidden className="h-px w-8 bg-muted-foreground" />Os pilares da preparação</span>
+        <h2 className="mt-4 font-display text-3xl font-bold sm:text-5xl">Um método claro para você saber<br className="hidden sm:block" /> <span className="text-gradient-gold">o que fazer a seguir</span></h2>
+        <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">Construa uma rotina sustentável, acompanhe o que está funcionando e direcione seu esforço para o que precisa melhorar.</p>
+      </div>
+      <div className="mt-14 grid gap-6 md:grid-cols-3">{pilares.map(({ icon: Icon, title, desc }) => <div key={title} className="rounded-lg border border-border bg-card p-7 transition hover:border-gold/50"><div className="grid h-14 w-14 place-items-center rounded-lg bg-gold/10 text-gold"><Icon className="h-6 w-6" /></div><h3 className="mt-7 font-display text-xl font-bold">{title}</h3><p className="mt-3 leading-relaxed text-muted-foreground">{desc}</p></div>)}</div>
+    </div></section>
+
+    <section id="como-funciona" className="border-y border-border/50 bg-card/40 py-20"><div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-4xl text-center">
+        <span className="inline-flex items-center justify-center gap-3 font-display text-sm font-semibold uppercase tracking-widest text-muted-foreground"><span aria-hidden className="h-px w-8 bg-muted-foreground" />Da intenção à execução</span>
+        <h2 className="mt-4 font-display text-3xl font-bold sm:text-5xl">Como colocar o método em<br className="hidden sm:block" /> prática</h2>
+        <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">Comece com uma visão clara do seu momento e evolua com acompanhamento dos seus próprios indicadores.</p>
+      </div>
+      <ol className="mt-14 grid gap-10 md:grid-cols-3">{[
+        ["01", "Defina seu alvo", "Escolha o concurso prioritário e identifique edital, matérias, tempo disponível e principais dificuldades."],
+        ["02", "Organize a rotina", "Distribua estudo novo, revisões, lei seca e questões em um plano possível de cumprir ao longo das semanas."],
+        ["03", "Meça e ajuste", "Use seu desempenho para priorizar lacunas, reforçar assuntos e adaptar o plano conforme a preparação avança."],
+      ].map(([n, t, d], i) => <li key={n}><div className="flex items-center gap-6"><span className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-background font-display text-2xl font-bold text-gold">{n}</span>{i < 2 && <span aria-hidden className="hidden flex-1 border-t border-dashed border-gold/30 md:block" />}</div><h3 className="mt-7 font-display text-xl font-bold">{t}</h3><p className="mt-4 leading-relaxed text-muted-foreground">{d}</p></li>)}</ol>
+    </div></section>
 
     <section className="py-20"><div className="mx-auto max-w-4xl px-6 text-center"><Heading eyebrow="Você nunca esteve sozinho(a)">Sua preparação não precisa ser solitária</Heading><MessageCircle className="mx-auto mt-8 h-12 w-12 text-gold" /><p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">Ter uma direção faz diferença. Além do conteúdo, você conta com suporte por 30 dias e um plantão de dúvidas pelo WhatsApp para aplicar o método à sua rotina.</p></div></section>
 
