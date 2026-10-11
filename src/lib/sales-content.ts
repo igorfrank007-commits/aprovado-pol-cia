@@ -30,4 +30,4 @@ export const testimonials = [
  {name:'Rafael M.',initial:'R',time:'21:05',messages:['Boa noite! Só passando pra dar a notícia 👮','Conciliava trabalho e estudo e achava impossível. O método encaixou na minha rotina.','Aprovado na PRF 🚔🔥']},
 ];
 export const audience = ['Iniciantes que não sabem por onde começar','Quem está perdido e estuda sem direção','Quem já estuda há anos e não evolui','Candidatos a Polícia Civil','Candidatos a Polícia Federal','Candidatos a Polícia Penal','Candidatos a Polícia Militar','Futuros Delegados','Candidatos a PRF','Concursos policiais em geral'];
-export const included = ['Curso completo — 10 módulos','Planejamento individual + cronograma','Planilha de controle e filtro QConcursos','Cronograma de Lei Seca','ATUALIZAÇÃO PÓS EDITAL: Suporte 30 dias + Plantão WhatsApp','ATUALIZAÇÃO PÓS EDITAL: Aulas de mentalidade e reta final'];
+export const included = benefits.map(({ title }) => title);
