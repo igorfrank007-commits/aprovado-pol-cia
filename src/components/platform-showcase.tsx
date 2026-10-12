@@ -34,10 +34,10 @@ export function PlatformShowcase() {
   const [selected, setSelected] = useState(1);
   const [imageIndex, setImageIndex] = useState(0);
   const [device, setDevice] = useState<typeof devices[number]['id']>('desktop');
-  const feature = benefits[selected];
+  const feature = showcaseFeatures[selected];
   if (!feature) return null;
   const deviceLabel = devices.find(item => item.id === device)?.label;
-  const images = featureImages[selected] ?? [];
+  const images = featureImages[feature.title] ?? [];
   const image = images[imageIndex] ?? images[0];
 
   return <section id="plataforma" aria-labelledby="platform-title" className="py-10 sm:py-14">
