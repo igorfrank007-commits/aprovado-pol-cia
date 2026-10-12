@@ -8,20 +8,20 @@ import planningConfiguration from '@/assets/cronograma-de-estudos-automatico.png
 import courseVideo from '@/assets/curso-video-aulas-passo-a-passo.png.asset.json';
 import verticalNotice from '@/assets/edital-verticalizado-editavel.png.asset.json';
 import progressStatistics from '@/assets/painel-de-estudos-completo.png.asset.json';
-import studyDiary from '@/assets/diario-estudos.png.asset.json';
-import lawQuestions from '@/assets/questoes-lei-seca.png.asset.json';
 import flashcardsReview from '@/assets/flashcards-revisao.png.asset.json';
 
 type DemoImage = { label: string; asset: { url: string }; contain?: boolean; fill?: boolean };
 
-const featureImages: Record<number, DemoImage[]> = {
-  0: [{ label: 'Curso Completo em Vídeo Aulas', asset: courseVideo, contain: true }],
-  1: [{ label: 'Cronograma e Planejamento Automáticos', asset: planningConfiguration, contain: true }],
-  2: [{ label: 'Edital Verticalizado', asset: verticalNotice, fill: true }],
-  3: [{ label: 'Estatísticas de Progresso', asset: progressStatistics, fill: true }],
-  4: [{ label: 'Diário de Estudos', asset: studyDiary }],
-  5: [{ label: 'Questões sobre a Lei Seca', asset: lawQuestions }],
-  6: [{ label: 'Flashcards e Revisão Espaçada', asset: flashcardsReview }],
+// Recursos exibidos na vitrine: sem "Diário de Estudos" e sem "Questões sobre a Lei Seca".
+const removedTitles = ['Diário de Estudos', 'Questões sobre a Lei Seca'];
+const showcaseFeatures = benefits.filter(({ title }) => !removedTitles.includes(title));
+
+const featureImages: Record<string, DemoImage[]> = {
+  'Curso Completo em Vídeo Aulas': [{ label: 'Curso Completo em Vídeo Aulas', asset: courseVideo, contain: true }],
+  'Cronograma e Planejamento Automáticos': [{ label: 'Cronograma e Planejamento Automáticos', asset: planningConfiguration, contain: true }],
+  'Edital Verticalizado': [{ label: 'Edital Verticalizado', asset: verticalNotice, fill: true }],
+  'Estatísticas de Progresso': [{ label: 'Estatísticas de Progresso', asset: progressStatistics, fill: true }],
+  'Flashcards e Revisão Espaçada': [{ label: 'Flashcards e Revisão Espaçada', asset: flashcardsReview }],
 };
 
 const devices = [
@@ -34,10 +34,10 @@ export function PlatformShowcase() {
   const [selected, setSelected] = useState(1);
   const [imageIndex, setImageIndex] = useState(0);
   const [device, setDevice] = useState<typeof devices[number]['id']>('desktop');
-  const feature = benefits[selected];
+  const feature = showcaseFeatures[selected];
   if (!feature) return null;
   const deviceLabel = devices.find(item => item.id === device)?.label;
-  const images = featureImages[selected] ?? [];
+  const images = featureImages[feature.title] ?? [];
   const image = images[imageIndex] ?? images[0];
 
   return <section id="plataforma" aria-labelledby="platform-title" className="py-10 sm:py-14">
@@ -55,7 +55,7 @@ export function PlatformShowcase() {
         <nav aria-label="Funcionalidades da plataforma" className="min-w-0">
           <p className="mb-3 text-[10px] font-bold uppercase text-gold">Recursos incluídos</p>
           <div className="flex max-h-[520px] gap-2 overflow-x-auto pb-3 lg:flex-col lg:overflow-y-auto lg:overflow-x-hidden lg:pr-2">
-            {benefits.map(({ title, icon: Icon }, index) => <Button key={title} variant="outline" aria-pressed={selected === index} onClick={() => setSelected(index)} className={`h-auto min-h-20 w-56 shrink-0 justify-start whitespace-normal p-4 text-left lg:w-full ${selected === index ? 'border-gold/60 bg-gold/10 text-foreground hover:bg-gold/15' : 'border-border bg-card text-muted-foreground hover:border-gold/30'}`}><span className="grid size-9 shrink-0 place-items-center rounded-md border border-gold/30 bg-gold/5 text-gold"><Icon /></span><span className="min-w-0 text-sm font-semibold leading-snug">{title}</span></Button>)}
+            {showcaseFeatures.map(({ title, icon: Icon }, index) => <Button key={title} variant="outline" aria-pressed={selected === index} onClick={() => { setSelected(index); setImageIndex(0); }} className={`h-auto min-h-20 w-56 shrink-0 justify-start whitespace-normal p-4 text-left lg:w-full ${selected === index ? 'border-gold/60 bg-gold/10 text-foreground hover:bg-gold/15' : 'border-border bg-card text-muted-foreground hover:border-gold/30'}`}><span className="grid size-9 shrink-0 place-items-center rounded-md border border-gold/30 bg-gold/5 text-gold"><Icon /></span><span className="min-w-0 text-sm font-semibold leading-snug">{title}</span></Button>)}
           </div>
         </nav>
         <div className="min-w-0" role="region" aria-label="Demonstração da funcionalidade" aria-live="polite">
