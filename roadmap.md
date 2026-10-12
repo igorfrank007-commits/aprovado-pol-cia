@@ -5,3 +5,5 @@
 - [x] Reproduzir o conteúdo, elementos, cores, fontes e layout da referência tplg.com.br/metodoaprovacao/.
 - [x] Identificar e incorporar o vídeo original com reprodução, pausa e som verificados.
 - [x] Conferir imagens, checkout e apresentação da nova página.
+- [x] Atualizar dependências vulneráveis e conferir as versões resolvidas no lockfile.
+- [x] Executar testes, verificar a página e conferir o resultado da compilação automática.
