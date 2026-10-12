@@ -6,18 +6,18 @@ import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogTrigger } 
 import { benefits } from '@/lib/sales-content';
 import planningConfiguration from '@/assets/cronograma-de-estudos-automatico.png.asset.json';
 import courseVideo from '@/assets/curso-video-aulas-passo-a-passo.png.asset.json';
-import verticalNotice from '@/assets/edital-verticalizado.png.asset.json';
+import verticalNotice from '@/assets/edital-verticalizado-editavel.png.asset.json';
 import progressStatistics from '@/assets/estatisticas-progresso.png.asset.json';
 import studyDiary from '@/assets/diario-estudos.png.asset.json';
 import lawQuestions from '@/assets/questoes-lei-seca.png.asset.json';
 import flashcardsReview from '@/assets/flashcards-revisao.png.asset.json';
 
-type DemoImage = { label: string; asset: { url: string }; contain?: boolean };
+type DemoImage = { label: string; asset: { url: string }; contain?: boolean; fill?: boolean };
 
 const featureImages: Record<number, DemoImage[]> = {
   0: [{ label: 'Curso Completo em Vídeo Aulas', asset: courseVideo, contain: true }],
   1: [{ label: 'Cronograma e Planejamento Automáticos', asset: planningConfiguration, contain: true }],
-  2: [{ label: 'Edital Verticalizado', asset: verticalNotice }],
+  2: [{ label: 'Edital Verticalizado', asset: verticalNotice, fill: true }],
   3: [{ label: 'Estatísticas de Progresso', asset: progressStatistics }],
   4: [{ label: 'Diário de Estudos', asset: studyDiary }],
   5: [{ label: 'Questões sobre a Lei Seca', asset: lawQuestions }],
@@ -64,9 +64,9 @@ export function PlatformShowcase() {
               {images.length > 1 && images.map(({ label }, index) => <Button key={label} variant="outline" onClick={() => setImageIndex(index)} aria-pressed={imageIndex === index} className={`h-auto whitespace-normal py-2 text-xs ${imageIndex === index ? 'border-gold/60 bg-gold/10 text-gold' : 'border-border text-muted-foreground'}`}>{label}</Button>)}
               <Dialog><DialogTrigger asChild><Button variant="outline" size="icon" aria-label="Ampliar imagem" title="Ampliar imagem" className="ml-auto shrink-0 border-border text-gold"><Expand /></Button></DialogTrigger><DialogContent className="max-h-[90dvh] w-[calc(100%-2rem)] max-w-5xl overflow-y-auto"><DialogTitle>{image.label}</DialogTitle><DialogDescription>{feature.title}</DialogDescription><img src={image.asset.url} alt={image.label} className="h-auto w-full" /></DialogContent></Dialog>
             </div>
-            <div className={`flex justify-center overflow-hidden rounded-lg border border-border bg-gradient-dark ${image.contain ? 'h-[420px] sm:h-[620px]' : 'h-[360px] sm:h-[480px]'}`}>
-              <div key={`${imageIndex}-${device}`} className={`flex h-full overflow-y-auto ${image.contain ? 'items-center justify-center' : 'items-start'} ${device === 'mobile' ? 'w-full max-w-[300px]' : device === 'tablet' ? 'w-full max-w-[560px]' : 'w-full'}`}>
-                <img src={image.asset.url} alt={image.label} className={image.contain ? 'mx-auto max-h-full max-w-full object-contain' : 'h-auto w-full'} />
+            <div className={`flex justify-center overflow-hidden rounded-lg border border-border bg-gradient-dark ${image.fill ? 'h-[420px] sm:h-[620px] mx-auto w-fit ' + (device === 'mobile' ? 'max-w-[300px]' : device === 'tablet' ? 'max-w-[560px]' : 'max-w-full') : image.contain ? 'h-[420px] sm:h-[620px]' : 'h-[360px] sm:h-[480px]'}`}>
+              <div key={`${imageIndex}-${device}`} className={`flex h-full ${image.fill || image.contain ? 'items-center justify-center' : 'items-start overflow-y-auto'} ${image.fill ? '' : device === 'mobile' ? 'w-full max-w-[300px]' : device === 'tablet' ? 'w-full max-w-[560px]' : 'w-full'}`}>
+                <img src={image.asset.url} alt={image.label} className={image.fill ? 'h-full w-auto max-w-full object-cover' : image.contain ? 'mx-auto max-h-full max-w-full object-contain' : 'h-auto w-full'} />
               </div>
             </div>
           </> : <div className="flex aspect-[3/2] items-center justify-center overflow-hidden rounded-lg border border-border bg-gradient-dark p-5 sm:aspect-video sm:p-8">
