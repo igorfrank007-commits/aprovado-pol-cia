@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "sdk_version": "3.0.5",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "aprovado-pol-cia",
+      "version": "0.1.0",
+      "title": "Aprovado Polícia"
+    },
+    "tools": [
+      {
+        "name": "course_features",
+        "title": "O que você recebe no curso",
+        "description": "Lists the seven resources included in the police-exam course, each with its title and full description.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": null,
+        "outputSchema": null
+      },
+      {
+        "name": "subscription_prices",
+        "title": "Planos e preços da assinatura",
+        "description": "Returns the course subscription prices in Brazilian reais: the monthly plan, the annual plan split into installments, plus the refund guarantee and support periods in days.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": null,
+        "outputSchema": null
+      },
+      {
+        "name": "purchase_and_contact_links",
+        "title": "Link de compra e WhatsApp",
+        "description": "Returns the checkout page where the course subscription is purchased and the WhatsApp link used to ask questions before buying.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": null,
+        "outputSchema": null
+      }
+    ]
+  }
+}
