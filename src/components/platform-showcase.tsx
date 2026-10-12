@@ -3,13 +3,11 @@ import { Monitor, Tablet, Smartphone, ImageIcon, Expand } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 import { benefits } from '@/lib/sales-content';
-import planningConfiguration from '@/assets/planejamento-configuracao.png.asset.json';
-import planningSchedule from '@/assets/planejamento-cronograma.png.asset.json';
+import planningConfiguration from '@/assets/planejamento-atualizado.png.asset.json';
 import courseVideo from '@/assets/curso-video-aulas.png.asset.json';
 
 const planningImages = [
-  { label: 'Configuração do planejamento', asset: planningConfiguration },
-  { label: 'Cronograma gerado', asset: planningSchedule },
+  { label: 'Cronograma e Planejamento Automáticos', asset: planningConfiguration },
 ];
 
 const devices = [
