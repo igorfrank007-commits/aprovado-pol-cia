@@ -1,20 +1,28 @@
 import { useState } from 'react';
 import { Monitor, Tablet, Smartphone, ImageIcon, Expand } from 'lucide-react';
-import { SectionCheckout } from '@/components/sales-checkout';
+import { Checkout, SectionCheckout } from '@/components/sales-checkout';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 import { benefits } from '@/lib/sales-content';
 import planningConfiguration from '@/assets/planejamento-atualizado.png.asset.json';
-import courseVideo from '@/assets/curso-video-aulas.png.asset.json';
+import courseVideo from '@/assets/curso-video-aulas-passo-a-passo.png.asset.json';
 import verticalNotice from '@/assets/edital-verticalizado.png.asset.json';
 import progressStatistics from '@/assets/estatisticas-progresso.png.asset.json';
 import studyDiary from '@/assets/diario-estudos.png.asset.json';
 import lawQuestions from '@/assets/questoes-lei-seca.png.asset.json';
 import flashcardsReview from '@/assets/flashcards-revisao.png.asset.json';
 
-const planningImages = [
-  { label: 'Cronograma e Planejamento Automáticos', asset: planningConfiguration },
-];
+type DemoImage = { label: string; asset: { url: string }; contain?: boolean };
+
+const featureImages: Record<number, DemoImage[]> = {
+  0: [{ label: 'Curso Completo em Vídeo Aulas', asset: courseVideo, contain: true }],
+  1: [{ label: 'Cronograma e Planejamento Automáticos', asset: planningConfiguration }],
+  2: [{ label: 'Edital Verticalizado', asset: verticalNotice }],
+  3: [{ label: 'Estatísticas de Progresso', asset: progressStatistics }],
+  4: [{ label: 'Diário de Estudos', asset: studyDiary }],
+  5: [{ label: 'Questões sobre a Lei Seca', asset: lawQuestions }],
+  6: [{ label: 'Flashcards e Revisão Espaçada', asset: flashcardsReview }],
+};
 
 const devices = [
   { id: 'desktop', label: 'Computador', icon: Monitor },
@@ -29,7 +37,7 @@ export function PlatformShowcase() {
   const feature = benefits[selected];
   if (!feature) return null;
   const deviceLabel = devices.find(item => item.id === device)?.label;
-  const images = selected === 0 ? [{ label: 'Curso Completo em Vídeo Aulas', asset: courseVideo }] : selected === 1 ? planningImages : selected === 2 ? [{ label: 'Edital Verticalizado', asset: verticalNotice }] : selected === 3 ? [{ label: 'Estatísticas de Progresso', asset: progressStatistics }] : selected === 4 ? [{ label: 'Diário de Estudos', asset: studyDiary }] : selected === 5 ? [{ label: 'Questões sobre a Lei Seca', asset: lawQuestions }] : selected === 6 ? [{ label: 'Flashcards e Revisão Espaçada', asset: flashcardsReview }] : [];
+  const images = featureImages[selected] ?? [];
   const image = images[imageIndex] ?? images[0];
 
   return <section id="plataforma" aria-labelledby="platform-title" className="py-10 sm:py-14">
@@ -57,8 +65,8 @@ export function PlatformShowcase() {
               <Dialog><DialogTrigger asChild><Button variant="outline" size="icon" aria-label="Ampliar imagem" title="Ampliar imagem" className="ml-auto shrink-0 border-border text-gold"><Expand /></Button></DialogTrigger><DialogContent className="max-h-[90dvh] w-[calc(100%-2rem)] max-w-5xl overflow-y-auto"><DialogTitle>{image.label}</DialogTitle><DialogDescription>{feature.title}</DialogDescription><img src={image.asset.url} alt={image.label} className="h-auto w-full" /></DialogContent></Dialog>
             </div>
             <div className="flex h-[360px] justify-center overflow-hidden rounded-lg border border-border bg-gradient-dark sm:h-[480px]">
-              <div key={`${imageIndex}-${device}`} className={`h-full overflow-y-auto ${device === 'mobile' ? 'w-full max-w-[300px]' : device === 'tablet' ? 'w-full max-w-[560px]' : 'w-full'}`}>
-                <img src={image.asset.url} alt={image.label} className="h-auto w-full" />
+              <div key={`${imageIndex}-${device}`} className={`flex h-full overflow-y-auto ${image.contain ? 'items-center justify-center' : 'items-start'} ${device === 'mobile' ? 'w-full max-w-[300px]' : device === 'tablet' ? 'w-full max-w-[560px]' : 'w-full'}`}>
+                <img src={image.asset.url} alt={image.label} className={image.contain ? 'mx-auto max-h-full max-w-full object-contain' : 'h-auto w-full'} />
               </div>
             </div>
           </> : <div className="flex aspect-[3/2] items-center justify-center overflow-hidden rounded-lg border border-border bg-gradient-dark p-5 sm:aspect-video sm:p-8">
@@ -67,6 +75,7 @@ export function PlatformShowcase() {
               <span className="px-3 text-center text-xs sm:text-sm">Imagem em breve</span>
             </div>
           </div>}
+          <div className="mt-4 text-center"><Checkout>Quero acessar o curso</Checkout></div>
           <div className="mx-auto mt-4 max-w-2xl text-center"><h3 className="text-xl font-bold sm:text-2xl">{feature.title}</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{feature.desc}</p></div>
         </div>
       </div>
