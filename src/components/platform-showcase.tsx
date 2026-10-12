@@ -8,20 +8,20 @@ import planningConfiguration from '@/assets/cronograma-de-estudos-automatico.png
 import courseVideo from '@/assets/curso-video-aulas-passo-a-passo.png.asset.json';
 import verticalNotice from '@/assets/edital-verticalizado-editavel.png.asset.json';
 import progressStatistics from '@/assets/painel-de-estudos-completo.png.asset.json';
-import studyDiary from '@/assets/diario-estudos.png.asset.json';
-import lawQuestions from '@/assets/questoes-lei-seca.png.asset.json';
 import flashcardsReview from '@/assets/flashcards-revisao.png.asset.json';
 
 type DemoImage = { label: string; asset: { url: string }; contain?: boolean; fill?: boolean };
 
-const featureImages: Record<number, DemoImage[]> = {
-  0: [{ label: 'Curso Completo em Vídeo Aulas', asset: courseVideo, contain: true }],
-  1: [{ label: 'Cronograma e Planejamento Automáticos', asset: planningConfiguration, contain: true }],
-  2: [{ label: 'Edital Verticalizado', asset: verticalNotice, fill: true }],
-  3: [{ label: 'Estatísticas de Progresso', asset: progressStatistics, fill: true }],
-  4: [{ label: 'Diário de Estudos', asset: studyDiary }],
-  5: [{ label: 'Questões sobre a Lei Seca', asset: lawQuestions }],
-  6: [{ label: 'Flashcards e Revisão Espaçada', asset: flashcardsReview }],
+// Recursos exibidos na vitrine: sem "Diário de Estudos" e sem "Questões sobre a Lei Seca".
+const removedTitles = ['Diário de Estudos', 'Questões sobre a Lei Seca'];
+const showcaseFeatures = benefits.filter(({ title }) => !removedTitles.includes(title));
+
+const featureImages: Record<string, DemoImage[]> = {
+  'Curso Completo em Vídeo Aulas': [{ label: 'Curso Completo em Vídeo Aulas', asset: courseVideo, contain: true }],
+  'Cronograma e Planejamento Automáticos': [{ label: 'Cronograma e Planejamento Automáticos', asset: planningConfiguration, contain: true }],
+  'Edital Verticalizado': [{ label: 'Edital Verticalizado', asset: verticalNotice, fill: true }],
+  'Estatísticas de Progresso': [{ label: 'Estatísticas de Progresso', asset: progressStatistics, fill: true }],
+  'Flashcards e Revisão Espaçada': [{ label: 'Flashcards e Revisão Espaçada', asset: flashcardsReview }],
 };
 
 const devices = [
