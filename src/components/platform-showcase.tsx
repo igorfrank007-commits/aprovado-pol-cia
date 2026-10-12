@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogTrigger } 
 import { benefits } from '@/lib/sales-content';
 import planningConfiguration from '@/assets/planejamento-configuracao.png.asset.json';
 import planningSchedule from '@/assets/planejamento-cronograma.png.asset.json';
+import courseVideo from '@/assets/curso-video-aulas.png.asset.json';
 
 const planningImages = [
   { label: 'Configuração do planejamento', asset: planningConfiguration },
@@ -24,7 +25,8 @@ export function PlatformShowcase() {
   const feature = benefits[selected];
   if (!feature) return null;
   const deviceLabel = devices.find(item => item.id === device)?.label;
-  const image = selected === 1 ? planningImages[imageIndex] : undefined;
+  const images = selected === 0 ? [{ label: 'Curso Completo em Vídeo Aulas', asset: courseVideo }] : selected === 1 ? planningImages : [];
+  const image = images[imageIndex] ?? images[0];
 
   return <section id="plataforma" aria-labelledby="platform-title" className="py-20 sm:py-28">
     <div className="mx-auto max-w-7xl px-4">
@@ -48,8 +50,8 @@ export function PlatformShowcase() {
         <div className="min-w-0" role="region" aria-label="Demonstração da funcionalidade" aria-live="polite">
           {image ? <>
             <div className="mb-3 flex flex-wrap items-center gap-2">
-              {planningImages.map(({ label }, index) => <Button key={label} variant="outline" onClick={() => setImageIndex(index)} aria-pressed={imageIndex === index} className={`h-auto whitespace-normal py-2 text-xs ${imageIndex === index ? 'border-gold/60 bg-gold/10 text-gold' : 'border-border text-muted-foreground'}`}>{label}</Button>)}
-              <Dialog><DialogTrigger asChild><Button variant="outline" size="icon" aria-label="Ampliar imagem" title="Ampliar imagem" className="ml-auto shrink-0 border-border text-gold"><Expand /></Button></DialogTrigger><DialogContent className="max-h-[90dvh] w-[calc(100%-2rem)] max-w-5xl overflow-y-auto"><DialogTitle>{image.label}</DialogTitle><DialogDescription> cronograma e planejamento automáticos</DialogDescription><img src={image.asset.url} alt={image.label} className="h-auto w-full" /></DialogContent></Dialog>
+              {images.length > 1 && images.map(({ label }, index) => <Button key={label} variant="outline" onClick={() => setImageIndex(index)} aria-pressed={imageIndex === index} className={`h-auto whitespace-normal py-2 text-xs ${imageIndex === index ? 'border-gold/60 bg-gold/10 text-gold' : 'border-border text-muted-foreground'}`}>{label}</Button>)}
+              <Dialog><DialogTrigger asChild><Button variant="outline" size="icon" aria-label="Ampliar imagem" title="Ampliar imagem" className="ml-auto shrink-0 border-border text-gold"><Expand /></Button></DialogTrigger><DialogContent className="max-h-[90dvh] w-[calc(100%-2rem)] max-w-5xl overflow-y-auto"><DialogTitle>{image.label}</DialogTitle><DialogDescription>{feature.title}</DialogDescription><img src={image.asset.url} alt={image.label} className="h-auto w-full" /></DialogContent></Dialog>
             </div>
             <div className="flex h-[360px] justify-center overflow-hidden rounded-lg border border-border bg-gradient-dark sm:h-[480px]">
               <div key={`${imageIndex}-${device}`} className={`h-full overflow-y-auto ${device === 'mobile' ? 'w-full max-w-[300px]' : device === 'tablet' ? 'w-full max-w-[560px]' : 'w-full'}`}>
