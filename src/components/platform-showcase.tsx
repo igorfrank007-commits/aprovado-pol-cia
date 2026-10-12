@@ -8,7 +8,7 @@ import planningConfiguration from '@/assets/cronograma-de-estudos-automatico.png
 import courseVideo from '@/assets/curso-video-aulas-passo-a-passo.png.asset.json';
 import verticalNotice from '@/assets/edital-verticalizado-editavel.png.asset.json';
 import progressStatistics from '@/assets/painel-de-estudos-completo.png.asset.json';
-import flashcardsReview from '@/assets/flashcards-revisao.png.asset.json';
+import flashcardsReview from '@/assets/flashcards-revisao-banner.png.asset.json';
 
 // ratio = largura/altura original da captura; stretch estica a largura para preencher a moldura.
 type DemoImage = { label: string; asset: { url: string }; ratio: number; stretch?: number; maxW?: number };
@@ -22,7 +22,7 @@ const featureImages: Record<string, DemoImage[]> = {
   'Cronograma e Planejamento Automáticos': [{ label: 'Cronograma e Planejamento Automáticos', asset: planningConfiguration, ratio: 466 / 672, stretch: 1.25, maxW: 600 }],
   'Edital Verticalizado': [{ label: 'Edital Verticalizado', asset: verticalNotice, ratio: 457 / 583, stretch: 1.25, maxW: 670 }],
   'Estatísticas de Progresso': [{ label: 'Estatísticas de Progresso', asset: progressStatistics, ratio: 452 / 707, stretch: 1.25, maxW: 560 }],
-  'Flashcards e Revisão Espaçada': [{ label: 'Flashcards e Revisão Espaçada', asset: flashcardsReview, ratio: 1142 / 701, stretch: 1 }],
+  'Flashcards e Revisão Espaçada': [{ label: 'Flashcards e Revisão Espaçada', asset: flashcardsReview, ratio: 1536 / 1024, stretch: 1 }],
 };
 
 const devices = [
