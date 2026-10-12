@@ -37,7 +37,7 @@ export function PlatformShowcase() {
   const feature = benefits[selected];
   if (!feature) return null;
   const deviceLabel = devices.find(item => item.id === device)?.label;
-  const images = selected === 0 ? [{ label: 'Curso Completo em Vídeo Aulas', asset: courseVideo }] : selected === 1 ? planningImages : selected === 2 ? [{ label: 'Edital Verticalizado', asset: verticalNotice }] : selected === 3 ? [{ label: 'Estatísticas de Progresso', asset: progressStatistics }] : selected === 4 ? [{ label: 'Diário de Estudos', asset: studyDiary }] : selected === 5 ? [{ label: 'Questões sobre a Lei Seca', asset: lawQuestions }] : selected === 6 ? [{ label: 'Flashcards e Revisão Espaçada', asset: flashcardsReview }] : [];
+  const images = featureImages[selected] ?? [];
   const image = images[imageIndex] ?? images[0];
 
   return <section id="plataforma" aria-labelledby="platform-title" className="py-10 sm:py-14">
@@ -65,8 +65,8 @@ export function PlatformShowcase() {
               <Dialog><DialogTrigger asChild><Button variant="outline" size="icon" aria-label="Ampliar imagem" title="Ampliar imagem" className="ml-auto shrink-0 border-border text-gold"><Expand /></Button></DialogTrigger><DialogContent className="max-h-[90dvh] w-[calc(100%-2rem)] max-w-5xl overflow-y-auto"><DialogTitle>{image.label}</DialogTitle><DialogDescription>{feature.title}</DialogDescription><img src={image.asset.url} alt={image.label} className="h-auto w-full" /></DialogContent></Dialog>
             </div>
             <div className="flex h-[360px] justify-center overflow-hidden rounded-lg border border-border bg-gradient-dark sm:h-[480px]">
-              <div key={`${imageIndex}-${device}`} className={`h-full overflow-y-auto ${device === 'mobile' ? 'w-full max-w-[300px]' : device === 'tablet' ? 'w-full max-w-[560px]' : 'w-full'}`}>
-                <img src={image.asset.url} alt={image.label} className="h-auto w-full" />
+              <div key={`${imageIndex}-${device}`} className={`flex h-full overflow-y-auto ${image.contain ? 'items-center justify-center' : 'items-start'} ${device === 'mobile' ? 'w-full max-w-[300px]' : device === 'tablet' ? 'w-full max-w-[560px]' : 'w-full'}`}>
+                <img src={image.asset.url} alt={image.label} className={image.contain ? 'mx-auto max-h-full max-w-full object-contain' : 'h-auto w-full'} />
               </div>
             </div>
           </> : <div className="flex aspect-[3/2] items-center justify-center overflow-hidden rounded-lg border border-border bg-gradient-dark p-5 sm:aspect-video sm:p-8">
