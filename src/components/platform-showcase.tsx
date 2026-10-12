@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 import { benefits } from '@/lib/sales-content';
 import planningConfiguration from '@/assets/planejamento-atualizado.png.asset.json';
-import courseVideo from '@/assets/curso-video-aulas.png.asset.json';
+import courseVideo from '@/assets/curso-video-aulas-passo-a-passo.png.asset.json';
 import verticalNotice from '@/assets/edital-verticalizado.png.asset.json';
 import progressStatistics from '@/assets/estatisticas-progresso.png.asset.json';
 import studyDiary from '@/assets/diario-estudos.png.asset.json';
@@ -67,6 +67,7 @@ export function PlatformShowcase() {
               <span className="px-3 text-center text-xs sm:text-sm">Imagem em breve</span>
             </div>
           </div>}
+          <div className="mt-4 text-center"><Checkout>Quero acessar o curso</Checkout></div>
           <div className="mx-auto mt-4 max-w-2xl text-center"><h3 className="text-xl font-bold sm:text-2xl">{feature.title}</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{feature.desc}</p></div>
         </div>
       </div>
