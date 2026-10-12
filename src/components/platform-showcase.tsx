@@ -7,7 +7,7 @@ import { benefits } from '@/lib/sales-content';
 import planningConfiguration from '@/assets/cronograma-de-estudos-automatico.png.asset.json';
 import courseVideo from '@/assets/curso-video-aulas-passo-a-passo.png.asset.json';
 import verticalNotice from '@/assets/edital-verticalizado-editavel.png.asset.json';
-import progressStatistics from '@/assets/estatisticas-progresso.png.asset.json';
+import progressStatistics from '@/assets/painel-de-estudos-completo.png.asset.json';
 import studyDiary from '@/assets/diario-estudos.png.asset.json';
 import lawQuestions from '@/assets/questoes-lei-seca.png.asset.json';
 import flashcardsReview from '@/assets/flashcards-revisao.png.asset.json';
@@ -18,7 +18,7 @@ const featureImages: Record<number, DemoImage[]> = {
   0: [{ label: 'Curso Completo em Vídeo Aulas', asset: courseVideo, contain: true }],
   1: [{ label: 'Cronograma e Planejamento Automáticos', asset: planningConfiguration, contain: true }],
   2: [{ label: 'Edital Verticalizado', asset: verticalNotice, fill: true }],
-  3: [{ label: 'Estatísticas de Progresso', asset: progressStatistics }],
+  3: [{ label: 'Estatísticas de Progresso', asset: progressStatistics, fill: true }],
   4: [{ label: 'Diário de Estudos', asset: studyDiary }],
   5: [{ label: 'Questões sobre a Lei Seca', asset: lawQuestions }],
   6: [{ label: 'Flashcards e Revisão Espaçada', asset: flashcardsReview }],
