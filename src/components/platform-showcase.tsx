@@ -4,7 +4,7 @@ import { Checkout } from '@/components/sales-checkout';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 import { benefits } from '@/lib/sales-content';
-import planningConfiguration from '@/assets/planejamento-atualizado.png.asset.json';
+import planningConfiguration from '@/assets/cronograma-de-estudos-automatico.png.asset.json';
 import courseVideo from '@/assets/curso-video-aulas-passo-a-passo.png.asset.json';
 import verticalNotice from '@/assets/edital-verticalizado.png.asset.json';
 import progressStatistics from '@/assets/estatisticas-progresso.png.asset.json';
@@ -16,7 +16,7 @@ type DemoImage = { label: string; asset: { url: string }; contain?: boolean };
 
 const featureImages: Record<number, DemoImage[]> = {
   0: [{ label: 'Curso Completo em Vídeo Aulas', asset: courseVideo, contain: true }],
-  1: [{ label: 'Cronograma e Planejamento Automáticos', asset: planningConfiguration }],
+  1: [{ label: 'Cronograma e Planejamento Automáticos', asset: planningConfiguration, contain: true }],
   2: [{ label: 'Edital Verticalizado', asset: verticalNotice }],
   3: [{ label: 'Estatísticas de Progresso', asset: progressStatistics }],
   4: [{ label: 'Diário de Estudos', asset: studyDiary }],
