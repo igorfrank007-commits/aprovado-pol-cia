@@ -1,4 +1,4 @@
-import { BookOpen, Target, Calendar, ListChecks, Filter, Brain, Headphones, MessageCircle, Clock, Trophy } from 'lucide-react';
+import { BookOpen, Target, Calendar, ListChecks, Brain, Headphones, MessageCircle, Trophy, Layers } from 'lucide-react';
 export const checkoutUrl = 'https://pay.kiwify.com.br/mPgVeXg';
 export const whatsappUrl = 'https://wa.me/5555981205146';
 export const offer = { monthly: 39.90, annualInstallments: 12, annualInstallment: 29.90, guaranteeDays: 7, supportDays: 30 };
@@ -7,10 +7,15 @@ export const benefits = [
  {icon:Calendar,title:'Cronograma e Planejamento Automáticos',desc:'Sistema que gera automaticamente seu cronograma de estudos e planejamento. Você anexa seu edital, informa o cronograma de aulas do curso preparatório, informa quantas horas e quais dias você vai estudar e o sistema gera automaticamente seu cronograma de estudos e planejamento.'},
  {icon:ListChecks,title:'Edital Verticalizado',desc:'Sistema que gera automaticamente seu edital verticalizado com marcações para você acompanhar seu progresso.'},
  {icon:Target,title:'Estatísticas de Progresso',desc:'Estatísticas para você acompanhar seu progresso.'},
- {icon:Clock,title:'Diário de Estudos',desc:'Diário de estudos para você registrar onde parou e de onde continuar, número de questões resolvidas e porcentagem de acertos.'},
- {icon:Filter,title:'Questões sobre a Lei Seca',desc:'Sistema de questões sobre a lei seca. Você escolhe a lei ou constituição que deseja e já pode começar a fazer as questões.'},
  {icon:Brain,title:'Flashcards e Revisão Espaçada',desc:'Sistema de criação de flashcards para revisão espaçada e memorização avançada da matéria.'},
 ];
+// Destaque que ocupa o lugar das seções removidas "Diário de Estudos" e "Questões sobre a Lei Seca".
+export const planHighlight = {
+ kicker:'Planejamento ilimitado',
+ title:'Faça seus planejamentos para quantos concursos quiser',
+ subtitle:'Monte um cronograma novo para cada edital, cargo e fase da sua preparação — tudo gerado automaticamente, no mesmo lugar.',
+ points:['Um plano para cada edital','Quantos cargos você quiser','Tudo gerado automaticamente'],
+};
 export const modules = [
  ['Mentalidade do Aprovado','Construa a base mental que separa quem passa de quem desiste.'],
  ['Como Organizar seus Estudos','Estruture seu material, seu tempo e seu ambiente de estudos.'],
@@ -31,4 +36,6 @@ export const testimonials = [
  {name:'Rafael M.',initial:'R',time:'21:05',messages:['Boa noite! Só passando pra dar a notícia 👮','Conciliava trabalho e estudo e achava impossível. O método encaixou na minha rotina.','Aprovado na PRF 🚔🔥']},
 ];
 export const audience = ['Iniciantes que não sabem por onde começar','Quem está perdido e estuda sem direção','Quem já estuda há anos e não evolui','Candidatos a Polícia Civil','Candidatos a Polícia Federal','Candidatos a Polícia Penal','Candidatos a Polícia Militar','Futuros Delegados','Candidatos a PRF','Concursos policiais em geral'];
-export const included = benefits.map(({ title }) => title);
+// Lista da oferta, mantida explicitamente: continua com os sete itens pedidos antes,
+// mesmo após "Diário de Estudos" e "Questões sobre a Lei Seca" saírem das seções da página.
+export const included = ['Curso Completo em Vídeo Aulas','Cronograma e Planejamento Automáticos','Edital Verticalizado','Estatísticas de Progresso','Diário de Estudos','Questões sobre a Lei Seca','Flashcards e Revisão Espaçada'];
