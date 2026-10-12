@@ -80,6 +80,5 @@ export function PlatformShowcase() {
         </div>
       </div>
     </div>
-    <SectionCheckout />
   </section>;
 }
