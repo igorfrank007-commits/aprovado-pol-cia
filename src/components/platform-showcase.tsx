@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Monitor, Tablet, Smartphone, ImageIcon, Expand } from 'lucide-react';
+import { SectionCheckout } from '@/components/sales-checkout';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 import { benefits } from '@/lib/sales-content';
@@ -71,5 +72,6 @@ export function PlatformShowcase() {
         </div>
       </div>
     </div>
+    <SectionCheckout />
   </section>;
 }
