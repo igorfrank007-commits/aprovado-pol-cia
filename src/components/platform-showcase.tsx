@@ -12,9 +12,17 @@ import studyDiary from '@/assets/diario-estudos.png.asset.json';
 import lawQuestions from '@/assets/questoes-lei-seca.png.asset.json';
 import flashcardsReview from '@/assets/flashcards-revisao.png.asset.json';
 
-const planningImages = [
-  { label: 'Cronograma e Planejamento Automáticos', asset: planningConfiguration },
-];
+type DemoImage = { label: string; asset: { url: string }; contain?: boolean };
+
+const featureImages: Record<number, DemoImage[]> = {
+  0: [{ label: 'Curso Completo em Vídeo Aulas', asset: courseVideo, contain: true }],
+  1: [{ label: 'Cronograma e Planejamento Automáticos', asset: planningConfiguration }],
+  2: [{ label: 'Edital Verticalizado', asset: verticalNotice }],
+  3: [{ label: 'Estatísticas de Progresso', asset: progressStatistics }],
+  4: [{ label: 'Diário de Estudos', asset: studyDiary }],
+  5: [{ label: 'Questões sobre a Lei Seca', asset: lawQuestions }],
+  6: [{ label: 'Flashcards e Revisão Espaçada', asset: flashcardsReview }],
+};
 
 const devices = [
   { id: 'desktop', label: 'Computador', icon: Monitor },
