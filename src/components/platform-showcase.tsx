@@ -7,6 +7,7 @@ import planningConfiguration from '@/assets/planejamento-atualizado.png.asset.js
 import courseVideo from '@/assets/curso-video-aulas.png.asset.json';
 import verticalNotice from '@/assets/edital-verticalizado.png.asset.json';
 import progressStatistics from '@/assets/estatisticas-progresso.png.asset.json';
+import studyDiary from '@/assets/diario-estudos.png.asset.json';
 
 const planningImages = [
   { label: 'Cronograma e Planejamento Automáticos', asset: planningConfiguration },
@@ -25,7 +26,7 @@ export function PlatformShowcase() {
   const feature = benefits[selected];
   if (!feature) return null;
   const deviceLabel = devices.find(item => item.id === device)?.label;
-  const images = selected === 0 ? [{ label: 'Curso Completo em Vídeo Aulas', asset: courseVideo }] : selected === 1 ? planningImages : selected === 2 ? [{ label: 'Edital Verticalizado', asset: verticalNotice }] : selected === 3 ? [{ label: 'Estatísticas de Progresso', asset: progressStatistics }] : [];
+  const images = selected === 0 ? [{ label: 'Curso Completo em Vídeo Aulas', asset: courseVideo }] : selected === 1 ? planningImages : selected === 2 ? [{ label: 'Edital Verticalizado', asset: verticalNotice }] : selected === 3 ? [{ label: 'Estatísticas de Progresso', asset: progressStatistics }] : selected === 4 ? [{ label: 'Diário de Estudos', asset: studyDiary }] : [];
   const image = images[imageIndex] ?? images[0];
 
   return <section id="plataforma" aria-labelledby="platform-title" className="py-20 sm:py-28">
