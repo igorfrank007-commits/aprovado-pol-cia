@@ -35,8 +35,7 @@ export function PlatformShowcase() {
   return <section id="plataforma" aria-labelledby="platform-title" className="py-10 sm:py-14">
     <div className="mx-auto max-w-7xl px-4">
       <div className="mx-auto mb-6 max-w-3xl text-center">
-        <span className="text-xs font-semibold uppercase text-gold">Conheça a plataforma</span>
-        <h2 id="platform-title" className="mt-4 text-3xl font-bold uppercase sm:text-4xl md:text-5xl">Seu método. <span className="text-gradient-gold">Sua preparação.</span></h2>
+        <h2 id="platform-title" className="text-3xl font-bold uppercase sm:text-4xl md:text-5xl">CONHEÇA A PLATAFORMA <span className="text-gradient-gold">POR DENTRO</span></h2>
       </div>
       <div className="flex flex-wrap items-center justify-between gap-4 border-y border-border bg-gradient-dark px-4 py-4 sm:px-6">
         <div className="min-w-0"><p className="font-semibold">{feature.title}</p><p className="mt-1 text-[10px] font-bold uppercase text-gold">{deviceLabel}</p></div>
