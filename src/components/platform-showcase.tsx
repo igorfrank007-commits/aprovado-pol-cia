@@ -31,9 +31,9 @@ export function PlatformShowcase() {
   const images = selected === 0 ? [{ label: 'Curso Completo em Vídeo Aulas', asset: courseVideo }] : selected === 1 ? planningImages : selected === 2 ? [{ label: 'Edital Verticalizado', asset: verticalNotice }] : selected === 3 ? [{ label: 'Estatísticas de Progresso', asset: progressStatistics }] : selected === 4 ? [{ label: 'Diário de Estudos', asset: studyDiary }] : selected === 5 ? [{ label: 'Questões sobre a Lei Seca', asset: lawQuestions }] : selected === 6 ? [{ label: 'Flashcards e Revisão Espaçada', asset: flashcardsReview }] : [];
   const image = images[imageIndex] ?? images[0];
 
-  return <section id="plataforma" aria-labelledby="platform-title" className="py-20 sm:py-28">
+  return <section id="plataforma" aria-labelledby="platform-title" className="py-10 sm:py-14">
     <div className="mx-auto max-w-7xl px-4">
-      <div className="mx-auto mb-10 max-w-3xl text-center">
+      <div className="mx-auto mb-6 max-w-3xl text-center">
         <span className="text-xs font-semibold uppercase text-gold">Conheça a plataforma</span>
         <h2 id="platform-title" className="mt-4 text-3xl font-bold uppercase sm:text-4xl md:text-5xl">Seu método. <span className="text-gradient-gold">Sua preparação.</span></h2>
       </div>
@@ -67,7 +67,7 @@ export function PlatformShowcase() {
               <span className="px-3 text-center text-xs sm:text-sm">Imagem em breve</span>
             </div>
           </div>}
-          <div className="mx-auto mt-6 max-w-2xl text-center"><h3 className="text-xl font-bold sm:text-2xl">{feature.title}</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{feature.desc}</p></div>
+          <div className="mx-auto mt-4 max-w-2xl text-center"><h3 className="text-xl font-bold sm:text-2xl">{feature.title}</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{feature.desc}</p></div>
         </div>
       </div>
     </div>
