@@ -10,18 +10,19 @@ import verticalNotice from '@/assets/edital-verticalizado-editavel.png.asset.jso
 import progressStatistics from '@/assets/painel-de-estudos-completo.png.asset.json';
 import flashcardsReview from '@/assets/flashcards-revisao.png.asset.json';
 
-type DemoImage = { label: string; asset: { url: string }; contain?: boolean; fill?: boolean };
+// ratio = largura/altura original da captura; stretch estica a largura para preencher a moldura.
+type DemoImage = { label: string; asset: { url: string }; ratio: number; stretch?: number; maxW?: number };
 
 // Recursos exibidos na vitrine: sem "Diário de Estudos" e sem "Questões sobre a Lei Seca".
 const removedTitles = ['Diário de Estudos', 'Questões sobre a Lei Seca'];
 const showcaseFeatures = benefits.filter(({ title }) => !removedTitles.includes(title));
 
 const featureImages: Record<string, DemoImage[]> = {
-  'Curso Completo em Vídeo Aulas': [{ label: 'Curso Completo em Vídeo Aulas', asset: courseVideo, contain: true }],
-  'Cronograma e Planejamento Automáticos': [{ label: 'Cronograma e Planejamento Automáticos', asset: planningConfiguration, contain: true }],
-  'Edital Verticalizado': [{ label: 'Edital Verticalizado', asset: verticalNotice, fill: true }],
-  'Estatísticas de Progresso': [{ label: 'Estatísticas de Progresso', asset: progressStatistics, fill: true }],
-  'Flashcards e Revisão Espaçada': [{ label: 'Flashcards e Revisão Espaçada', asset: flashcardsReview }],
+  'Curso Completo em Vídeo Aulas': [{ label: 'Curso Completo em Vídeo Aulas', asset: courseVideo, ratio: 442 / 647, stretch: 1.25, maxW: 600 }],
+  'Cronograma e Planejamento Automáticos': [{ label: 'Cronograma e Planejamento Automáticos', asset: planningConfiguration, ratio: 466 / 672, stretch: 1.25, maxW: 600 }],
+  'Edital Verticalizado': [{ label: 'Edital Verticalizado', asset: verticalNotice, ratio: 457 / 583, stretch: 1.25, maxW: 670 }],
+  'Estatísticas de Progresso': [{ label: 'Estatísticas de Progresso', asset: progressStatistics, ratio: 452 / 707, stretch: 1.25, maxW: 560 }],
+  'Flashcards e Revisão Espaçada': [{ label: 'Flashcards e Revisão Espaçada', asset: flashcardsReview, ratio: 1142 / 701, stretch: 1 }],
 };
 
 const devices = [
@@ -29,6 +30,8 @@ const devices = [
   { id: 'tablet', label: 'Tablet', icon: Tablet },
   { id: 'mobile', label: 'Celular', icon: Smartphone },
 ] as const;
+
+const deviceMaxWidth = { desktop: Infinity, tablet: 600, mobile: 320 } as const;
 
 export function PlatformShowcase() {
   const [selected, setSelected] = useState(1);
@@ -39,6 +42,8 @@ export function PlatformShowcase() {
   const deviceLabel = devices.find(item => item.id === device)?.label;
   const images = featureImages[feature.title] ?? [];
   const image = images[imageIndex] ?? images[0];
+  const maxW = Math.min(deviceMaxWidth[device], image?.maxW ?? Infinity);
+  const boxRatio = image ? image.ratio * (image.stretch ?? 1.25) : 1;
 
   return <section id="plataforma" aria-labelledby="platform-title" className="py-10 sm:py-14">
     <div className="mx-auto max-w-7xl px-4">
@@ -64,10 +69,8 @@ export function PlatformShowcase() {
               {images.length > 1 && images.map(({ label }, index) => <Button key={label} variant="outline" onClick={() => setImageIndex(index)} aria-pressed={imageIndex === index} className={`h-auto whitespace-normal py-2 text-xs ${imageIndex === index ? 'border-gold/60 bg-gold/10 text-gold' : 'border-border text-muted-foreground'}`}>{label}</Button>)}
               <Dialog><DialogTrigger asChild><Button variant="outline" size="icon" aria-label="Ampliar imagem" title="Ampliar imagem" className="ml-auto shrink-0 border-border text-gold"><Expand /></Button></DialogTrigger><DialogContent className="max-h-[90dvh] w-[calc(100%-2rem)] max-w-5xl overflow-y-auto"><DialogTitle>{image.label}</DialogTitle><DialogDescription>{feature.title}</DialogDescription><img src={image.asset.url} alt={image.label} className="h-auto w-full" /></DialogContent></Dialog>
             </div>
-            <div className={`flex justify-center overflow-hidden rounded-lg border border-border bg-gradient-dark ${image.fill ? 'h-[420px] sm:h-[620px] mx-auto w-fit ' + (device === 'mobile' ? 'max-w-[300px]' : device === 'tablet' ? 'max-w-[560px]' : 'max-w-full') : image.contain ? 'h-[420px] sm:h-[620px]' : 'h-[360px] sm:h-[480px]'}`}>
-              <div key={`${imageIndex}-${device}`} className={`flex h-full ${image.fill || image.contain ? 'items-center justify-center' : 'items-start overflow-y-auto'} ${image.fill ? '' : device === 'mobile' ? 'w-full max-w-[300px]' : device === 'tablet' ? 'w-full max-w-[560px]' : 'w-full'}`}>
-                <img src={image.asset.url} alt={image.label} className={image.fill ? 'h-full w-auto max-w-full object-cover' : image.contain ? 'mx-auto max-h-full max-w-full object-contain' : 'h-auto w-full'} />
-              </div>
+            <div key={`${imageIndex}-${device}`} className="mx-auto w-full overflow-hidden rounded-lg border border-border bg-gradient-dark" style={{ aspectRatio: `${boxRatio}`, maxWidth: Number.isFinite(maxW) ? `${maxW}px` : undefined }}>
+              <img src={image.asset.url} alt={image.label} className="h-full w-full object-fill" />
             </div>
           </> : <div className="flex aspect-[3/2] items-center justify-center overflow-hidden rounded-lg border border-border bg-gradient-dark p-5 sm:aspect-video sm:p-8">
             <div className={`flex flex-col items-center justify-center gap-3 rounded-lg border-2 border-border bg-card text-muted-foreground shadow-elegant ${device === 'mobile' ? 'aspect-[9/16] h-full max-w-full' : device === 'tablet' ? 'aspect-[4/3] h-full max-w-full' : 'aspect-video w-full max-w-xl'}`}>
