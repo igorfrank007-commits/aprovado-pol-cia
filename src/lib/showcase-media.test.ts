@@ -18,8 +18,15 @@ test('the lesson video carries the attached captions and its cover image', () =>
   expect(video.poster?.url.endsWith('/aula-02-poster.webp')).toBe(true);
 });
 
+test('the cronograma tab shows the Aula 03 video with its cover instead of an image', () => {
+  const media = showcaseMediaFor('Cronograma e Planejamento Automáticos');
+  expect(media.map(({ kind }) => kind)).toEqual(['video']);
+  expect(media[0].asset.url.endsWith('/aula-03-planejamento-edital.mp4')).toBe(true);
+  expect(media[0].poster?.url.endsWith('/aula-03-poster.webp')).toBe(true);
+});
+
 test('the other tabs keep their demonstration images', () => {
-  const others = ['Cronograma e Planejamento Automáticos', 'Edital Verticalizado', 'Estatísticas de Progresso', 'Flashcards e Revisão Espaçada'];
+  const others = ['Edital Verticalizado', 'Estatísticas de Progresso', 'Flashcards e Revisão Espaçada'];
   for (const title of others) {
     const media = showcaseMediaFor(title);
     expect(media.length).toBeGreaterThan(0);
