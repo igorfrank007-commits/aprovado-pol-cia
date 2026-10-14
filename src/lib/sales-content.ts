@@ -1,5 +1,7 @@
 import { BookOpen, Target, Calendar, ListChecks, Brain, Headphones, MessageCircle, Trophy, Layers } from 'lucide-react';
 export const checkoutUrl = 'https://pay.kiwify.com.br/mPgVeXg';
+// Segunda linha dos botões de compra ("Quero ser aprovado").
+export const ctaSub = 'Criar conta gratuita';
 export const whatsappUrl = 'https://wa.me/5555981205146';
 export const offer = { monthly: 39.90, annualInstallments: 12, annualInstallment: 29.90, guaranteeDays: 7, supportDays: 30 };
 export const benefits = [
