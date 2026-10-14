@@ -35,7 +35,17 @@ export const testimonials = [
  {name:'Mariana S.',initial:'M',time:'14:18',messages:['Não acredito que finalmente aconteceu 😭','O cronograma e o filtro do QConcursos foram um divisor de águas pra mim.','Aprovada na Polícia Civil! Obrigada por tudo ❤️']},
  {name:'Rafael M.',initial:'R',time:'21:05',messages:['Boa noite! Só passando pra dar a notícia 👮','Conciliava trabalho e estudo e achava impossível. O método encaixou na minha rotina.','Aprovado na PRF 🚔🔥']},
 ];
-export const audience = ['Iniciantes que não sabem por onde começar','Quem está perdido e estuda sem direção','Quem já estuda há anos e não evolui','Candidatos a Polícia Civil','Candidatos a Polícia Federal','Candidatos a Polícia Penal','Candidatos a Polícia Militar','Futuros Delegados','Candidatos a PRF','Concursos policiais em geral'];
+// Seção "Não é mentoria": pergunta do aluno e resposta do professor.
+export const mentorship = {
+  question: 'Prof. é uma mentoria?',
+  answerLead: 'Não! É um curso em vídeo aulas em que eu ensino passo a passo o método que me fez passar 3x na Polícia Federal, 4x para Delegado de Polícia e 1x na ABIN. E uma plataforma para o aluno gerar automaticamente:',
+  features: [
+    {icon:Calendar,title:'Cronograma e Planejamento Automáticos',desc:'Sistema que gera automaticamente seu cronograma de estudos e planejamento.'},
+    {icon:ListChecks,title:'Edital Verticalizado',desc:'Sistema que gera automaticamente seu edital verticalizado com marcações para você acompanhar seu progresso.'},
+    {icon:Target,title:'Estatísticas de Progresso',desc:'Estatísticas para você acompanhar seu progresso.'},
+    {icon:Brain,title:'Flashcards e Revisão Espaçada',desc:'Sistema de criação de flashcards para revisão espaçada e memorização avançada da matéria.'},
+  ],
+};
 // Lista da oferta, mantida explicitamente: continua com os sete itens pedidos antes,
 // mesmo após "Diário de Estudos" e "Questões sobre a Lei Seca" saírem das seções da página.
 export const included = ['Curso Completo em Vídeo Aulas','Cronograma e Planejamento Automáticos','Edital Verticalizado','Estatísticas de Progresso','Diário de Estudos','Questões sobre a Lei Seca','Flashcards e Revisão Espaçada'];
