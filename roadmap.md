@@ -10,3 +10,4 @@
 - [x] Atualizar a imagem da aba de vídeo aulas, ajustá-la na moldura e criar o botão “Quero acessar o curso”.
 - [x] Configurar a integração de assistentes (MCP) com acesso público e conferir as ferramentas.
 - [x] Substituir os cards "Diário de Estudos" e "Questões sobre a Lei Seca" pelo destaque de planejamentos ilimitados e conferir a exibição.
+- [x] Trocar a seção "Para quem é" pela seção "Não é mentoria" com pergunta e resposta do professor e foto de aluno.
