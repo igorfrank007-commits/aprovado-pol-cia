@@ -41,7 +41,6 @@ function Index() { return <main className="min-h-screen bg-background text-foreg
  <div>
   <h2 className="mt-4 text-3xl font-bold uppercase leading-tight sm:text-4xl md:text-5xl">Prof. é uma <Gold>mentoria?</Gold></h2>
   <div className="mt-6 flex flex-col gap-3">
-   <div className="max-w-[85%] self-start rounded-2xl rounded-tl-sm border border-border bg-card px-4 py-3 text-base font-semibold shadow-elegant">{mentorship.question}</div>
    <div className="max-w-[95%] self-end rounded-2xl rounded-tr-sm bg-chat-bubble px-4 py-3 ring-1 ring-chat/20">
     <p className="text-base leading-relaxed">{mentorship.answerLead}</p>
     <ul className="mt-3 grid gap-2.5">{mentorship.features.map(({icon:Icon,title,desc})=><li key={title} className="flex items-start gap-2 text-sm leading-relaxed"><Icon className="mt-0.5 size-4 shrink-0 text-gold" /><span><span className="font-semibold">{title}</span> <span className="text-muted-foreground">— {desc}</span></span></li>)}</ul>
