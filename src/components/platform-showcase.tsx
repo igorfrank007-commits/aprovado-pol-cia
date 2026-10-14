@@ -66,6 +66,7 @@ export function PlatformShowcase() {
           <div className="mx-auto mt-4 max-w-2xl text-center"><h3 className="text-xl font-bold sm:text-2xl">{feature.title}</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{feature.desc}</p></div>
         </div>
       </div>
+      </div></div></div>
     </div>
   </section>;
 }
