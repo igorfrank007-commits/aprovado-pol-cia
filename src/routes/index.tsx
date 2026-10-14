@@ -6,7 +6,7 @@ import { Checkout, SectionCheckout } from '@/components/sales-checkout';
 import { SalesVideo } from '@/components/sales-video';
 import { PlatformShowcase } from '@/components/platform-showcase';
 import hero from '@/assets/delegado.webp.asset.json';
-import student from '@/assets/student.webp.asset.json';
+import student from '@/assets/estudante.jpg.asset.json';
 import { benefits, problems, testimonials, included, offer, checkoutUrl, whatsappUrl, planHighlight, mentorship } from '@/lib/sales-content';
 export const Route = createFileRoute('/')({
  head: () => ({meta:[
