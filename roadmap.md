@@ -17,3 +17,4 @@
 - [x] Botões de plano viram "Quero ser aprovado"; texto de recorrência removido da oferta; todos os CTAs de compra levam à página de autenticação do Study Planner Pro (/auth?mode=signup).
 - [x] Excluir a seção de destaque "Planejamento ilimitado — Faça seus planejamentos para quantos concursos quiser" e conferir a exibição.
 - [x] Excluir a caixa "Não é mentoria" logo abaixo da capa, ajustando o espaçamento entre a capa e a seção seguinte, e conferir a exibição.
+- [x] Excluir o botão "Quero ser aprovado — Criar conta gratuita" que ficava no fim da oferta, abaixo do link do WhatsApp e dos selos, e conferir a exibição.
