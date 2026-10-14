@@ -7,7 +7,7 @@ import { SalesVideo } from '@/components/sales-video';
 import { PlatformShowcase } from '@/components/platform-showcase';
 import hero from '@/assets/delegado.webp.asset.json';
 import student from '@/assets/student.webp.asset.json';
-import { benefits, problems, testimonials, audience, included, offer, checkoutUrl, whatsappUrl, planHighlight } from '@/lib/sales-content';
+import { benefits, problems, testimonials, included, offer, checkoutUrl, whatsappUrl, planHighlight, mentorship } from '@/lib/sales-content';
 export const Route = createFileRoute('/')({
  head: () => ({meta:[
   {title:'Como Passar em Concursos Policiais e Delegado | Método Aprovado'},
@@ -37,7 +37,20 @@ function Index() { return <main className="min-h-screen bg-background text-foreg
   </div><SectionCheckout /></section>
   <PlatformShowcase />
   <section className="bg-secondary/30 py-10 sm:py-14"><div className="mx-auto max-w-7xl px-4"><Heading kicker="Depoimentos">Comentários <Gold>dos alunos</Gold></Heading><div className="grid gap-6 md:grid-cols-3">{testimonials.map(t=><article key={t.name} className="rounded-2xl border border-border bg-card p-5 shadow-elegant"><div className="flex items-center gap-3 border-b border-border pb-3"><div className="grid size-11 place-items-center rounded-full bg-gradient-gold font-display text-lg font-bold text-primary-foreground">{t.initial}</div><div className="flex-1"><p className="font-semibold">{t.name}</p></div><MessageCircle className="size-5 text-chat" /></div><div className="mt-4 flex flex-col gap-2">{t.messages.map(message=><div key={message} className="ml-auto max-w-[90%] rounded-2xl rounded-tr-sm bg-chat-bubble px-3 py-2 text-sm leading-relaxed ring-1 ring-chat/20">{message}<div className="mt-1 flex items-center justify-end gap-1 text-[10px] text-muted-foreground">{t.time}<CheckCheck className="size-3 text-chat" /></div></div>)}</div></article>)}</div></div><SectionCheckout /></section>
- <section className="py-10 sm:py-14"><div className="mx-auto grid max-w-7xl gap-6 px-4 lg:grid-cols-2 lg:items-center"><img src={student.url} loading="lazy" width={1024} height={1024} alt="Aluno estudando para concurso policial" className="order-2 w-full rounded-2xl border border-gold/20 shadow-elegant lg:order-1" /><div className="order-1 lg:order-2"><Heading kicker="Para quem é" center={false}>Esse curso é <Gold>para você</Gold></Heading><ul className="grid gap-3 sm:grid-cols-2">{audience.map(t=><li key={t} className="flex items-start gap-2 text-sm sm:text-base"><CircleCheck className="mt-0.5 size-5 shrink-0 text-gold" />{t}</li>)}</ul></div></div><SectionCheckout /></section>
+<section className="py-10 sm:py-14"><div className="mx-auto grid max-w-7xl gap-8 px-4 lg:grid-cols-2 lg:items-center">
+ <img src={student.url} loading="lazy" width={1024} height={1024} alt="Aluno perguntando ao professor se o curso é uma mentoria" className="w-full rounded-2xl border border-gold/20 shadow-elegant" />
+ <div>
+  <Kicker><MessageCircle className="mr-2 inline size-3.5" />Não é mentoria</Kicker>
+  <h2 className="mt-4 text-3xl font-bold uppercase leading-tight sm:text-4xl md:text-5xl">Prof. é uma <Gold>mentoria?</Gold></h2>
+  <div className="mt-6 flex flex-col gap-3">
+   <div className="max-w-[85%] self-start rounded-2xl rounded-tl-sm border border-border bg-card px-4 py-3 text-base font-semibold shadow-elegant">{mentorship.question}</div>
+   <div className="max-w-[95%] self-end rounded-2xl rounded-tr-sm bg-chat-bubble px-4 py-3 ring-1 ring-chat/20">
+    <p className="text-base leading-relaxed">{mentorship.answerLead}</p>
+    <ul className="mt-3 grid gap-2.5">{mentorship.features.map(({icon:Icon,title,desc})=><li key={title} className="flex items-start gap-2 text-sm leading-relaxed"><Icon className="mt-0.5 size-4 shrink-0 text-gold" /><span><span className="font-semibold">{title}</span> <span className="text-muted-foreground">— {desc}</span></span></li>)}</ul>
+   </div>
+  </div>
+ </div>
+</div><SectionCheckout /></section>
  <section id="oferta" className="py-10 sm:py-14"><div className="mx-auto max-w-5xl px-4">
 <Heading subtitle="Mas isso depende da decisão que você toma hoje. Comece agora com o método certo e transforme esforço em aprovação.">Seu nome pode ser o <Gold>próximo aprovado</Gold>.</Heading>
 <div className="grid items-stretch gap-6 md:grid-cols-2">{[{name:'Mensal',amount:offer.monthly,annual:false},{name:'Anual',amount:offer.annualInstallment,annual:true}].map(plan=><article key={plan.name} className={`flex min-w-0 flex-col rounded-lg border bg-gradient-dark p-6 sm:p-8 ${plan.annual?'border-gold/60 shadow-gold':'border-border'}`}>
