@@ -1,6 +1,6 @@
 /// <reference types="bun" />
 import { test, expect } from 'bun:test';
-import { checkoutUrl, offer, whatsappUrl, benefits, included, planHighlight, mentorship } from './sales-content';
+import { checkoutUrl, offer, whatsappUrl, benefits, included, planHighlight, mentorship, ctaSub } from './sales-content';
 import * as salesContent from './sales-content';
 test('the mentorship section answers the student question with the requested reply', () => { expect(mentorship.question).toBe('Prof. é uma mentoria?'); expect(mentorship.answerLead.startsWith('Não! É um curso em vídeo aulas')).toBe(true); });
 test('the mentorship section lists the four automatic platform features', () => { expect(mentorship.features.map(({ title }) => title)).toEqual(['Cronograma e Planejamento Automáticos','Edital Verticalizado','Estatísticas de Progresso','Flashcards e Revisão Espaçada']); });
@@ -14,3 +14,4 @@ test('reference support lasts thirty days', () => { expect(offer.supportDays).to
 test('the benefits grid no longer lists Diário de Estudos or Questões sobre a Lei Seca', () => { const titles = benefits.map(({ title }) => title); expect(titles).toEqual(['Curso Completo em Vídeo Aulas','Cronograma e Planejamento Automáticos','Edital Verticalizado','Estatísticas de Progresso','Flashcards e Revisão Espaçada']); });
 test('the replacement highlight carries the requested headline', () => { expect(planHighlight.title).toBe('Faça seus planejamentos para quantos concursos quiser'); });
 test('the offer still lists the seven items requested earlier', () => { expect(included).toEqual(['Curso Completo em Vídeo Aulas','Cronograma e Planejamento Automáticos','Edital Verticalizado','Estatísticas de Progresso','Diário de Estudos','Questões sobre a Lei Seca','Flashcards e Revisão Espaçada']); });
+test('purchase buttons carry the free account subtext', () => { expect(ctaSub).toBe('Criar conta gratuita'); });
