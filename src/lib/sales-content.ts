@@ -1,4 +1,4 @@
-import { BookOpen, Target, Calendar, ListChecks, Brain, Headphones, MessageCircle, Trophy, Layers } from 'lucide-react';
+import { BookOpen, Target, Calendar, ListChecks, Brain, Headphones, MessageCircle, Trophy } from 'lucide-react';
 export const checkoutUrl = 'https://pay.kiwify.com.br/mPgVeXg';
 // Segunda linha dos botões de compra ("Quero ser aprovado").
 export const ctaSub = 'Criar conta gratuita';
@@ -11,13 +11,6 @@ export const benefits = [
  {icon:Target,title:'Estatísticas de Progresso',desc:'Estatísticas para você acompanhar seu progresso.'},
  {icon:Brain,title:'Flashcards e Revisão Espaçada',desc:'Sistema de criação de flashcards para revisão espaçada e memorização avançada da matéria.'},
 ];
-// Destaque que ocupa o lugar das seções removidas "Diário de Estudos" e "Questões sobre a Lei Seca".
-export const planHighlight = {
- kicker:'Planejamento ilimitado',
- title:'Faça seus planejamentos para quantos concursos quiser',
- subtitle:'Monte um cronograma novo para cada edital, cargo e fase da sua preparação — tudo gerado automaticamente, no mesmo lugar.',
- points:['Um plano para cada edital','Quantos cargos você quiser','Tudo gerado automaticamente'],
-};
 export const modules = [
  ['Mentalidade do Aprovado','Construa a base mental que separa quem passa de quem desiste.'],
  ['Como Organizar seus Estudos','Estruture seu material, seu tempo e seu ambiente de estudos.'],
