@@ -1,5 +1,6 @@
 import { BookOpen, Target, Calendar, ListChecks, Brain, Headphones, MessageCircle, Trophy } from 'lucide-react';
-export const checkoutUrl = 'https://pay.kiwify.com.br/mPgVeXg';
+// Destination of every "Quero ser aprovado" button: the Study Planner Pro auth page.
+export const checkoutUrl = 'https://operacaoestudei.lovable.app/auth?mode=signup';
 // Segunda linha dos botões de compra ("Quero ser aprovado").
 export const ctaSub = 'Criar conta gratuita';
 export const whatsappUrl = 'https://wa.me/5555981205146';

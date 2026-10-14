@@ -14,5 +14,6 @@
 - [x] Criar a caixa de destaque "Não é mentoria" logo abaixo da capa, no estilo do selo "Método Validado", e conferir a exibição.
 - [x] Inserir o vídeo legendado da Aula 03 na aba "Cronograma e Planejamento Automáticos" da vitrine, substituindo a imagem.
 - [x] Acrescentar o texto "Criar conta gratuita" a todos os botões "Quero ser aprovado" e conferir a exibição.
+- [x] Botões de plano viram "Quero ser aprovado"; texto de recorrência removido da oferta; todos os CTAs de compra levam à página de autenticação do Study Planner Pro (/auth?mode=signup).
 - [x] Excluir a seção de destaque "Planejamento ilimitado — Faça seus planejamentos para quantos concursos quiser" e conferir a exibição.
 - [x] Excluir a caixa "Não é mentoria" logo abaixo da capa, ajustando o espaçamento entre a capa e a seção seguinte, e conferir a exibição.
