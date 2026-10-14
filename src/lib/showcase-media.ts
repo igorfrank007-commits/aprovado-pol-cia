@@ -1,7 +1,8 @@
 import { benefits } from '@/lib/sales-content';
 import aula03Video from '@/assets/aula-03-planejamento-edital.mp4.asset.json';
 import aula03Poster from '@/assets/aula-03-poster.webp.asset.json';
-import verticalNotice from '@/assets/edital-verticalizado-editavel.png.asset.json';
+import aula03EditalVideo from '@/assets/aula-03-edital-verticalizado.mp4.asset.json';
+import aula03EditalPoster from '@/assets/aula-03-edital-poster.webp.asset.json';
 import progressStatistics from '@/assets/painel-de-estudos-completo.png.asset.json';
 import flashcardsReview from '@/assets/flashcards-revisao-banner.png.asset.json';
 import aula02Video from '@/assets/aula-02-visao-geral.mp4.asset.json';
@@ -33,7 +34,8 @@ const mediaByTitle: Record<string, ShowcaseMedia[]> = {
   'Cronograma e Planejamento Automáticos': [
     { kind: 'video', label: 'Aula 03 - Planejamento e Edital Verticalizado', ratio: 1920 / 1080, stretch: 1, maxW: 960, asset: aula03Video, poster: aula03Poster },
   ],
-  'Edital Verticalizado': [{ kind: 'image', label: 'Edital Verticalizado', ratio: 457 / 583, stretch: 1.25, maxW: 670, asset: verticalNotice }],
+  // Aula 03 (trecho do edital) com as legendas gravadas no próprio vídeo.
+  'Edital Verticalizado': [{ kind: 'video', label: 'Aula 03 - Edital Verticalizado', ratio: 1920 / 1080, stretch: 1, maxW: 960, asset: aula03EditalVideo, poster: aula03EditalPoster }],
   'Estatísticas de Progresso': [{ kind: 'image', label: 'Estatísticas de Progresso', ratio: 452 / 707, stretch: 1.25, maxW: 560, asset: progressStatistics }],
   'Flashcards e Revisão Espaçada': [{ kind: 'image', label: 'Flashcards e Revisão Espaçada', ratio: 1536 / 1024, stretch: 1, asset: flashcardsReview }],
 };

@@ -25,8 +25,15 @@ test('the cronograma tab shows the Aula 03 video with its cover instead of an im
   expect(media[0].poster?.url.endsWith('/aula-03-poster.webp')).toBe(true);
 });
 
+test('the edital verticalizado tab shows the captioned Aula 03 video instead of an image', () => {
+  const media = showcaseMediaFor('Edital Verticalizado');
+  expect(media.map(({ kind }) => kind)).toEqual(['video']);
+  expect(media[0].asset.url.endsWith('/aula-03-edital-verticalizado.mp4')).toBe(true);
+  expect(media[0].poster?.url.endsWith('/aula-03-edital-poster.webp')).toBe(true);
+});
+
 test('the other tabs keep their demonstration images', () => {
-  const others = ['Edital Verticalizado', 'Estatísticas de Progresso', 'Flashcards e Revisão Espaçada'];
+  const others = ['Estatísticas de Progresso', 'Flashcards e Revisão Espaçada'];
   for (const title of others) {
     const media = showcaseMediaFor(title);
     expect(media.length).toBeGreaterThan(0);
