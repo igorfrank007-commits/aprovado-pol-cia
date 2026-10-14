@@ -1,0 +1,39 @@
+import { benefits } from '@/lib/sales-content';
+import planningConfiguration from '@/assets/cronograma-de-estudos-automatico.png.asset.json';
+import verticalNotice from '@/assets/edital-verticalizado-editavel.png.asset.json';
+import progressStatistics from '@/assets/painel-de-estudos-completo.png.asset.json';
+import flashcardsReview from '@/assets/flashcards-revisao-banner.png.asset.json';
+import aula02Video from '@/assets/aula-02-visao-geral.mp4.asset.json';
+import aula02Poster from '@/assets/aula-02-poster.webp.asset.json';
+import aula02Captions from '@/assets/aula-02-visao-geral.vtt.asset.json';
+
+// Mídia exibida na moldura de cada aba da vitrine.
+// ratio = largura/altura original da mídia; stretch estica a largura para preencher a moldura.
+export type ShowcaseMedia = {
+  kind: 'image' | 'video';
+  label: string;
+  ratio: number;
+  stretch: number;
+  maxW?: number;
+  asset: { url: string };
+  poster?: { url: string };
+  captions?: { url: string };
+};
+
+// Recursos exibidos na vitrine: sem "Diário de Estudos" e sem "Questões sobre a Lei Seca".
+const removedTitles = ['Diário de Estudos', 'Questões sobre a Lei Seca'];
+export const showcaseFeatures = benefits.filter(({ title }) => !removedTitles.includes(title));
+
+const mediaByTitle: Record<string, ShowcaseMedia[]> = {
+  'Curso Completo em Vídeo Aulas': [
+    { kind: 'video', label: 'Aula 02 - Visão Geral da Plataforma', ratio: 1920 / 1080, stretch: 1, maxW: 960, asset: aula02Video, poster: aula02Poster, captions: aula02Captions },
+  ],
+  'Cronograma e Planejamento Automáticos': [{ kind: 'image', label: 'Cronograma e Planejamento Automáticos', ratio: 466 / 672, stretch: 1.25, maxW: 600, asset: planningConfiguration }],
+  'Edital Verticalizado': [{ kind: 'image', label: 'Edital Verticalizado', ratio: 457 / 583, stretch: 1.25, maxW: 670, asset: verticalNotice }],
+  'Estatísticas de Progresso': [{ kind: 'image', label: 'Estatísticas de Progresso', ratio: 452 / 707, stretch: 1.25, maxW: 560, asset: progressStatistics }],
+  'Flashcards e Revisão Espaçada': [{ kind: 'image', label: 'Flashcards e Revisão Espaçada', ratio: 1536 / 1024, stretch: 1, asset: flashcardsReview }],
+};
+
+export function showcaseMediaFor(title: string): ShowcaseMedia[] {
+  return mediaByTitle[title] ?? [];
+}
