@@ -1,6 +1,6 @@
 /// <reference types="bun" />
 import { test, expect } from 'bun:test';
-import { checkoutUrl, offer, whatsappUrl, benefits, included, planHighlight, mentorship } from './sales-content';
+import { checkoutUrl, offer, whatsappUrl, benefits, included, planHighlight, mentorship, ctaSub } from './sales-content';
 import * as salesContent from './sales-content';
 test('the mentorship section answers the student question with the requested reply', () => { expect(mentorship.question).toBe('Prof. é uma mentoria?'); expect(mentorship.answerLead.startsWith('Não! É um curso em vídeo aulas')).toBe(true); });
 test('the mentorship section lists the four automatic platform features', () => { expect(mentorship.features.map(({ title }) => title)).toEqual(['Cronograma e Planejamento Automáticos','Edital Verticalizado','Estatísticas de Progresso','Flashcards e Revisão Espaçada']); });
