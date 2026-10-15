@@ -30,7 +30,7 @@ export function PlatformShowcase() {
     <div className="mx-auto max-w-7xl px-4">
       <div className="relative overflow-hidden rounded-3xl bg-gradient-plan p-px shadow-gold"><div className="relative overflow-hidden rounded-[calc(var(--radius-3xl)-1px)] bg-gradient-plan-soft px-4 py-10 sm:px-6 sm:py-12"><div aria-hidden className="grid-bg absolute inset-0 opacity-25" /><div aria-hidden className="absolute -top-28 left-1/2 h-56 w-[42rem] max-w-full -translate-x-1/2 rounded-full bg-gold/25 blur-3xl" /><div className="relative">
       <div className="mx-auto mb-6 max-w-3xl text-center">
-        <h2 id="platform-title" className="text-3xl font-bold uppercase sm:text-4xl md:text-5xl">CONHEÇA A PLATAFORMA <span className="text-gradient-gold">POR DENTRO</span></h2>
+        <h2 id="platform-title" className="text-3xl font-bold uppercase sm:text-4xl md:text-5xl">CONHEÇA UM POUCO <span className="text-gradient-gold">DO CURSO</span></h2>
       </div>
       <div className="flex flex-wrap items-center justify-between gap-4 border-y border-border bg-gradient-dark px-4 py-4 sm:px-6">
         <div className="min-w-0"><p className="font-semibold">{feature.title}</p><p className="mt-1 text-[10px] font-bold uppercase text-gold">{deviceLabel}</p></div>
