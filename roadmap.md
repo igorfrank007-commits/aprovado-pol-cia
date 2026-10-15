@@ -1,4 +1,5 @@
 # Atualização da página de vendas
+- [ ] Remover o CTA do diagnóstico, atualizar título da vitrine e descrições de aprendizagem, ajustar resposta sobre mentoria e preços, adicionar perguntas frequentes e verificar a página.
 - [x] Adaptar textos e seções do modelo para o curso de Igor Andrade, preservando o estilo e checkout.
 - [x] Conferir a página, perguntas frequentes e links de inscrição.
 - [x] Aplicar os layouts das capturas às aprovações, pilares e passos do método e conferir a exibição.
