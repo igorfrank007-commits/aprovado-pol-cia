@@ -4,7 +4,7 @@ export const checkoutUrl = 'https://operacaoestudei.lovable.app/auth?mode=signup
 // Segunda linha dos botões de compra ("Quero ser aprovado").
 export const ctaSub = 'Criar conta gratuita';
 export const whatsappUrl = 'https://wa.me/5555981205146';
-export const offer = { monthly: 29.90, annualInstallments: 12, annualInstallment: 19.90, guaranteeDays: 7, supportDays: 30 };
+export const offer = { monthly: 37.00, annualInstallments: 12, annualInstallment: 19.90, guaranteeDays: 7, supportDays: 30 };
 export const benefits = [
  {icon:BookOpen,title:'Curso Completo em Vídeo Aulas',desc:'Curso completo em vídeo aulas em que eu mostro meu método passo a passo.'},
  {icon:Calendar,title:'Cronograma e Planejamento Automáticos',desc:'Você vai aprender como gerar automaticamente seu cronograma de estudos e planejamento. Você anexa seu edital, informa o cronograma de aulas do curso preparatório, informa quantas horas e quais dias você vai estudar e gera automaticamente seu cronograma de estudos e planejamento'},
@@ -42,9 +42,10 @@ export const mentorship = {
     {icon:Brain,title:'Aprenderá como criar Flashcards e Revisão Espaçada',desc:''},
   ],
 };
-// Lista da oferta, mantida explicitamente: continua com os sete itens pedidos antes,
-// mesmo após "Diário de Estudos" e "Questões sobre a Lei Seca" saírem das seções da página.
-export const included = ['Curso Completo em Vídeo Aulas','Cronograma e Planejamento Automáticos','Edital Verticalizado','Estatísticas de Progresso','Diário de Estudos','Questões sobre a Lei Seca','Flashcards e Revisão Espaçada'];
+// Lista da oferta, mantida explicitamente: continua com os itens pedidos antes,
+// mesmo após "Diário de Estudos" e "Questões sobre a Lei Seca" saírem das seções da página,
+// e agora inclui o "Raio-X da banca" com análise estatística do que cai na prova.
+export const included = ['Curso Completo em Vídeo Aulas','Cronograma e Planejamento Automáticos','Edital Verticalizado','Estatísticas de Progresso','Diário de Estudos','Questões sobre a Lei Seca','Flashcards e Revisão Espaçada','Raio-X da Banca e Análise Estatística do Que Cai na Prova'];
 
 export const courseScope = { publicExams: true, oab: true };
 export const faqs = [
