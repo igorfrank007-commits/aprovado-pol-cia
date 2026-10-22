@@ -6,6 +6,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Checkout, SectionCheckout } from '@/components/sales-checkout';
 import { PlatformShowcase } from '@/components/platform-showcase';
 import { PricingPlans } from '@/components/pricing-plans';
+import { PlanCompare } from '@/components/plan-compare';
 import { VslPlayer } from '@/components/vsl-player';
 import { useScrollReveal } from '@/hooks/use-scroll-reveal';
 import { benefits, problems, testimonials, offer, whatsappUrl, mentorship, ctaSub, faqs } from '@/lib/sales-content';
@@ -50,6 +51,7 @@ function Index() {
    </div></div></div>
   </div><SectionCheckout /></section>
   <PlatformShowcase />
+  <PlanCompare />
   <section className="bg-secondary/30 py-10 sm:py-14"><div className="mx-auto max-w-7xl px-4"><Heading kicker="Depoimentos">Comentários <Gold>dos alunos</Gold></Heading><div className="grid gap-6 md:grid-cols-3">{testimonials.map(t=><article key={t.name} className="rounded-2xl border border-border bg-card p-5 shadow-elegant"><div className="flex items-center gap-3 border-b border-border pb-3"><div className="grid size-11 place-items-center rounded-full bg-gradient-gold font-display text-lg font-bold text-primary-foreground">{t.initial}</div><div className="flex-1"><p className="font-semibold">{t.name}</p></div><MessageCircle className="size-5 text-chat" /></div><div className="mt-4 flex flex-col gap-2">{t.messages.map(message=><div key={message} className="ml-auto max-w-[90%] rounded-2xl rounded-tr-sm bg-chat-bubble px-3 py-2 text-sm leading-relaxed ring-1 ring-chat/20">{message}<div className="mt-1 flex items-center justify-end gap-1 text-[10px] text-muted-foreground">{t.time}<CheckCheck className="size-3 text-chat" /></div></div>)}</div></article>)}</div></div><SectionCheckout /></section>
 <section className="py-10 sm:py-14"><div className="mx-auto max-w-3xl px-4">
  <h2 className="text-center text-3xl font-bold uppercase leading-tight sm:text-4xl md:text-5xl">Prof. é uma <Gold>mentoria?</Gold></h2>
