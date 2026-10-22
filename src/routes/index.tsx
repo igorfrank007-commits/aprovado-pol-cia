@@ -7,8 +7,6 @@ import { Checkout, SectionCheckout } from '@/components/sales-checkout';
 import { PlatformShowcase } from '@/components/platform-showcase';
 import { VslPlayer } from '@/components/vsl-player';
 import { useScrollReveal } from '@/hooks/use-scroll-reveal';
-import hero from '@/assets/delegado.webp.asset.json';
-import student from '@/assets/estudante.jpg.asset.json';
 import { benefits, problems, testimonials, included, offer, checkoutUrl, whatsappUrl, mentorship, ctaSub, faqs } from '@/lib/sales-content';
 export const Route = createFileRoute('/')({
  head: () => ({meta:[
@@ -39,7 +37,6 @@ function Index() {
   <div className="mt-8 w-full max-w-3xl"><VslPlayer onOfferReached={scrollToOffer} /></div>
   <div id="cta-oferta-principal" className="mt-6 flex w-full max-w-3xl flex-col items-center gap-3"><Checkout sub={ctaSub} shimmer>Quero ser aprovado</Checkout><span className="text-xs uppercase text-muted-foreground">Acesso imediato · Garantia {offer.guaranteeDays} dias</span></div>
   <ul className="mt-8 grid gap-2 text-sm sm:text-base">{['Método validado por aprovados','Organização completa pronta para usar','Estudo inteligente e mais rápido'].map(t=><li key={t} className="flex items-center justify-center gap-2"><CircleCheck className="size-5 shrink-0 text-gold" />{t}</li>)}</ul>
-  <div className="mt-10 w-full max-w-sm overflow-hidden rounded-2xl border border-gold/20 shadow-elegant"><img src={hero.url} width={1055} height={1491} alt="Guia Como Passar em Concursos Policiais de Igor Andrade" className="h-auto w-full object-cover" /></div>
  </div></section>
  <div id="conteudo-liberado" className={sectionsVisible ? 'animate-fade-up' : 'hidden'}>
   <section className="pb-10 pt-8 sm:pb-14 sm:pt-10"><div className="mx-auto max-w-6xl px-4"><Heading kicker="Diagnóstico">Você sonha em passar em concurso publico mas <Gold>enfrenta os seguintes problemas?</Gold></Heading><div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{problems.map(p=><div key={p} className="flex items-start gap-3 rounded-xl border border-border bg-card p-5"><TriangleAlert className="size-5 shrink-0 text-destructive" /><p className="text-base">{p}</p></div>)}</div><div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-gold/30 bg-card p-8 text-center"><Flame className="mx-auto mb-4 size-7 text-gold" /><p className="text-xl font-semibold">Precisa de um <Gold>método certeiro para alcançar a aprovação</Gold></p></div></div></section>
@@ -53,16 +50,11 @@ function Index() {
   </div><SectionCheckout /></section>
   <PlatformShowcase />
   <section className="bg-secondary/30 py-10 sm:py-14"><div className="mx-auto max-w-7xl px-4"><Heading kicker="Depoimentos">Comentários <Gold>dos alunos</Gold></Heading><div className="grid gap-6 md:grid-cols-3">{testimonials.map(t=><article key={t.name} className="rounded-2xl border border-border bg-card p-5 shadow-elegant"><div className="flex items-center gap-3 border-b border-border pb-3"><div className="grid size-11 place-items-center rounded-full bg-gradient-gold font-display text-lg font-bold text-primary-foreground">{t.initial}</div><div className="flex-1"><p className="font-semibold">{t.name}</p></div><MessageCircle className="size-5 text-chat" /></div><div className="mt-4 flex flex-col gap-2">{t.messages.map(message=><div key={message} className="ml-auto max-w-[90%] rounded-2xl rounded-tr-sm bg-chat-bubble px-3 py-2 text-sm leading-relaxed ring-1 ring-chat/20">{message}<div className="mt-1 flex items-center justify-end gap-1 text-[10px] text-muted-foreground">{t.time}<CheckCheck className="size-3 text-chat" /></div></div>)}</div></article>)}</div></div><SectionCheckout /></section>
-<section className="py-10 sm:py-14"><div className="mx-auto grid max-w-7xl gap-8 px-4 lg:grid-cols-2 lg:items-center">
- <img src={student.url} loading="lazy" width={1024} height={1024} alt="Aluno perguntando ao professor se o curso é uma mentoria" className="w-full rounded-2xl border border-gold/20 shadow-elegant" />
- <div>
-  <h2 className="mt-4 text-3xl font-bold uppercase leading-tight sm:text-4xl md:text-5xl">Prof. é uma <Gold>mentoria?</Gold></h2>
-  <div className="mt-6 flex flex-col gap-3">
-   <div className="max-w-[95%] self-end rounded-2xl rounded-tr-sm bg-chat-bubble px-4 py-3 ring-1 ring-chat/20">
-    <p className="text-base leading-relaxed">{mentorship.answerLead}</p>
-     <ul className="mt-3 grid gap-2.5">{mentorship.features.map(({icon:Icon,title,desc})=><li key={title} className="flex items-start gap-2 text-sm leading-relaxed"><Icon className="mt-0.5 size-4 shrink-0 text-gold" /><span><span className="font-semibold">{title}</span>{desc && <span className="text-muted-foreground">{title === 'Como gerar o Edital Verticalizado' ? ' ' : ' — '}{desc}</span>}</span></li>)}</ul>
-   </div>
-  </div>
+<section className="py-10 sm:py-14"><div className="mx-auto max-w-3xl px-4">
+ <h2 className="text-center text-3xl font-bold uppercase leading-tight sm:text-4xl md:text-5xl">Prof. é uma <Gold>mentoria?</Gold></h2>
+ <div className="mt-6 rounded-2xl rounded-tr-sm bg-chat-bubble px-4 py-3 ring-1 ring-chat/20">
+  <p className="text-base leading-relaxed">{mentorship.answerLead}</p>
+  <ul className="mt-3 grid gap-2.5">{mentorship.features.map(({icon:Icon,title,desc})=><li key={title} className="flex items-start gap-2 text-sm leading-relaxed"><Icon className="mt-0.5 size-4 shrink-0 text-gold" /><span><span className="font-semibold">{title}</span>{desc && <span className="text-muted-foreground">{title === 'Como gerar o Edital Verticalizado' ? ' ' : ' — '}{desc}</span>}</span></li>)}</ul>
  </div>
 </div><SectionCheckout /></section>
  <section id="oferta" className="py-10 sm:py-14"><div className="mx-auto max-w-5xl px-4">
