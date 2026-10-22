@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { useEffect, useState, type ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { Shield, CircleCheck, TriangleAlert, Flame, MessageCircle, CheckCheck, Clock, Layers } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -22,17 +22,12 @@ export const Route = createFileRoute('/')({
 function Kicker({children}:{children:ReactNode}) { return <span className="inline-block rounded-full border border-gold/30 bg-gold/5 px-3 py-1 text-xs font-semibold uppercase text-gold">{children}</span>; }
 function Heading({kicker,children,subtitle,center=true}:{kicker?:string;children:ReactNode;subtitle?:string;center?:boolean}) { return <div className={`mb-6 ${center?'mx-auto max-w-3xl text-center':''}`}>{kicker && <Kicker>{kicker}</Kicker>}<h2 className="mt-4 text-3xl font-bold uppercase leading-tight sm:text-4xl md:text-5xl">{children}</h2>{subtitle && <p className="mt-4 text-base text-muted-foreground sm:text-lg">{subtitle}</p>}</div>; }
 function Gold({children}:{children:ReactNode}) { return <span className="text-gradient-gold">{children}</span>; }
-// Tempo (em segundos) que as seções abaixo do vídeo ficam ocultas.
-// Altere apenas este valor para mudar o delay inteligente.
-const delaySeconds = 90;
-
 function Index() {
  const [sectionsVisible, setSectionsVisible] = useState(false);
- useEffect(() => { const timer = window.setTimeout(() => setSectionsVisible(true), delaySeconds * 1000); return () => window.clearTimeout(timer); }, []);
  // Animações de entrada (fade-in + slide) via IntersectionObserver, após a liberação das seções.
  useScrollReveal(sectionsVisible);
- // Ao chegar em 37:35 do vídeo, rola suavemente até o botão de compra abaixo do player.
- function scrollToOffer() { document.getElementById('cta-oferta-principal')?.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+ // Gatilho do player: aos 26:53 do vídeo libera o restante da página e rola até a oferta.
+ function scrollToOffer() { setSectionsVisible(true); document.getElementById('cta-oferta-principal')?.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
  return <main className="min-h-screen bg-background text-foreground">
  <section className="relative overflow-hidden bg-gradient-hero"><div aria-hidden className="grid-bg absolute inset-0 opacity-40" /><div className="relative mx-auto flex max-w-4xl flex-col items-center px-4 py-10 text-center sm:py-14">
   <div className="w-full animate-fade-up"><div className="flex flex-wrap items-center justify-center gap-2"><Kicker><Shield className="mr-2 inline size-3.5" />Método Validado</Kicker><Kicker><MessageCircle className="mr-2 inline size-3.5" />NÃO É MENTORIA DE MILHARES DE REAIS</Kicker></div><h1 className="mt-5 font-display text-4xl font-bold uppercase leading-[1.05] sm:text-5xl md:text-6xl">DESCUBRA O MÉTODO QUE ME AJUDOU A <Gold>PASSAR 3X NA POLÍCIA FEDERAL, 4X PARA DELEGADO DE POLÍCIA E 1X NA ABIN.</Gold> <Gold>AULA 100% GRATUITA</Gold></h1></div>
