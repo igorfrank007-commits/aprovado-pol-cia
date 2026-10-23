@@ -15,7 +15,9 @@ import { benefits, problems, testimonials, offer, whatsappUrl, mentorship, ctaSu
 // As seções abaixo do vídeo ficam ocultas e são liberadas automaticamente
 // depois deste tempo (em segundos). Basta alterar o valor para mudar o delay.
 // ---------------------------------------------------------------------------
-const delaySeconds = 90;export const Route = createFileRoute('/')({
+const delaySeconds = 90;
+
+export const Route = createFileRoute('/')({
  head: () => ({meta:[
   {title:'Como Passar em Concursos Policiais e Delegado | Método Aprovado'},
   {name:'description',content:'Método validado para aprovação em concursos policiais e delegado. Planejamento, revisões e estratégia para você ser o próximo aprovado.'},

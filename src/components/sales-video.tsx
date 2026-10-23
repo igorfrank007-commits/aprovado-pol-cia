@@ -1,9 +1,6 @@
 import { useRef, useState } from 'react';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import videoAsset from '@/assets/method-video.mp4.asset.json';
-import webmAsset from '@/assets/method-video.webm.asset.json';
-import posterAsset from '@/assets/video-poster.webp.asset.json';
 export function SalesVideo() {
  const video = useRef<HTMLVideoElement>(null);
  const [playing, setPlaying] = useState(false);
