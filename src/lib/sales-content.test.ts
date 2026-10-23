@@ -15,3 +15,23 @@ test('the benefits grid no longer lists Diário de Estudos or Questões sobre a 
 test('the "planejamentos para quantos concursos quiser" highlight is removed from the page content', () => { expect('planHighlight' in salesContent).toBe(false); });
 test('the offer lists every item requested earlier plus the bank analysis item', () => { expect(included).toEqual(['Curso Completo em Vídeo Aulas','Cronograma e Planejamento Automáticos','Edital Verticalizado','Estatísticas de Progresso','Diário de Estudos','Questões sobre a Lei Seca','Flashcards e Revisão Espaçada','Raio-X da Banca e Análise Estatística do Que Cai na Prova']); });
 test('purchase buttons carry the free account subtext', () => { expect(ctaSub).toBe('Criar conta gratuita'); });
+test('the FAQ answers the support question with the 30-day reply', () => {
+  const item = salesContent.faqs.find(({ question }) => question === 'Terei suporte ou tira dúvidas?');
+  expect(item?.answer).toBe('Sim. O aluno tem acesso ao suporte por 30 dias após o início do curso.');
+});
+test('the old "Como começo ou tiro outras dúvidas?" FAQ item is removed', () => {
+  const questions = salesContent.faqs.map(({ question }) => question);
+  expect(questions.some((question) => question.startsWith('Como começo'))).toBe(false);
+  const answers = salesContent.faqs.map(({ answer }) => answer).join(' ');
+  expect(answers.includes('Clique em')).toBe(false);
+});
+test('the FAQ answers the support question with the 30-day reply', () => {
+  const item = salesContent.faqs.find(({ question }) => question === 'Terei suporte ou tira dúvidas?');
+  expect(item?.answer).toBe('Sim. O aluno tem acesso ao suporte por 30 dias após o início do curso.');
+});
+test('the old "Como começo ou tiro outras dúvidas?" FAQ item is removed', () => {
+  const questions = salesContent.faqs.map(({ question }) => question);
+  expect(questions.some((question) => question.startsWith('Como começo'))).toBe(false);
+  const answers = salesContent.faqs.map(({ answer }) => answer).join(' ');
+  expect(answers.includes('Clique em')).toBe(false);
+});

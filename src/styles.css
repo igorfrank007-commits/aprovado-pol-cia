@@ -225,3 +225,5 @@
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1 !important; transform: none !important; }
 }
+
+/* FAQ: pergunta de suporte com 30 dias (ver src/lib/sales-content.ts) */

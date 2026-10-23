@@ -70,5 +70,5 @@ export const faqs = [
   { question: 'O curso ensina técnicas de revisão e memorização?', answer: 'Sim. Você aprenderá a criar flashcards para revisão espaçada e memorização avançada da matéria.' },
   { question: 'Qual a diferença entre os planos mensal e anual?', answer: `Os dois planos incluem os mesmos itens da oferta. A assinatura mensal custa R$ ${offer.monthly.toFixed(2).replace('.', ',')} por mês. A assinatura anual custa ${offer.annualInstallments}x de R$ ${offer.annualInstallment.toFixed(2).replace('.', ',')} e oferece 12 meses de acesso. O acesso ao curso e aos sistemas permanece durante a assinatura.` },
   { question: 'O curso tem garantia?', answer: `Sim. A garantia é de ${offer.guaranteeDays} dias.` },
-  { question: 'Como começo ou tiro outras dúvidas?', answer: 'Clique em “Quero ser aprovado” para criar sua conta gratuita. Se tiver dúvidas antes de começar, entre em contato pelo WhatsApp disponível nesta página.' },
+  { question: 'Terei suporte ou tira dúvidas?', answer: `Sim. O aluno tem acesso ao suporte por ${offer.supportDays} dias após o início do curso.` },
 ];
