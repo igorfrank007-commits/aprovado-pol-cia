@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { useState, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { Shield, CircleCheck, TriangleAlert, Flame, MessageCircle, CheckCheck, Clock, Layers } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -10,7 +10,12 @@ import { PlanCompare } from '@/components/plan-compare';
 import { VslPlayer } from '@/components/vsl-player';
 import { useScrollReveal } from '@/hooks/use-scroll-reveal';
 import { benefits, problems, testimonials, offer, whatsappUrl, mentorship, ctaSub, faqs } from '@/lib/sales-content';
-export const Route = createFileRoute('/')({
+// ---------------------------------------------------------------------------
+// DELAY INTELIGENTE
+// As seções abaixo do vídeo ficam ocultas e são liberadas automaticamente
+// depois deste tempo (em segundos). Basta alterar o valor para mudar o delay.
+// ---------------------------------------------------------------------------
+const delaySeconds = 90;export const Route = createFileRoute('/')({
  head: () => ({meta:[
   {title:'Como Passar em Concursos Policiais e Delegado | Método Aprovado'},
   {name:'description',content:'Método validado para aprovação em concursos policiais e delegado. Planejamento, revisões e estratégia para você ser o próximo aprovado.'},
@@ -26,13 +31,18 @@ function Index() {
  const [sectionsVisible, setSectionsVisible] = useState(false);
  // Animações de entrada (fade-in + slide) via IntersectionObserver, após a liberação das seções.
  useScrollReveal(sectionsVisible);
- // Gatilho do player: aos 26:53 do vídeo libera o restante da página e rola até a oferta.
+ // Delay inteligente: libera as seções abaixo do vídeo após `delaySeconds`.
+ useEffect(() => {
+  const timer = window.setTimeout(() => setSectionsVisible(true), delaySeconds * 1000);
+  return () => window.clearTimeout(timer);
+ }, []);
+ // Gatilho do player: aos 26:53 do vídeo libera o restante da página e rola até o botão de compra.
  function scrollToOffer() { setSectionsVisible(true); document.getElementById('cta-oferta-principal')?.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
  return <main className="min-h-screen bg-background text-foreground">
  <section className="relative overflow-hidden bg-gradient-hero"><div aria-hidden className="grid-bg absolute inset-0 opacity-40" /><div className="relative mx-auto flex max-w-4xl flex-col items-center px-4 py-10 text-center sm:py-14">
   <div className="w-full animate-fade-up"><div className="flex flex-wrap items-center justify-center gap-2"><Kicker><Shield className="mr-2 inline size-3.5" />Método Validado</Kicker><Kicker><MessageCircle className="mr-2 inline size-3.5" />NÃO É MENTORIA DE MILHARES DE REAIS</Kicker></div><h1 className="mt-5 font-display text-4xl font-bold uppercase leading-[1.05] sm:text-5xl md:text-6xl">DESCUBRA O MÉTODO QUE ME AJUDOU A <Gold>PASSAR 3X NA POLÍCIA FEDERAL, 4X PARA DELEGADO DE POLÍCIA E 1X NA ABIN.</Gold> <Gold>AULA 100% GRATUITA</Gold></h1></div>
   <div className="mt-8 w-full max-w-3xl"><VslPlayer onOfferReached={scrollToOffer} /></div>
-  <div id="cta-oferta-principal" className="mt-6 flex w-full max-w-3xl flex-col items-center gap-3"><Checkout sub={ctaSub} shimmer>Quero ser aprovado</Checkout><span className="text-xs uppercase text-muted-foreground">Acesso imediato · Garantia {offer.guaranteeDays} dias</span></div>
+  <div id="cta-oferta-principal" className="mt-6 flex w-full max-w-3xl flex-col items-center gap-3"><Checkout sub={ctaSub} pulse shimmer>Quero ser aprovado</Checkout><span className="text-xs uppercase text-muted-foreground">Acesso imediato · Garantia {offer.guaranteeDays} dias</span></div>
   <ul className="mt-8 grid gap-2 text-sm sm:text-base">{['Método validado por aprovados','Organização completa pronta para usar','Estudo inteligente e mais rápido'].map(t=><li key={t} className="flex items-center justify-center gap-2"><CircleCheck className="size-5 shrink-0 text-gold" />{t}</li>)}</ul>
  </div></section>
  <div id="conteudo-liberado" className={sectionsVisible ? 'animate-fade-up' : 'hidden'}>

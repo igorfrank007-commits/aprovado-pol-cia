@@ -7,64 +7,54 @@ import {
   type PointerEvent as ReactPointerEvent,
 } from 'react';
 import { Loader2, Maximize, Pause, Play, Volume2, VolumeX } from 'lucide-react';
-import posterAsset from '@/assets/video-poster.webp.asset.json';
-import mp4Asset from '@/assets/method-video.mp4.asset.json';
-import webmAsset from '@/assets/method-video.webm.asset.json';
+// Vídeo hospedado no Google Drive (fonte do player).
+const DRIVE_FILE_ID = '1eh2mZ4e1c2hMiPJZpCB_O8pi9EChfnTS';
+const DRIVE_STREAM_URL = `https://drive.usercontent.google.com/download?id=${DRIVE_FILE_ID}&export=download&confirm=t`;
+const DRIVE_EMBED_URL = `https://drive.google.com/file/d/${DRIVE_FILE_ID}/preview?autoplay=1`;
 
+// Vídeo hospedado no Google Drive.
+const DRIVE_FILE_ID = '1eh2mZ4e1c2hMiPJZpCB_O8pi9EChfnTS';
+const DRIVE_STREAM_URL = `https://drive.usercontent.google.com/download?id=${DRIVE_FILE_ID}&export=download&confirm=t`;
+const DRIVE_EMBED_URL = `https://drive.google.com/file/d/${DRIVE_FILE_ID}/preview?autoplay=1`;
+const DRIVE_FILE_ID = '1eh2mZ4e1c2hMiPJZpCB_O8pi9EChfnTS';
+const DRIVE_STREAM_URL = `https://drive.usercontent.google.com/download?id=${DRIVE_FILE_ID}&export=download&confirm=t`;
+const DRIVE_EMBED_URL = `https://drive.google.com/file/d/${DRIVE_FILE_ID}/preview?autoplay=1`;
 // ============================================================================
 // CONFIGURAÇÃO DO VÍDEO
-// O player usa sempre o arquivo local (src/assets), com todos os controles
-// próprios: autoplay com som, play/pause, mute, barra de progresso e tela cheia.
-// Para trocar a aula, basta substituir os arquivos referenciados abaixo.
+// Vídeo hospedado no Google Drive. O player tenta primeiro o stream direto,
+// que permite controles próprios e leitura do tempo (necessária para o gatilho
+// de 26:53); se o Drive bloquear, cai automaticamente para o embed oficial.
 // ============================================================================
-const VIDEO_SOURCES = [
-  { src: mp4Asset.url, type: 'video/mp4' },
-  { src: webmAsset.url, type: 'video/webm' },
-];
+const DRIVE_FILE_ID = '1eh2mZ4e1c2hMiPJZpCB_O8pi9EChfnTS';
+const DRIVE_STREAM_URL = `https://drive.usercontent.google.com/download?id=${DRIVE_FILE_ID}&export=download&confirm=t`;
+const DRIVE_EMBED_URL = `https://drive.google.com/file/d/${DRIVE_FILE_ID}/preview?autoplay=1`;
 
-/** Momento do vídeo que dispara a rolagem para a oferta: 26 minutos e 53 segundos. */
+/** Momento do vídeo que dispara a rolagem suave até a oferta: 26 minutos e 53 segundos. */
 const TRIGGER_SECONDS = 26 * 60 + 53;
 
-/**
- * Se o navegador bloquear totalmente o autoplay (sem som nenhum), a página se
- * libera depois desse tempo para o visitante nunca ficar preso na tela do vídeo.
- */
-const FALLBACK_SECONDS = 90;
-
 type VslPlayerProps = {
-  /** Chamado uma única vez quando o vídeo chega em 26:53 (ou quando não pode tocar). */
+  /** Chamado uma única vez quando o vídeo chega em 26:53. */
   onOfferReached?: () => void;
 };
 
-type Overlay = 'none' | 'sound' | 'start';
-
-function formatTime(total: number) {
-  if (!Number.isFinite(total) || total < 0) return '0:00';
-  const seconds = Math.floor(total % 60);
-  const minutes = Math.floor((total / 60) % 60);
-  const hours = Math.floor(total / 3600);
-  const pad = (value: number) => String(value).padStart(2, '0');
-  return hours > 0 ? `${hours}:${pad(minutes)}:${pad(seconds)}` : `${minutes}:${pad(seconds)}`;
-}
-
 /**
- * Player da VSL: vídeo local em 16:9, autoplay (tentando com áudio), play/pause,
- * mute, barra de progresso arrastável, tempo e tela cheia.
+ * Player da VSL: vídeo 16:9 do Google Drive, autoplay mudo com overlay
+ * "Clique para Ouvir", play/pause, mute, barra de progresso arrastável (com
+ * scrubbing livre e sem exibir a duração) e tela cheia.
  */
 export function VslPlayer({ onOfferReached }: VslPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const firedRef = useRef(false);
-  const hideTimer = useRef<number | null>(null);
   const draggingRef = useRef(false);
 
+  const [mode, setMode] = useState<'video' | 'embed'>('video');
   const [playing, setPlaying] = useState(false);
-  const [muted, setMuted] = useState(false);
   const [current, setCurrent] = useState(0);
   const [duration, setDuration] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [overlay, setOverlay] = useState<Overlay>('none');
-  const [controlsVisible, setControlsVisible] = useState(true);
+  const [audioOn, setAudioOn] = useState(false);
+  const [unlocked, setUnlocked] = useState(false);
 
   const fireOffer = useCallback(() => {
     if (firedRef.current) return;
@@ -84,49 +74,15 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
     [fireOffer],
   );
 
-  // Autoplay: tenta primeiro com som; se o navegador bloquear, tenta sem som e
-  // oferece o botão "Ativar som"; se bloquear tudo, mostra o overlay de play.
+  // Autoplay sempre mudo (política dos navegadores) + overlay "Clique para Ouvir".
   useEffect(() => {
+    if (mode !== 'video') return;
     const video = videoRef.current;
     if (!video) return;
-    let cancelled = false;
-
-    const attempt = async () => {
-      video.muted = false;
-      video.volume = 1;
-      try {
-        await video.play();
-        if (cancelled) return;
-        setMuted(false);
-        setOverlay('none');
-      } catch {
-        if (cancelled) return;
-        try {
-          video.muted = true;
-          await video.play();
-          if (cancelled) return;
-          setMuted(true);
-          setOverlay('sound');
-        } catch {
-          if (cancelled) return;
-          setMuted(true);
-          setOverlay('start');
-        }
-      }
-    };
-
-    void attempt();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  // Libera as seções abaixo caso o vídeo nunca consiga tocar.
-  useEffect(() => {
-    if (overlay !== 'start') return;
-    const timer = window.setTimeout(fireOffer, FALLBACK_SECONDS * 1000);
-    return () => window.clearTimeout(timer);
-  }, [overlay, fireOffer]);
+    video.muted = true;
+    video.volume = 1;
+    void video.play().catch(() => undefined);
+  }, [mode]);
 
   // Atualiza a barra de progresso com fluidez enquanto o vídeo roda.
   useEffect(() => {
@@ -144,52 +100,39 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
     return () => window.cancelAnimationFrame(frame);
   }, [playing, maybeTrigger]);
 
-  const scheduleHide = useCallback(() => {
-    setControlsVisible(true);
-    if (hideTimer.current) window.clearTimeout(hideTimer.current);
-    if (!playing) return;
-    hideTimer.current = window.setTimeout(() => setControlsVisible(false), 3200);
-  }, [playing]);
-
-  useEffect(() => {
-    scheduleHide();
-  }, [scheduleHide]);
-
-  useEffect(
-    () => () => {
-      if (hideTimer.current) window.clearTimeout(hideTimer.current);
-    },
-    [],
-  );
-
   const togglePlay = useCallback(() => {
     const video = videoRef.current;
     if (!video) return;
     if (video.paused) {
-      void video.play().catch(() => setOverlay('start'));
+      void video.play().catch(() => undefined);
     } else {
       video.pause();
     }
   }, []);
 
-  const enableSound = useCallback(() => {
+  /** Clique no overlay: ativa o áudio, retoma o vídeo e remove a sobreposição. */
+  const activateAudio = useCallback(() => {
     const video = videoRef.current;
+    setUnlocked(true);
+    setAudioOn(true);
     if (!video) return;
     video.muted = false;
     video.volume = 1;
-    setMuted(false);
-    setOverlay('none');
-    if (video.paused) void video.play().catch(() => setOverlay('start'));
+    if (video.paused) void video.play().catch(() => undefined);
   }, []);
 
   const toggleMute = useCallback(() => {
     const video = videoRef.current;
     if (!video) return;
-    const nextMuted = !video.muted;
-    video.muted = nextMuted;
-    if (!nextMuted && video.volume === 0) video.volume = 1;
-    setMuted(nextMuted);
-    setOverlay('none');
+    if (video.muted) {
+      video.muted = false;
+      if (video.volume === 0) video.volume = 1;
+      setAudioOn(true);
+      setUnlocked(true);
+    } else {
+      video.muted = true;
+      setAudioOn(false);
+    }
   }, []);
 
   const toggleFullscreen = useCallback(() => {
@@ -252,20 +195,19 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
   };
 
   const percent = duration > 0 ? Math.min(100, Math.max(0, (current / duration) * 100)) : 0;
-  const controlsActive = controlsVisible || !playing || overlay !== 'none';
+  const showSoundOverlay = mode === 'video' && !unlocked;
 
   return (
     <div
       ref={wrapperRef}
-      onMouseMove={scheduleHide}
-      onTouchStart={scheduleHide}
       className="vsl-glow group relative aspect-video w-full overflow-hidden rounded-2xl border border-gold/25 bg-black"
     >
       <video
         ref={videoRef}
         playsInline
+        muted
+        autoPlay
         preload="auto"
-        poster={posterAsset.url}
         onClick={togglePlay}
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
@@ -280,7 +222,10 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
           setCurrent(event.currentTarget.currentTime);
           maybeTrigger(event.currentTarget);
         }}
-        onError={fireOffer}
+        onError={() => {
+          setLoading(false);
+          setMode('embed');
+        }}
         onEnded={() => {
           setPlaying(false);
           fireOffer();
@@ -288,9 +233,7 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
         className="absolute inset-0 h-full w-full bg-black object-contain"
         aria-label="Aula gratuita do Método Aprovação Policial"
       >
-        {VIDEO_SOURCES.map((source) => (
-          <source key={source.src} src={source.src} type={source.type} />
-        ))}
+        <source src={DRIVE_STREAM_URL} type="video/mp4" />
         Seu navegador não suporta a reprodução de vídeo.
       </video>
 
@@ -301,46 +244,47 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
         </div>
       )}
 
-      {/* Aviso de som: o navegador liberou o autoplay apenas sem áudio */}
-      {overlay === 'sound' && (
+      {/* Overlay translúcido: ativa o áudio e desaparece para sempre */}
+      {showSoundOverlay && (
         <button
           type="button"
-          onClick={enableSound}
-          className="absolute left-1/2 top-4 z-30 flex -translate-x-1/2 items-center gap-2 rounded-full border border-gold/60 bg-black/85 px-4 py-2 text-[11px] font-bold uppercase tracking-widest text-gold shadow-gold backdrop-blur sm:text-xs"
-        >
-          <VolumeX className="size-4 animate-pulse" />
-          Ativar som
-        </button>
-      )}
-
-      {/* Autoplay totalmente bloqueado: porta de entrada clássica */}
-      {overlay === 'start' && (
-        <button
-          type="button"
-          onClick={enableSound}
-          aria-label="Reproduzir o vídeo com áudio"
-          className="absolute inset-0 z-30 flex flex-col items-center justify-center gap-4 bg-black/55 backdrop-blur-[2px] transition-colors hover:bg-black/45"
+          onClick={activateAudio}
+          aria-label="Clique para ouvir o vídeo com áudio"
+          className="absolute inset-0 z-30 flex flex-col items-center justify-center gap-4 bg-black/45 backdrop-blur-[1px] transition-colors hover:bg-black/35"
         >
           <span className="relative grid size-20 place-items-center sm:size-24">
             <span
               aria-hidden
-              className="absolute inset-0 animate-ping rounded-full bg-gold/25 [animation-duration:2.4s]"
+              className="absolute inset-0 animate-ping rounded-full bg-gold/25 [animation-duration:2.2s]"
             />
             <span className="relative grid size-16 place-items-center rounded-full border border-gold/60 bg-gold/20 shadow-gold sm:size-20">
-              <Play className="size-8 fill-current text-gold sm:size-9" />
+              <VolumeX className="size-8 animate-pulse text-gold sm:size-9" />
             </span>
           </span>
           <span className="font-display text-lg font-bold uppercase tracking-[0.08em] text-foreground drop-shadow sm:text-2xl">
             Clique para Ouvir
           </span>
-          <span className="text-xs uppercase tracking-widest text-foreground/70">Ative o som do vídeo</span>
+          <span className="text-[11px] uppercase tracking-widest text-foreground/70 sm:text-xs">
+            Ligue o som da aula
+          </span>
         </button>
+      )}
+
+      {/* Fallback: embed oficial do Drive, caso o stream direto seja bloqueado */}
+      {mode === 'embed' && (
+        <iframe
+          src={DRIVE_EMBED_URL}
+          title="Aula gratuita do Método Aprovação Policial"
+          allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+          allowFullScreen
+          className="absolute inset-0 z-40 h-full w-full border-0"
+        />
       )}
 
       {/* Controles customizados */}
       <div
-        className={`absolute inset-x-0 bottom-0 z-20 bg-gradient-to-t from-black/95 via-black/70 to-transparent px-3 pb-2.5 pt-10 transition-opacity duration-300 sm:px-4 ${
-          controlsActive ? 'opacity-100' : 'pointer-events-none opacity-0'
+        className={`absolute inset-x-0 bottom-0 z-20 bg-gradient-to-t from-black/95 via-black/70 to-transparent px-3 pb-2.5 pt-10 sm:px-4 ${
+          mode === 'video' ? '' : 'hidden'
         }`}
       >
         <div
@@ -350,7 +294,6 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
           aria-valuemin={0}
           aria-valuemax={Math.round(duration) || 0}
           aria-valuenow={Math.round(current)}
-          aria-valuetext={`${formatTime(current)} de ${formatTime(duration)}`}
           onPointerDown={handleSeekDown}
           onPointerMove={handleSeekMove}
           onPointerUp={handleSeekUp}
@@ -381,15 +324,11 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
           <button
             type="button"
             onClick={toggleMute}
-            aria-label={muted ? 'Ativar som' : 'Silenciar vídeo'}
+            aria-label={audioOn ? 'Silenciar vídeo' : 'Ativar som'}
             className="grid size-9 place-items-center rounded-full bg-foreground/10 text-foreground transition hover:bg-foreground/20"
           >
-            {muted ? <VolumeX className="size-5" /> : <Volume2 className="size-5" />}
+            {audioOn ? <Volume2 className="size-5" /> : <VolumeX className="size-5" />}
           </button>
-
-          <span className="font-mono text-[11px] tabular-nums text-foreground/80 sm:text-xs">
-            {formatTime(current)} / {formatTime(duration)}
-          </span>
 
           <span className="flex-1" />
 
