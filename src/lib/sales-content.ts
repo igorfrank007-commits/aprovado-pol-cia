@@ -1,4 +1,4 @@
-import { BookOpen, Target, Calendar, ListChecks, Brain, Headphones, MessageCircle, Trophy } from 'lucide-react';
+import { BookOpen, Target, Calendar, ListChecks, Brain, Headphones, MessageCircle, Trophy, BarChart3 } from 'lucide-react';
 // Destination of every "Quero ser aprovado" button: the Study Planner Pro auth page.
 export const checkoutUrl = 'https://operacaoestudei.lovable.app/auth?mode=signup';
 // Segunda linha dos botões de compra ("Quero ser aprovado").
@@ -11,6 +11,7 @@ export const benefits = [
  {icon:ListChecks,title:'Edital Verticalizado',desc:'Aprenda a gerar automaticamente seu edital verticalizado com marcações para você acompanhar seu progresso.'},
  {icon:Target,title:'Estatísticas de Progresso',desc:'Estatísticas para você acompanhar seu progresso.'},
  {icon:Brain,title:'Flashcards e Revisão Espaçada',desc:'Aprenda a criar flashcards para revisão espaçada e memorização avançada da matéria e transforme sua mente em uma máquina de memorização.'},
+ {icon:BarChart3,title:'Raio-X da Banca e Análise Estatística do Que Cai na Prova',desc:'Preveja a incidência real de cada tema e assunto na prova, com base nas estatísticas das provas anteriores'},
 ];
 export const modules = [
  ['Mentalidade do Aprovado','Construa a base mental que separa quem passa de quem desiste.'],
