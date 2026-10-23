@@ -63,7 +63,7 @@ export const included = ['Curso Completo em Vídeo Aulas','Cronograma e Planejam
 
 export const courseScope = { publicExams: true, oab: true };
 export const faqs = [
-  { question: 'O curso é só para carreiras policiais?', answer: courseScope.publicExams && courseScope.oab ? 'Não. O método aplica-se a qualquer concurso público e exame da OAB' : 'Consulte pelo WhatsApp os concursos e exames atendidos pelo método.' },
+  { question: 'É para concurseiros ou estudantes de qual área?', answer: 'O Estudei pode ser usado por qualquer estudante. Ele é 100% personalizável. Você pode tanto usar editais e assuntos já registrados como criar planos de estudos completamente novos e de acordo com as suas necessidades.' },
   { question: 'O curso é uma mentoria?', answer: 'Não. É um curso em vídeo aulas em que o professor ensina passo a passo o método que utilizou para passar 3x na Polícia Federal, 4x para Delegado de Polícia e 1x na ABIN.' },
   { question: 'O que vou aprender sobre planejamento de estudos?', answer: 'Você vai aprender a gerar automaticamente seu cronograma e planejamento a partir do edital, do cronograma de aulas do preparatório e das horas e dias disponíveis para estudar.' },
   { question: 'Como vou acompanhar meu progresso?', answer: 'Você vai aprender a gerar seu edital verticalizado com marcações e terá acesso a estatísticas para acompanhar seu progresso nos estudos.' },
