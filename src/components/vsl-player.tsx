@@ -7,18 +7,6 @@ import {
   type PointerEvent as ReactPointerEvent,
 } from 'react';
 import { Loader2, Maximize, Pause, Play, Volume2, VolumeX } from 'lucide-react';
-// Vídeo hospedado no Google Drive (fonte do player).
-const DRIVE_FILE_ID = '1eh2mZ4e1c2hMiPJZpCB_O8pi9EChfnTS';
-const DRIVE_STREAM_URL = `https://drive.usercontent.google.com/download?id=${DRIVE_FILE_ID}&export=download&confirm=t`;
-const DRIVE_EMBED_URL = `https://drive.google.com/file/d/${DRIVE_FILE_ID}/preview?autoplay=1`;
-
-// Vídeo hospedado no Google Drive.
-const DRIVE_FILE_ID = '1eh2mZ4e1c2hMiPJZpCB_O8pi9EChfnTS';
-const DRIVE_STREAM_URL = `https://drive.usercontent.google.com/download?id=${DRIVE_FILE_ID}&export=download&confirm=t`;
-const DRIVE_EMBED_URL = `https://drive.google.com/file/d/${DRIVE_FILE_ID}/preview?autoplay=1`;
-const DRIVE_FILE_ID = '1eh2mZ4e1c2hMiPJZpCB_O8pi9EChfnTS';
-const DRIVE_STREAM_URL = `https://drive.usercontent.google.com/download?id=${DRIVE_FILE_ID}&export=download&confirm=t`;
-const DRIVE_EMBED_URL = `https://drive.google.com/file/d/${DRIVE_FILE_ID}/preview?autoplay=1`;
 // ============================================================================
 // CONFIGURAÇÃO DO VÍDEO
 // Vídeo hospedado no Google Drive. O player tenta primeiro o stream direto,
