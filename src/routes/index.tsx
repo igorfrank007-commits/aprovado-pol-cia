@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useEffect, useState, type ReactNode } from 'react';
-import { Shield, CircleCheck, TriangleAlert, Flame, MessageCircle, CheckCheck, Clock, Layers } from 'lucide-react';
+import { Shield, CircleCheck, MessageCircle, CheckCheck, Clock, Layers } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Checkout, SectionCheckout } from '@/components/sales-checkout';
@@ -9,7 +9,7 @@ import { PricingPlans } from '@/components/pricing-plans';
 import { PlanCompare } from '@/components/plan-compare';
 import { VslPlayer } from '@/components/vsl-player';
 import { useScrollReveal } from '@/hooks/use-scroll-reveal';
-import { benefits, problems, testimonials, offer, whatsappUrl, mentorship, ctaSub, faqs } from '@/lib/sales-content';
+import { benefits, testimonials, offer, whatsappUrl, mentorship, ctaSub, faqs } from '@/lib/sales-content';
 // ---------------------------------------------------------------------------
 // DELAY INTELIGENTE
 // As seções abaixo do vídeo ficam ocultas e são liberadas automaticamente
@@ -51,7 +51,6 @@ function Index() {
   <ul className="mt-8 grid gap-2 text-sm sm:text-base">{['Método validado por aprovados','Organização completa pronta para usar','Estudo inteligente e mais rápido'].map(t=><li key={t} className="flex items-center justify-center gap-2"><CircleCheck className="size-5 shrink-0 text-gold" />{t}</li>)}</ul>
  </div></section>
  <div id="conteudo-liberado" className={sectionsVisible ? 'animate-fade-up' : 'hidden'}>
-  <section className="pb-10 pt-8 sm:pb-14 sm:pt-10"><div className="mx-auto max-w-6xl px-4"><Heading kicker="Diagnóstico">Você sonha em passar em concurso publico mas <Gold>enfrenta os seguintes problemas?</Gold></Heading><div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{problems.map(p=><div key={p} className="flex items-start gap-3 rounded-xl border border-border bg-card p-5"><TriangleAlert className="size-5 shrink-0 text-destructive" /><p className="text-base">{p}</p></div>)}</div><div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-gold/30 bg-card p-8 text-center"><Flame className="mx-auto mb-4 size-7 text-gold" /><p className="text-xl font-semibold">Precisa de um <Gold>método certeiro para alcançar a aprovação</Gold></p></div></div></section>
   <section className="bg-secondary/30 py-10 sm:py-14"><div className="mx-auto max-w-7xl px-4">
    <div className="relative overflow-hidden rounded-3xl bg-gradient-plan p-px shadow-gold"><div className="relative overflow-hidden rounded-[calc(var(--radius-3xl)-1px)] bg-gradient-plan-soft px-6 py-12 text-center sm:px-10 sm:py-14"><div aria-hidden className="grid-bg absolute inset-0 opacity-25" /><div aria-hidden className="absolute -top-28 left-1/2 h-56 w-[42rem] max-w-full -translate-x-1/2 rounded-full bg-gold/25 blur-3xl" /><div className="relative">
     <Kicker><Layers className="mr-2 inline size-3.5" />O que você recebe</Kicker>
