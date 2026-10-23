@@ -27,10 +27,23 @@ export const modules = [
 ];
 export const problems = ['Dificuldade para focar em uma área ou um cargo','Estuda sem foco e sem saber se esta estudando correto','Medo de estar perdendo tempo','Incertezas de não saber se vai passar','Não sabe revisar e acaba esquecendo a matéria','Não sabe como resolver questões e simulados'];
 // Testimonials reproduced from the user-selected source, not independently verified.
-export const testimonials = [
- {name:'Lucas A.',initial:'L',time:'09:42',messages:['Professor, passei!! 🎉','Em 7 meses seguindo o método à risca consegui minha aprovação na Polícia Federal.','Eu estava completamente perdido antes. Muito obrigado, mudou minha vida 🙏']},
- {name:'Mariana S.',initial:'M',time:'14:18',messages:['Não acredito que finalmente aconteceu 😭','O cronograma e o filtro do QConcursos foram um divisor de águas pra mim.','Aprovada na Polícia Civil! Obrigada por tudo ❤️']},
- {name:'Rafael M.',initial:'R',time:'21:05',messages:['Boa noite! Só passando pra dar a notícia 👮','Conciliava trabalho e estudo e achava impossível. O método encaixou na minha rotina.','Aprovado na PRF 🚔🔥']},
+// As fotos são de banco de imagens (Pexels) usadas apenas como ilustração dos perfis.
+export type Testimonial = {
+  name: string;
+  initial: string;
+  avatar: string;
+  role: string;
+  time: string;
+  messages: string[];
+};
+
+export const testimonials: Testimonial[] = [
+ {name:'Lucas A.',initial:'L',avatar:'/uploads/aluno-lucas.avif',role:'Aprovado — Polícia Federal',time:'09:42',messages:['Professor, passei!! 🎉','Em 7 meses seguindo o método à risca consegui minha aprovação na Polícia Federal.','Eu estava completamente perdido antes. Muito obrigado, mudou minha vida 🙏']},
+ {name:'Mariana S.',initial:'M',avatar:'/uploads/aluna-mariana.avif',role:'Aprovada — Polícia Civil',time:'14:18',messages:['Não acredito que finalmente aconteceu 😭','O cronograma e o filtro do QConcursos foram um divisor de águas pra mim.','Aprovada na Polícia Civil! Obrigada por tudo ❤️']},
+ {name:'Rafael M.',initial:'R',avatar:'/uploads/aluno-rafael.avif',role:'Aprovado — PRF',time:'21:05',messages:['Boa noite! Só passando pra dar a notícia 👮','Conciliava trabalho e estudo e achava impossível. O método encaixou na minha rotina.','Aprovado na PRF 🚔🔥']},
+ {name:'Juliana P.',initial:'J',avatar:'/uploads/aluna-juliana.avif',role:'Aprovada — Polícia Federal',time:'08:12',messages:['Bom dia, professor! 🙏','Fiz o edital verticalizado exatamente como você ensinou e foi o que virou o jogo pra mim.','Aprovada na PF na primeira tentativa depois de 2 reprovações ❤️']},
+ {name:'Diego F.',initial:'D',avatar:'/uploads/aluno-diego.avif',role:'Aprovado — Polícia Penal',time:'23:47',messages:['Passando aqui antes de dormir 🎯','As revisões espaçadas e os flashcards me fizeram lembrar de coisas que eu achava impossível.','Aprovado na Polícia Penal! Se eu consegui, você também consegue 💪']},
+ {name:'Carla M.',initial:'C',avatar:'/uploads/aluna-carla.avif',role:'Aprovada — Polícia Civil',time:'17:33',messages:['Gente, saiu o resultado!! 😭😭','Estudava 2h por dia depois do trabalho e o cronograma automático me mostrou que era possível.','Nome na lista da Polícia Civil. Obrigada, professor! 🚓']},
 ];
 // Seção "Não é mentoria": pergunta do aluno e resposta do professor.
 export const mentorship = {

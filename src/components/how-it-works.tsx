@@ -27,7 +27,7 @@ const steps: Step[] = [
   {
     number: '2',
     title: 'Planejamento inteligente',
-    desc: 'Informe sua rotina e preferências. O Estudei distribui as disciplinas de forma equilibrada, considerando suas facilidades e dificuldades.',
+    desc: 'Informe sua rotina e preferências. A plataforma distribui as disciplinas de forma equilibrada, considerando suas facilidades e dificuldades.',
     icon: CalendarClock,
     image: planejamentoAsset,
     alt: 'Cronograma de estudos gerado automaticamente pelo app',
