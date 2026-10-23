@@ -6,19 +6,26 @@ import {
   type KeyboardEvent as ReactKeyboardEvent,
   type PointerEvent as ReactPointerEvent,
 } from 'react';
-import { Loader2, Maximize, Pause, Play, Volume2, VolumeX } from 'lucide-react';
+import { Loader2, Play, VolumeX } from 'lucide-react';
 // ============================================================================
 // CONFIGURAÇÃO DO VÍDEO
-// Vídeo hospedado no Google Drive. O player tenta primeiro o stream direto,
-// que permite controles próprios e leitura do tempo (necessária para o gatilho
-// de 26:53); se o Drive bloquear, cai automaticamente para o embed oficial.
+// Vídeo da VSL hospedado no Vimeo. Os controles nativos do player ficam
+// ofuscados (sem título, duração, botões e barra do Vimeo) e no lugar deles
+// fica apenas a barra de progresso própria — o controle de avançar o vídeo.
 // ============================================================================
-const DRIVE_FILE_ID = '1eh2mZ4e1c2hMiPJZpCB_O8pi9EChfnTS';
-const DRIVE_STREAM_URL = `https://drive.usercontent.google.com/download?id=${DRIVE_FILE_ID}&export=download&confirm=t`;
-const DRIVE_EMBED_URL = `https://drive.google.com/file/d/${DRIVE_FILE_ID}/preview?autoplay=1`;
+const VIMEO_ID = '1238923676';
+const VIMEO_ORIGIN = 'https://player.vimeo.com';
+const VIMEO_SRC =
+  `${VIMEO_ORIGIN}/video/${VIMEO_ID}` +
+  '?autoplay=1&muted=1&controls=0&title=0&byline=0&portrait=0&pip=0&keyboard=0&dnt=1&playsinline=1&autopause=0&color=c8a24a';
 
 /** Momento do vídeo que dispara a rolagem suave até a oferta: 26 minutos e 53 segundos. */
 const TRIGGER_SECONDS = 26 * 60 + 53;
+
+type VimeoMessage = {
+  event?: string;
+  data?: { seconds?: number; duration?: number };
+};
 
 type VslPlayerProps = {
   /** Chamado uma única vez quando o vídeo chega em 26:53. */
@@ -26,22 +33,20 @@ type VslPlayerProps = {
 };
 
 /**
- * Player da VSL: vídeo 16:9 do Google Drive, autoplay mudo com overlay
- * "Clique para Ouvir", play/pause, mute, barra de progresso arrastável (com
- * scrubbing livre e sem exibir a duração) e tela cheia.
+ * Player da VSL: vídeo 16:9 hospedado no Vimeo com os controles nativos
+ * ofuscados (sem título, duração, menu ou botões do Vimeo). Do player original
+ * fica apenas a barra de avanço, sempre visível; som começa mudo com o overlay
+ * "Clique para Ouvir".
  */
 export function VslPlayer({ onOfferReached }: VslPlayerProps) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const frameRef = useRef<HTMLIFrameElement>(null);
   const firedRef = useRef(false);
   const draggingRef = useRef(false);
 
-  const [mode, setMode] = useState<'video' | 'embed'>('video');
   const [playing, setPlaying] = useState(false);
   const [current, setCurrent] = useState(0);
   const [duration, setDuration] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [audioOn, setAudioOn] = useState(false);
   const [unlocked, setUnlocked] = useState(false);
 
   const fireOffer = useCallback(() => {
@@ -53,94 +58,105 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
   // Gatilho de rolagem: em 26:53. Se o vídeo for mais curto que isso, dispara
   // perto do final para a página não ficar travada.
   const maybeTrigger = useCallback(
-    (video: HTMLVideoElement) => {
-      const total = video.duration;
+    (seconds: number) => {
       const triggerAt =
-        Number.isFinite(total) && total > 0 && total < TRIGGER_SECONDS ? total * 0.9 : TRIGGER_SECONDS;
-      if (video.currentTime >= triggerAt) fireOffer();
+        duration > 0 && duration < TRIGGER_SECONDS ? duration * 0.9 : TRIGGER_SECONDS;
+      if (seconds >= triggerAt) fireOffer();
     },
-    [fireOffer],
+    [duration, fireOffer],
   );
 
-  // Autoplay sempre mudo (política dos navegadores) + overlay "Clique para Ouvir".
-  useEffect(() => {
-    if (mode !== 'video') return;
-    const video = videoRef.current;
-    if (!video) return;
-    video.muted = true;
-    video.volume = 1;
-    void video.play().catch(() => undefined);
-  }, [mode]);
+  /** Envia um comando para a API postMessage do player do Vimeo. */
+  const post = useCallback((method: string, value?: unknown) => {
+    const target = frameRef.current?.contentWindow;
+    if (!target) return;
+    target.postMessage(
+      JSON.stringify(value === undefined ? { method } : { method, value }),
+      VIMEO_ORIGIN,
+    );
+  }, []);
 
-  // Atualiza a barra de progresso com fluidez enquanto o vídeo roda.
+  // Escuta os eventos do player do Vimeo: tempo, duração, play/pause e buffer.
+  // É isso que alimenta a barra de avanço própria (o Vimeo não mostra nada).
   useEffect(() => {
-    if (!playing) return;
-    let frame = 0;
-    const tick = () => {
-      const video = videoRef.current;
-      if (video) {
-        setCurrent(video.currentTime);
-        maybeTrigger(video);
+    const handleMessage = (event: MessageEvent) => {
+      if (event.origin !== VIMEO_ORIGIN) return;
+      if (event.source !== frameRef.current?.contentWindow) return;
+
+      let payload: VimeoMessage;
+      try {
+        payload = (typeof event.data === 'string' ? JSON.parse(event.data) : event.data) as VimeoMessage;
+      } catch {
+        return;
       }
-      frame = window.requestAnimationFrame(tick);
+      if (!payload || typeof payload.event !== 'string') return;
+
+      const total = payload.data?.duration;
+      const seconds = payload.data?.seconds;
+      if (typeof total === 'number' && total > 0) setDuration(total);
+
+      switch (payload.event) {
+        case 'ready':
+          ['play', 'pause', 'ended', 'timeupdate', 'bufferstart', 'bufferend'].forEach((name) =>
+            post('addEventListener', name),
+          );
+          post('setVolume', 1);
+          setLoading(false);
+          break;
+        case 'play':
+          setPlaying(true);
+          setLoading(false);
+          break;
+        case 'pause':
+          setPlaying(false);
+          break;
+        case 'bufferstart':
+          setLoading(true);
+          break;
+        case 'bufferend':
+          setLoading(false);
+          break;
+        case 'timeupdate':
+          if (typeof seconds === 'number') {
+            setCurrent(seconds);
+            maybeTrigger(seconds);
+          }
+          break;
+        case 'ended':
+          setPlaying(false);
+          fireOffer();
+          break;
+        default:
+          break;
+      }
     };
-    frame = window.requestAnimationFrame(tick);
-    return () => window.cancelAnimationFrame(frame);
-  }, [playing, maybeTrigger]);
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, [fireOffer, maybeTrigger, post]);
 
   const togglePlay = useCallback(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (video.paused) {
-      void video.play().catch(() => undefined);
-    } else {
-      video.pause();
-    }
-  }, []);
+    if (playing) post('pause');
+    else post('play');
+  }, [playing, post]);
 
   /** Clique no overlay: ativa o áudio, retoma o vídeo e remove a sobreposição. */
   const activateAudio = useCallback(() => {
-    const video = videoRef.current;
     setUnlocked(true);
-    setAudioOn(true);
-    if (!video) return;
-    video.muted = false;
-    video.volume = 1;
-    if (video.paused) void video.play().catch(() => undefined);
-  }, []);
+    post('setVolume', 1);
+    post('play');
+  }, [post]);
 
-  const toggleMute = useCallback(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (video.muted) {
-      video.muted = false;
-      if (video.volume === 0) video.volume = 1;
-      setAudioOn(true);
-      setUnlocked(true);
-    } else {
-      video.muted = true;
-      setAudioOn(false);
-    }
-  }, []);
-
-  const toggleFullscreen = useCallback(() => {
-    const wrapper = wrapperRef.current;
-    if (!wrapper) return;
-    if (document.fullscreenElement) {
-      void document.exitFullscreen().catch(() => undefined);
-      return;
-    }
-    void wrapper.requestFullscreen?.().catch(() => undefined);
-  }, []);
+  const seekToRatio = (ratio: number) => {
+    if (!duration) return;
+    const clamped = Math.min(1, Math.max(0, ratio));
+    setCurrent(clamped * duration);
+    post('setCurrentTime', clamped * duration);
+  };
 
   const seekFromPointer = (event: ReactPointerEvent<HTMLDivElement>) => {
-    const video = videoRef.current;
-    if (!video || !duration) return;
     const rect = event.currentTarget.getBoundingClientRect();
-    const ratio = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
-    const time = ratio * duration;
-    video.currentTime = time;
-    setCurrent(time);
+    seekToRatio((event.clientX - rect.left) / rect.width);
   };
 
   const handleSeekDown = (event: ReactPointerEvent<HTMLDivElement>) => {
@@ -161,79 +177,64 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
   };
 
   const handleSeekKey = (event: ReactKeyboardEvent<HTMLDivElement>) => {
-    const video = videoRef.current;
-    if (!video) return;
+    if (!duration) return;
     if (event.key === 'ArrowRight') {
       event.preventDefault();
-      video.currentTime = Math.min(duration, video.currentTime + 5);
-      setCurrent(video.currentTime);
+      seekToRatio((current + 5) / duration);
     } else if (event.key === 'ArrowLeft') {
       event.preventDefault();
-      video.currentTime = Math.max(0, video.currentTime - 5);
-      setCurrent(video.currentTime);
+      seekToRatio((current - 5) / duration);
     } else if (event.key === 'Home') {
       event.preventDefault();
-      video.currentTime = 0;
-      setCurrent(0);
+      seekToRatio(0);
     } else if (event.key === 'End') {
       event.preventDefault();
-      video.currentTime = duration;
-      setCurrent(duration);
+      seekToRatio(1);
     }
   };
 
   const percent = duration > 0 ? Math.min(100, Math.max(0, (current / duration) * 100)) : 0;
-  const showSoundOverlay = mode === 'video' && !unlocked;
 
   return (
-    <div
-      ref={wrapperRef}
-      className="vsl-glow group relative aspect-video w-full overflow-hidden rounded-xl border border-gold/25 bg-black sm:rounded-2xl"
-    >
-      <video
-        ref={videoRef}
-        playsInline
-        muted
-        autoPlay
-        preload="auto"
-        onClick={togglePlay}
-        onPlay={() => setPlaying(true)}
-        onPause={() => setPlaying(false)}
-        onPlaying={() => {
-          setPlaying(true);
-          setLoading(false);
-        }}
-        onCanPlay={() => setLoading(false)}
-        onWaiting={() => setLoading(true)}
-        onLoadedMetadata={(event) => setDuration(event.currentTarget.duration)}
-        onTimeUpdate={(event) => {
-          setCurrent(event.currentTarget.currentTime);
-          maybeTrigger(event.currentTarget);
-        }}
-        onError={() => {
-          setLoading(false);
-          setMode('embed');
-        }}
-        onEnded={() => {
-          setPlaying(false);
-          fireOffer();
-        }}
-        className="absolute inset-0 h-full w-full bg-black object-contain"
-        aria-label="Aula gratuita do Método Aprovação Policial"
-      >
-        <source src={DRIVE_STREAM_URL} type="video/mp4" />
-        Seu navegador não suporta a reprodução de vídeo.
-      </video>
+    <div className="vsl-glow group relative w-full overflow-hidden rounded-xl border border-gold/25 bg-black sm:rounded-2xl">
+      <div className="relative aspect-video w-full">
+        <iframe
+          ref={frameRef}
+          src={VIMEO_SRC}
+          title="Aula gratuita do Método Aprovação Policial"
+          allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
+          referrerPolicy="strict-origin-when-cross-origin"
+          onLoad={() => setLoading(false)}
+          className="absolute inset-0 h-full w-full border-0"
+        />
+
+        {/* Camada transparente sobre o vídeo: o toque/clique alterna play e pause
+            sem expor nenhum controle nativo (que estão desativados no embed). */}
+        <button
+          type="button"
+          onClick={togglePlay}
+          aria-label={playing ? 'Pausar vídeo' : 'Reproduzir vídeo'}
+          className="absolute inset-0 z-10 cursor-pointer bg-transparent outline-none focus-visible:ring-2 focus-visible:ring-gold"
+        />
+
+        {/* Indicador discreto de play quando o vídeo está pausado */}
+        {unlocked && !playing && !loading && (
+          <div className="pointer-events-none absolute inset-0 z-20 grid place-items-center">
+            <span className="grid size-14 place-items-center rounded-full border border-gold/60 bg-black/45 shadow-gold sm:size-20">
+              <Play className="size-6 translate-x-0.5 fill-current text-gold sm:size-8" />
+            </span>
+          </div>
+        )}
 
       {/* Carregando */}
       {loading && (
-        <div className="pointer-events-none absolute inset-0 z-10 grid place-items-center">
+        <div className="pointer-events-none absolute inset-0 z-20 grid place-items-center bg-black/40">
           <Loader2 className="size-10 animate-spin text-gold" />
         </div>
       )}
 
       {/* Overlay translúcido: ativa o áudio e desaparece para sempre */}
-      {showSoundOverlay && (
+      {!unlocked && (
         <button
           type="button"
           onClick={activateAudio}
@@ -258,76 +259,33 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
         </button>
       )}
 
-      {/* Fallback: embed oficial do Drive, caso o stream direto seja bloqueado */}
-      {mode === 'embed' && (
-        <iframe
-          src={DRIVE_EMBED_URL}
-          title="Aula gratuita do Método Aprovação Policial"
-          allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
-          allowFullScreen
-          className="absolute inset-0 z-40 h-full w-full border-0"
-        />
-      )}
-
-      {/* Controles customizados */}
-      <div
-        className={`absolute inset-x-0 bottom-0 z-20 bg-gradient-to-t from-black/95 via-black/70 to-transparent px-3 pb-2.5 pt-10 sm:px-4 ${
-          mode === 'video' ? '' : 'hidden'
-        }`}
-      >
-        <div
-          role="slider"
-          tabIndex={0}
-          aria-label="Progresso do vídeo"
-          aria-valuemin={0}
-          aria-valuemax={Math.round(duration) || 0}
-          aria-valuenow={Math.round(current)}
-          onPointerDown={handleSeekDown}
-          onPointerMove={handleSeekMove}
-          onPointerUp={handleSeekUp}
-          onPointerCancel={handleSeekUp}
-          onKeyDown={handleSeekKey}
-          className="group/seek relative flex h-6 cursor-pointer touch-none items-center outline-none"
-        >
-          <div className="h-1.5 w-full overflow-hidden rounded-full bg-foreground/25 transition-all group-hover/seek:h-2">
-            <div className="h-full rounded-full bg-gradient-gold" style={{ width: `${percent}%` }} />
+        {/* Controle visível único: a barra de avançar o vídeo. Nada de duração,
+            menu, botões ou marcações do player original. */}
+        <div className="absolute inset-x-0 bottom-0 z-30 bg-gradient-to-t from-black/90 via-black/45 to-transparent px-3 pb-2 pt-6 sm:px-4 sm:pb-3">
+          <div
+            role="slider"
+            tabIndex={0}
+            aria-label="Avançar o vídeo"
+            aria-valuemin={0}
+            aria-valuemax={Math.round(duration) || 0}
+            aria-valuenow={Math.round(current)}
+            aria-valuetext={duration ? `${Math.round(percent)}% do vídeo` : 'Vídeo'}
+            onPointerDown={handleSeekDown}
+            onPointerMove={handleSeekMove}
+            onPointerUp={handleSeekUp}
+            onPointerCancel={handleSeekUp}
+            onKeyDown={handleSeekKey}
+            className="group/seek relative -mx-1 flex h-9 cursor-pointer touch-none items-center px-1 outline-none focus-visible:ring-2 focus-visible:ring-gold/70 sm:h-6"
+          >
+            <div className="h-1.5 w-full overflow-hidden rounded-full bg-foreground/25 transition-all group-hover/seek:h-2 sm:h-1.5">
+              <div className="h-full rounded-full bg-gradient-gold" style={{ width: `${percent}%` }} />
+            </div>
+            <span
+              aria-hidden
+              className="pointer-events-none absolute size-3.5 -translate-x-1/2 rounded-full bg-gold opacity-70 shadow-gold transition-opacity group-hover/seek:opacity-100"
+              style={{ left: `${percent}%` }}
+            />
           </div>
-          <span
-            aria-hidden
-            className="absolute size-3.5 -translate-x-1/2 rounded-full bg-gold opacity-0 shadow-gold transition-opacity group-hover/seek:opacity-100"
-            style={{ left: `${percent}%` }}
-          />
-        </div>
-
-        <div className="mt-1 flex items-center gap-2 text-foreground sm:gap-3">
-          <button
-            type="button"
-            onClick={togglePlay}
-            aria-label={playing ? 'Pausar vídeo' : 'Reproduzir vídeo'}
-            className="grid size-9 place-items-center rounded-full bg-gold/15 text-gold transition hover:bg-gold/30"
-          >
-            {playing ? <Pause className="size-5 fill-current" /> : <Play className="size-5 fill-current" />}
-          </button>
-
-          <button
-            type="button"
-            onClick={toggleMute}
-            aria-label={audioOn ? 'Silenciar vídeo' : 'Ativar som'}
-            className="grid size-9 place-items-center rounded-full bg-foreground/10 text-foreground transition hover:bg-foreground/20"
-          >
-            {audioOn ? <Volume2 className="size-5" /> : <VolumeX className="size-5" />}
-          </button>
-
-          <span className="flex-1" />
-
-          <button
-            type="button"
-            onClick={toggleFullscreen}
-            aria-label="Tela cheia"
-            className="grid size-9 place-items-center rounded-full bg-foreground/10 text-foreground transition hover:bg-foreground/20"
-          >
-            <Maximize className="size-5" />
-          </button>
         </div>
       </div>
     </div>
