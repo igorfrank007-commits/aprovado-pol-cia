@@ -131,6 +131,9 @@
 
   html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    overflow-x: hidden;
   }
 
   body {
@@ -138,7 +141,12 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
   }
+
+  /* Nada deve estourar a largura da tela em celulares/tablets */
+  img, video, iframe, svg { max-width: 100%; }
 
   h1, h2, h3, h4 {
     font-family: var(--font-display);
@@ -225,5 +233,21 @@
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1 !important; transform: none !important; }
 }
+
+/* ---------- Ajustes finos para celulares ---------- */
+@media (max-width: 640px) {
+  /* Alvos de toque confortáveis (mín. 44px) */
+  button, a[role="button"], [role="slider"] { touch-action: manipulation; }
+
+  /* Títulos grandes não devem estourar a largura */
+  h1, h2, h3 { word-break: break-word; }
+
+  /* Respiro para a barra fixa de CTA no rodapé */
+  body { padding-bottom: 0; }
+}
+
+/* Rolagem horizontal com encaixe nos carrosséis de recursos */
+.snap-x-mandatory { scroll-snap-type: x mandatory; }
+.snap-start-item { scroll-snap-align: start; }
 
 /* FAQ: pergunta de suporte com 30 dias (ver src/lib/sales-content.ts) */

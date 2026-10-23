@@ -188,7 +188,7 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
   return (
     <div
       ref={wrapperRef}
-      className="vsl-glow group relative aspect-video w-full overflow-hidden rounded-2xl border border-gold/25 bg-black"
+      className="vsl-glow group relative aspect-video w-full overflow-hidden rounded-xl border border-gold/25 bg-black sm:rounded-2xl"
     >
       <video
         ref={videoRef}
@@ -240,19 +240,19 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
           aria-label="Clique para ouvir o vídeo com áudio"
           className="absolute inset-0 z-30 flex flex-col items-center justify-center gap-4 bg-black/45 backdrop-blur-[1px] transition-colors hover:bg-black/35"
         >
-          <span className="relative grid size-20 place-items-center sm:size-24">
+          <span className="relative grid size-16 place-items-center sm:size-24">
             <span
               aria-hidden
               className="absolute inset-0 animate-ping rounded-full bg-gold/25 [animation-duration:2.2s]"
             />
-            <span className="relative grid size-16 place-items-center rounded-full border border-gold/60 bg-gold/20 shadow-gold sm:size-20">
-              <VolumeX className="size-8 animate-pulse text-gold sm:size-9" />
+            <span className="relative grid size-14 place-items-center rounded-full border border-gold/60 bg-gold/20 shadow-gold sm:size-20">
+              <VolumeX className="size-7 animate-pulse text-gold sm:size-9" />
             </span>
           </span>
-          <span className="font-display text-lg font-bold uppercase tracking-[0.08em] text-foreground drop-shadow sm:text-2xl">
+          <span className="px-4 font-display text-base font-bold uppercase tracking-[0.06em] text-foreground drop-shadow sm:text-2xl">
             Clique para Ouvir
           </span>
-          <span className="text-[11px] uppercase tracking-widest text-foreground/70 sm:text-xs">
+          <span className="px-4 text-[10px] uppercase tracking-widest text-foreground/70 sm:text-xs">
             Ligue o som da aula
           </span>
         </button>
