@@ -17,6 +17,9 @@ import { benefits, problems, testimonials, offer, whatsappUrl, mentorship, ctaSu
 // ---------------------------------------------------------------------------
 const delaySeconds = 90;
 
+// Ajuste o valor acima para mudar o tempo de liberação das seções.
+
+
 export const Route = createFileRoute('/')({
  head: () => ({meta:[
   {title:'Como Passar em Concursos Policiais e Delegado | Método Aprovado'},
