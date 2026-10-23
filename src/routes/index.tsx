@@ -60,8 +60,10 @@ function Index() {
    </div></div></div>
   </div><SectionCheckout /></section>
   <PlatformShowcase />
-  {/* Como funciona? — inserida imediatamente acima da seção de provas sociais */}
+  {/* Como funciona? */}
   <HowItWorks />
+  {/* Investimento — mantida imediatamente acima da seção de depoimentos */}
+  <PricingPlans />
   {/* Depoimentos
       Comentários dos alunos */}
   <section aria-label="Depoimentos e comentários dos alunos" className="bg-secondary/30 py-12 sm:py-16"><div className="mx-auto max-w-7xl px-4">
@@ -69,7 +71,7 @@ function Index() {
    <ul className="mx-auto mb-8 flex max-w-3xl flex-col items-stretch gap-3 sm:flex-row sm:justify-center">
     {[
      { icon: Star, label: '4,9 de 5', desc: 'média de avaliação' },
-     { icon: Users, label: 'Milhares de alunos', desc: 'em todo o Brasil' },
+     { icon: Users, label: 'Alunos aprovados', desc: 'em todo o Brasil' },
      { icon: CircleCheck, label: 'Aprovações reais', desc: 'PF · PC · PRF · Penal' },
     ].map(({ icon: Icon, label, desc }) => (
      <li key={label} className="flex flex-1 items-center gap-3 rounded-xl border border-gold/15 bg-card/70 px-4 py-3 backdrop-blur-sm">
@@ -85,8 +87,7 @@ function Index() {
   <p className="text-base leading-relaxed">{mentorship.answerLead}</p>
   <ul className="mt-3 grid gap-2.5">{mentorship.features.map(({icon:Icon,title,desc})=><li key={title} className="flex items-start gap-2 text-sm leading-relaxed"><Icon className="mt-0.5 size-4 shrink-0 text-gold" /><span><span className="font-semibold">{title}</span>{desc && <span className="text-muted-foreground">{title === 'Como gerar o Edital Verticalizado' ? ' ' : ' — '}{desc}</span>}</span></li>)}</ul>
  </div>
-</div><SectionCheckout /></section>
- <PricingPlans />
+ </div><SectionCheckout /></section>
   <section aria-labelledby="faq-title" className="bg-secondary/30 py-10 sm:py-14"><div className="mx-auto max-w-4xl px-4"><h2 id="faq-title" className="mb-6 text-center text-3xl font-bold uppercase leading-tight sm:text-4xl md:text-5xl">Perguntas <Gold>frequentes</Gold></h2><Accordion type="single" collapsible className="w-full">{faqs.map(({question,answer},index)=><AccordionItem key={question} value={`faq-${index}`} className="border-border"><AccordionTrigger className="gap-4 py-5 text-base font-semibold text-foreground hover:text-gold sm:text-lg">{question}</AccordionTrigger><AccordionContent className="pr-8 text-base leading-relaxed text-muted-foreground">{answer}</AccordionContent></AccordionItem>)}</Accordion></div></section>
   <section className="relative overflow-hidden bg-gradient-hero py-10 sm:py-14"><div aria-hidden className="grid-bg absolute inset-0 opacity-30" /><div className="relative mx-auto max-w-4xl px-4 text-center"><h2 className="text-3xl font-bold uppercase leading-tight sm:text-5xl md:text-6xl">Ainda está <Gold>em dúvida?</Gold></h2><p className="mx-auto mt-5 max-w-2xl text-muted-foreground sm:text-lg">Entre em contato pelo WhatsApp e tire suas dúvidas sobre o curso antes de começar.</p><div className="mt-6"><Button asChild variant="outline" className="h-auto min-h-14 max-w-full whitespace-normal rounded-md border-chat/50 bg-card px-6 py-5 font-display text-base font-bold uppercase text-foreground hover:border-chat hover:bg-chat/10 sm:text-lg"><a href={whatsappUrl} target="_blank" rel="noopener noreferrer"><svg aria-hidden="true" viewBox="0 0 24 24" className="size-6 shrink-0 fill-current text-chat"><path d="M20.52 3.48A11.87 11.87 0 0 0 12.04 0C5.46 0 .1 5.35.1 11.93c0 2.1.55 4.16 1.6 5.97L0 24l6.26-1.64a11.93 11.93 0 0 0 5.77 1.47h.01c6.58 0 11.93-5.35 11.93-11.93 0-3.19-1.24-6.18-3.45-8.42ZM12.04 21.8a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.72.98.99-3.63-.23-.37a9.85 9.85 0 0 1-1.51-5.26c0-5.47 4.45-9.92 9.93-9.92a9.86 9.86 0 0 1 7.02 2.91 9.86 9.86 0 0 1 2.9 7.03c0 5.47-4.45 9.85-9.98 9.85Zm5.44-7.39c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.66-1.61-.91-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.09 4.49.71.3 1.27.49 1.7.63.71.22 1.36.19 1.87.11.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35Z" /></svg> Tirar dúvidas pelo WhatsApp</a></Button></div></div></section>
  </div>
