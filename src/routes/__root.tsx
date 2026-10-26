@@ -78,6 +78,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Como Passar em Concursos Policiais e Delegado" },
       { name: "description", content: "Método de estudos para concursos policiais e delegado de Igor Andrade." },
       { name: "author", content: "Igor Andrade" },
+      { name: "facebook-domain-verification", content: "v27qo6lfv5jt5qq0yhhmsoq1rw5ftr" },
       { property: "og:title", content: "Como Passar em Concursos Policiais e Delegado" },
       { property: "og:description", content: "Método de estudos para concursos policiais e delegado de Igor Andrade." },
       { property: "og:type", content: "website" },
