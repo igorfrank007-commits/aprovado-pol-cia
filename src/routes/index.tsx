@@ -10,6 +10,7 @@ import { PricingPlans } from '@/components/pricing-plans';
 import { VslPlayer } from '@/components/vsl-player';
 import { MobileCtaBar } from '@/components/mobile-cta-bar';
 import { useScrollReveal } from '@/hooks/use-scroll-reveal';
+import { useMetaPixelTracking } from '@/hooks/use-meta-pixel';
 import { benefits, testimonials, offer, whatsappUrl, mentorship, ctaSub, faqs } from '@/lib/sales-content';
 // ---------------------------------------------------------------------------
 // DELAY INTELIGENTE
@@ -35,6 +36,7 @@ function Heading({kicker,children,subtitle,center=true}:{kicker?:string;children
 function Gold({children}:{children:ReactNode}) { return <span className="text-gradient-gold">{children}</span>; }
 function Index() {
  const [sectionsVisible, setSectionsVisible] = useState(false);
+ useMetaPixelTracking();
  // Animações de entrada (fade-in + slide) via IntersectionObserver, após a liberação das seções.
  useScrollReveal(sectionsVisible);
  // Delay inteligente: libera as seções abaixo do vídeo após `delaySeconds`.

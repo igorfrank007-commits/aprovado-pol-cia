@@ -8,8 +8,10 @@ import {
   Scripts,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
+import { useEffect } from "react";
 
 import appCss from "../styles.css?url";
+import { setupMetaPixel, trackMetaEvent } from "../lib/meta-pixel";
 
 function NotFoundComponent() {
   return (
@@ -111,6 +113,10 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+
+  useEffect(() => {
+    setupMetaPixel();
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
