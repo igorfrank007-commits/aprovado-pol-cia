@@ -13,7 +13,7 @@ import { Loader2, Play, VolumeX } from 'lucide-react';
 // ofuscados (sem título, duração, botões e barra do Vimeo) e no lugar deles
 // fica apenas a barra de progresso própria — o controle de avançar o vídeo.
 // ============================================================================
-const VIMEO_ID = '1238923676';
+const VIMEO_ID = '1240976753';
 const VIMEO_ORIGIN = 'https://player.vimeo.com';
 const VIMEO_SRC =
   `${VIMEO_ORIGIN}/video/${VIMEO_ID}` +
