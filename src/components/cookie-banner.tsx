@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { getMetaConsent, setMetaConsent, setupMetaPixel, trackMetaEvent, trackViewContent } from '@/lib/meta-pixel';
+import { decorateSignupLinks, getMetaConsent, setMetaConsent, setupMetaPixel, trackMetaEvent, trackViewContent } from '@/lib/meta-pixel';
 
 export function CookieBanner() {
   const [open, setOpen] = useState(false);
@@ -9,12 +9,13 @@ export function CookieBanner() {
 
   const accept = () => {
     setMetaConsent('opt-in');
+    decorateSignupLinks();
     setupMetaPixel();
     trackMetaEvent('PageView');
     if (window.location.pathname === '/') trackViewContent();
     setOpen(false);
   };
-  const reject = () => { setMetaConsent('opt-out'); setOpen(false); };
+  const reject = () => { setMetaConsent('opt-out'); decorateSignupLinks(); setOpen(false); };
 
   return (
     <div role="region" aria-label="Aviso de cookies" className="fixed inset-x-2 bottom-2 z-50 sm:inset-x-auto sm:left-1/2 sm:w-[min(44rem,calc(100%-2rem))] sm:-translate-x-1/2" style={{ marginBottom: 'env(safe-area-inset-bottom)' }}>
