@@ -21,11 +21,12 @@ type FbqMethod =
 type FbqCall = FbqMethod | undefined;
 
 interface FbqQueue {
-  (): unknown;
+  (...args: unknown[]): unknown;
   push: (method: FbqCall, ...args: unknown[]) => unknown;
   loaded: boolean;
   version: string;
-  queue: Array<{ method: FbqCall; args: unknown[] }>;
+  callMethod?: (...args: unknown[]) => unknown;
+  queue: unknown[];
 }
 
 declare global {
@@ -61,12 +62,13 @@ function loadPixelScript(pixelId: string): void {
   if (!w.fbq) {
     const factory = function (this: unknown, f: Window, b: Document, e: string, v: string, n: string, t: string) {
       if (f.fbq) return;
-      const nfq = function () {
+      const nfq: FbqQueue = function () {
+        const args = arguments as unknown as unknown[];
         if (nfq.callMethod) {
-          return (nfq.callMethod as (...args: unknown[]) => unknown).apply(nfq, arguments as unknown as unknown[]);
+          return nfq.callMethod.apply(nfq, args);
         }
-        nfq.queue.push(arguments as unknown as unknown[]);
-      };
+        nfq.queue.push(args);
+      } as unknown as FbqQueue;
       nfq.push = nfq;
       nfq.loaded = true;
       nfq.version = '2.0';

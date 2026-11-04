@@ -57,10 +57,16 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/configuracoes' | '/mcp' | '/.well-known/oauth-protected-resource'
+  fullPaths:
+    '/' | '/configuracoes' | '/mcp' | '/.well-known/oauth-protected-resource'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/configuracoes' | '/mcp' | '/.well-known/oauth-protected-resource'
-  id: '__root__' | '/' | '/configuracoes' | '/mcp' | '/.well-known/oauth-protected-resource'
+  id:
+    | '__root__'
+    | '/'
+    | '/configuracoes'
+    | '/mcp'
+    | '/.well-known/oauth-protected-resource'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
