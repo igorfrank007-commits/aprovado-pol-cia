@@ -283,13 +283,21 @@ export function storeAdParams(): void {
   } catch { /* storage indisponível */ }
 }
 
-/** Acrescenta os parâmetros guardados a uma URL, mantendo os existentes (ex.: mode=signup). */
+const CONSENT_PARAM = 'consent';
+
+/**
+ * Acrescenta os parâmetros guardados a uma URL, mantendo os existentes (ex.: mode=signup).
+ * Com consentimento aceito (lvd_meta_consent=opt-in) também repassa consent=opt-in;
+ * se o visitante recusou ou ainda não escolheu, o parâmetro é removido.
+ */
 export function withAdParams(href: string): string {
   if (typeof window === 'undefined') return href;
   let saved: Record<string, string> = {};
-  try { saved = JSON.parse(localStorage.getItem(AD_PARAMS_KEY) || '{}'); } catch { return href; }
+  try { saved = JSON.parse(localStorage.getItem(AD_PARAMS_KEY) || '{}'); } catch { saved = {}; }
   const u = new URL(href);
   for (const k of AD_PARAMS) if (saved[k]) u.searchParams.set(k, saved[k]);
+  if (getMetaConsent() === 'opt-in') u.searchParams.set(CONSENT_PARAM, 'opt-in');
+  else u.searchParams.delete(CONSENT_PARAM);
   return u.toString();
 }
 

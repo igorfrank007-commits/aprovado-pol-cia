@@ -20,3 +20,4 @@
 - [x] Excluir a caixa "Não é mentoria" logo abaixo da capa, ajustando o espaçamento entre a capa e a seção seguinte, e conferir a exibição.
 - [x] Excluir o botão "Quero ser aprovado — Criar conta gratuita" que ficava no fim da oferta, abaixo do link do WhatsApp e dos selos, e conferir a exibição.
 - [x] Corrigir o título do diagnóstico para "Você sonha em passar em concurso publico mas enfrenta os seguintes problemas?", excluir a caixa "Não é mentoria" acima de "Prof. é uma mentoria?" e a bolha da pergunta repetida nessa seção, e conferir a exibição.
+- [x] Repassar consent=opt-in aos links de cadastro quando o visitante aceitar os cookies, atualizando os links no clique em Aceitar, e conferir na página.
