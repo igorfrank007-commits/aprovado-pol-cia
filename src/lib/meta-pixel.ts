@@ -129,6 +129,7 @@ export function trackMetaEvent(event: string, params?: Record<string, unknown>):
  */
 export function trackViewContent(params?: Record<string, unknown>): void {
   if (viewContentFired) return;
+  if (!isEnabled() || !hasConsent()) return;
   viewContentFired = true;
   trackMetaEvent('ViewContent', {
     content_name: 'Método Aprovado — Página de Vendas',
@@ -256,4 +257,45 @@ export function buildKiwifyUrl(baseUrl: string): string {
 export function setMetaConsent(consent: 'opt-in' | 'opt-out'): void {
   if (typeof document === 'undefined') return;
   document.cookie = `lvd_meta_consent=${consent};path=/;max-age=31536000;samesite=lax;secure`;
+}
+
+/** Lê a escolha gravada no cookie lvd_meta_consent (null se ainda não respondeu). */
+export function getMetaConsent(): 'opt-in' | 'opt-out' | null {
+  if (typeof document === 'undefined') return null;
+  const v = document.cookie.split('; ').find((p) => p.startsWith(CONSENT_COOKIE_KEY + '='))?.split('=')[1];
+  return v === 'opt-in' || v === 'opt-out' ? v : null;
+}
+
+const AD_PARAMS = ['fbclid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+const AD_PARAMS_KEY = 'lvd_ad_params';
+const SIGNUP_PREFIX = 'https://operacaoestudei.lovable.app/auth';
+
+/** Guarda no localStorage os parâmetros do anúncio que vieram na URL. */
+export function storeAdParams(): void {
+  if (typeof window === 'undefined') return;
+  const url = new URL(window.location.href);
+  const found: Record<string, string> = {};
+  for (const k of AD_PARAMS) { const v = url.searchParams.get(k); if (v) found[k] = v; }
+  if (!Object.keys(found).length) return;
+  try {
+    const prev = JSON.parse(localStorage.getItem(AD_PARAMS_KEY) || '{}');
+    localStorage.setItem(AD_PARAMS_KEY, JSON.stringify({ ...prev, ...found }));
+  } catch { /* storage indisponível */ }
+}
+
+/** Acrescenta os parâmetros guardados a uma URL, mantendo os existentes (ex.: mode=signup). */
+export function withAdParams(href: string): string {
+  if (typeof window === 'undefined') return href;
+  let saved: Record<string, string> = {};
+  try { saved = JSON.parse(localStorage.getItem(AD_PARAMS_KEY) || '{}'); } catch { return href; }
+  const u = new URL(href);
+  for (const k of AD_PARAMS) if (saved[k]) u.searchParams.set(k, saved[k]);
+  return u.toString();
+}
+
+/** Atualiza todos os links de cadastro do Study Planner Pro com os parâmetros guardados. */
+export function decorateSignupLinks(root: ParentNode = document): void {
+  root.querySelectorAll<HTMLAnchorElement>(`a[href^="${SIGNUP_PREFIX}"]`).forEach((a) => {
+    a.href = withAdParams(a.href);
+  });
 }

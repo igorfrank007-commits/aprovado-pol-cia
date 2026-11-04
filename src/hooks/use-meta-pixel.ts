@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useLocation } from '@tanstack/react-router';
-import { setupMetaPixel, trackMetaEvent, trackViewContent } from '@/lib/meta-pixel';
+import { decorateSignupLinks, storeAdParams, setupMetaPixel, trackMetaEvent, trackViewContent } from '@/lib/meta-pixel';
 
 /**
  * Hook que cuida do Meta Pixel em todo o app:
@@ -16,6 +16,16 @@ export function useMetaPixelTracking() {
   // Inicializa o script do Pixel uma única vez ao montar
   useEffect(() => {
     setupMetaPixel();
+    storeAdParams();
+    decorateSignupLinks();
+    // Links renderizados depois (seções liberadas, barra móvel) recebem os parâmetros no clique.
+    const onClick = (e: MouseEvent) => {
+      const a = (e.target as Element | null)?.closest?.('a');
+      if (a && a.href.startsWith('https://operacaoestudei.lovable.app/auth')) decorateSignupLinks(a.parentNode ?? document);
+    };
+    document.addEventListener('click', onClick, true);
+    document.addEventListener('auxclick', onClick, true);
+    return () => { document.removeEventListener('click', onClick, true); document.removeEventListener('auxclick', onClick, true); };
   }, []);
 
   // Dispara PageView na primeira abertura e em cada mudança real de rota

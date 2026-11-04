@@ -4,7 +4,7 @@ export const checkoutUrl = 'https://operacaoestudei.lovable.app/auth?mode=signup
 // Segunda linha dos botões de compra ("Quero ser aprovado").
 export const ctaSub = 'Criar conta gratuita';
 export const whatsappUrl = 'https://wa.me/5555981205146';
-export const offer = { monthly: 37.00, annualInstallments: 12, annualInstallment: 19.90, guaranteeDays: 7, supportDays: 30 };
+export const offer = { monthly: 37.90, annualInstallments: 12, annualInstallment: 19.80, guaranteeDays: 7, supportDays: 30 };
 export const benefits = [
  {icon:BookOpen,title:'Curso Completo em Vídeo Aulas',desc:'Curso completo em vídeo aulas em que eu mostro meu método passo a passo.'},
  {icon:Calendar,title:'Cronograma e Planejamento Automáticos',desc:'Você vai aprender como gerar automaticamente seu cronograma de estudos e planejamento. Você anexa seu edital, informa o cronograma de aulas do curso preparatório, informa quantas horas e quais dias você vai estudar e gera automaticamente seu cronograma de estudos e planejamento'},

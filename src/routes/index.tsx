@@ -9,6 +9,7 @@ import { HowItWorks } from '@/components/how-it-works';
 import { PricingPlans } from '@/components/pricing-plans';
 import { VslPlayer } from '@/components/vsl-player';
 import { MobileCtaBar } from '@/components/mobile-cta-bar';
+import { CookieBanner } from '@/components/cookie-banner';
 import { useScrollReveal } from '@/hooks/use-scroll-reveal';
 import { useMetaPixelTracking } from '@/hooks/use-meta-pixel';
 import { benefits, testimonials, offer, whatsappUrl, mentorship, ctaSub, faqs } from '@/lib/sales-content';
@@ -48,6 +49,7 @@ function Index() {
  function scrollToOffer() { setSectionsVisible(true); document.getElementById('cta-oferta-principal')?.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
  return <main className="min-h-screen overflow-x-hidden bg-background text-foreground">
  <MobileCtaBar />
+ <CookieBanner />
  <section className="relative overflow-hidden bg-gradient-hero"><div aria-hidden className="grid-bg absolute inset-0 opacity-40" /><div className="relative mx-auto flex max-w-4xl flex-col items-center px-4 pb-10 pt-8 text-center sm:px-6 sm:py-14">
   <div className="w-full animate-fade-up"><div className="flex flex-wrap items-center justify-center gap-2"><Kicker><Shield className="mr-1.5 inline size-3.5" />Método Validado</Kicker><Kicker><MessageCircle className="mr-1.5 inline size-3.5" />NÃO É MENTORIA DE MILHARES DE REAIS</Kicker></div><h1 className="mt-4 font-display text-[1.45rem] font-bold uppercase leading-[1.14] sm:mt-5 sm:text-4xl sm:leading-[1.08] md:text-5xl">DESCUBRA O MÉTODO QUE USEI PARA SER APROVADO <Gold>3X NA POLÍCIA FEDERAL, 4X PARA DELEGADO DE POLÍCIA E 1X NA ABIN.</Gold> <Gold>AULA 100% GRATUITA</Gold></h1></div>
   <div className="mt-6 w-full max-w-3xl sm:mt-8"><VslPlayer onOfferReached={scrollToOffer} /></div>
