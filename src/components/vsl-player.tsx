@@ -13,14 +13,14 @@ import { Loader2, Play, VolumeX } from 'lucide-react';
 // ofuscados (sem título, duração, botões e barra do Vimeo) e no lugar deles
 // fica apenas a barra de progresso própria — o controle de avançar o vídeo.
 // ============================================================================
-const VIMEO_ID = '1240976753';
+const VIMEO_ID = '1243059209';
 const VIMEO_ORIGIN = 'https://player.vimeo.com';
 const VIMEO_SRC =
   `${VIMEO_ORIGIN}/video/${VIMEO_ID}` +
   '?autoplay=1&muted=1&controls=0&title=0&byline=0&portrait=0&pip=0&keyboard=0&dnt=1&playsinline=1&autopause=0&color=c8a24a';
 
-/** Momento do vídeo que dispara a rolagem suave até a oferta: 26 minutos e 53 segundos. */
-const TRIGGER_SECONDS = 26 * 60 + 53;
+/** Momento do vídeo que dispara a rolagem suave até a oferta: 18 minutos e 53 segundos. */
+const TRIGGER_SECONDS = 18 * 60 + 53;
 
 type VimeoMessage = {
   event?: string;
