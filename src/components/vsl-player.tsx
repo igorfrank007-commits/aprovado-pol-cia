@@ -6,7 +6,7 @@ import {
   type KeyboardEvent as ReactKeyboardEvent,
   type PointerEvent as ReactPointerEvent,
 } from 'react';
-import { Loader2, Play, VolumeX } from 'lucide-react';
+import { Loader2, Maximize, Minimize, Play, VolumeX } from 'lucide-react';
 // ============================================================================
 // CONFIGURAÇÃO DO VÍDEO
 // Vídeo da VSL hospedado no Vimeo. Os controles nativos do player ficam
@@ -40,6 +40,7 @@ type VslPlayerProps = {
  */
 export function VslPlayer({ onOfferReached }: VslPlayerProps) {
   const frameRef = useRef<HTMLIFrameElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const firedRef = useRef(false);
   const draggingRef = useRef(false);
 
@@ -48,6 +49,13 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
   const [duration, setDuration] = useState(0);
   const [loading, setLoading] = useState(true);
   const [unlocked, setUnlocked] = useState(false);
+  const [fullscreen, setFullscreen] = useState(false);
+
+  useEffect(() => {
+    const sync = () => setFullscreen(document.fullscreenElement === containerRef.current);
+    document.addEventListener('fullscreenchange', sync);
+    return () => document.removeEventListener('fullscreenchange', sync);
+  }, []);
 
   const fireOffer = useCallback(() => {
     if (firedRef.current) return;
@@ -147,6 +155,19 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
     post('play');
   }, [post]);
 
+  /** Tela cheia no container (mantém a barra de avanço); no iPhone, que não aceita isso, pede ao player do Vimeo. */
+  const toggleFullscreen = useCallback(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    if (document.fullscreenElement) {
+      void document.exitFullscreen();
+    } else if (container.requestFullscreen) {
+      container.requestFullscreen().catch(() => post('requestFullscreen'));
+    } else {
+      post('requestFullscreen');
+    }
+  }, [post]);
+
   const seekToRatio = (ratio: number) => {
     if (!duration) return;
     const clamped = Math.min(1, Math.max(0, ratio));
@@ -196,8 +217,13 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
   const percent = duration > 0 ? Math.min(100, Math.max(0, (current / duration) * 100)) : 0;
 
   return (
-    <div className="vsl-glow group relative w-full overflow-hidden rounded-xl border border-gold/25 bg-black sm:rounded-2xl">
-      <div className="relative aspect-video w-full">
+    <div
+      ref={containerRef}
+      className={`vsl-glow group relative w-full overflow-hidden border border-gold/25 bg-black ${
+        fullscreen ? 'flex items-center justify-center rounded-none' : 'rounded-xl sm:rounded-2xl'
+      }`}
+    >
+      <div className={`relative w-full ${fullscreen ? 'aspect-video max-h-full' : 'aspect-video'}`}>
         <iframe
           ref={frameRef}
           src={VIMEO_SRC}
@@ -261,7 +287,7 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
 
         {/* Controle visível único: a barra de avançar o vídeo. Nada de duração,
             menu, botões ou marcações do player original. */}
-        <div className="absolute inset-x-0 bottom-0 z-30 bg-gradient-to-t from-black/90 via-black/45 to-transparent px-3 pb-2 pt-6 sm:px-4 sm:pb-3">
+        <div className="absolute inset-x-0 bottom-0 z-30 flex items-center gap-2 bg-gradient-to-t from-black/90 via-black/45 to-transparent px-3 pb-2 pt-6 sm:gap-3 sm:px-4 sm:pb-3">
           <div
             role="slider"
             tabIndex={0}
@@ -275,7 +301,7 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
             onPointerUp={handleSeekUp}
             onPointerCancel={handleSeekUp}
             onKeyDown={handleSeekKey}
-            className="group/seek relative -mx-1 flex h-9 cursor-pointer touch-none items-center px-1 outline-none focus-visible:ring-2 focus-visible:ring-gold/70 sm:h-6"
+            className="group/seek relative -mx-1 flex h-9 min-w-0 flex-1 cursor-pointer touch-none items-center px-1 outline-none focus-visible:ring-2 focus-visible:ring-gold/70 sm:h-6"
           >
             <div className="h-1.5 w-full overflow-hidden rounded-full bg-foreground/25 transition-all group-hover/seek:h-2 sm:h-1.5">
               <div className="h-full rounded-full bg-gradient-gold" style={{ width: `${percent}%` }} />
@@ -286,6 +312,15 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
               style={{ left: `${percent}%` }}
             />
           </div>
+          <button
+            type="button"
+            onClick={toggleFullscreen}
+            aria-label={fullscreen ? 'Sair da tela cheia' : 'Assistir em tela cheia'}
+            title={fullscreen ? 'Sair da tela cheia' : 'Tela cheia'}
+            className="grid size-9 shrink-0 place-items-center rounded-md border border-gold/40 bg-black/55 text-gold outline-none transition hover:border-gold hover:bg-black/75 focus-visible:ring-2 focus-visible:ring-gold sm:size-8"
+          >
+            {fullscreen ? <Minimize className="size-4" /> : <Maximize className="size-4" />}
+          </button>
         </div>
       </div>
     </div>

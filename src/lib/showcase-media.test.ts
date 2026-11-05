@@ -3,7 +3,7 @@ import { test, expect } from 'bun:test';
 import { showcaseFeatures, showcaseMediaFor } from './showcase-media';
 
 test('the showcase keeps the six platform features', () => {
-  expect(showcaseFeatures.map(({ title }) => title)).toEqual(['Curso Completo em Vídeo Aulas', 'Cronograma e Planejamento Automáticos', 'Edital Verticalizado', 'Estatísticas de Progresso', 'Flashcards e Revisão Espaçada', 'Raio-X da Banca e Análise Estatística do Que Cai na Prova']);
+  expect(showcaseFeatures.map(({ title }) => title)).toEqual(['Curso Completo em Vídeo Aulas', 'Cronograma e Planejamento Automáticos', 'Edital Verticalizado', 'Lei Seca em Questões', 'Flashcards e Revisão Espaçada', 'Raio-X da Banca e Análise Estatística do Que Cai na Prova']);
 });
 
 test('the vídeo aulas tab shows the supplied lesson video instead of an image', () => {
@@ -33,7 +33,7 @@ test('the edital verticalizado tab shows the captioned Aula 03 video instead of 
 });
 
 test('the other tabs keep their demonstration images', () => {
-  const others = ['Estatísticas de Progresso', 'Flashcards e Revisão Espaçada'];
+  const others = ['Lei Seca em Questões','Flashcards e Revisão Espaçada'];
   for (const title of others) {
     const media = showcaseMediaFor(title);
     expect(media.length).toBeGreaterThan(0);
