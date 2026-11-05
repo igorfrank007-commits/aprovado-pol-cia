@@ -15,6 +15,7 @@ import { Loader2, Maximize, Minimize, Play, VolumeX } from 'lucide-react';
 // ============================================================================
 const VIMEO_ID = '1243059209';
 const VIMEO_ORIGIN = 'https://player.vimeo.com';
+const POSTER_SRC = '/uploads/vsl-capa.jpg';
 const VIMEO_SRC =
   `${VIMEO_ORIGIN}/video/${VIMEO_ID}` +
   '?autoplay=1&muted=1&controls=0&title=0&byline=0&portrait=0&pip=0&keyboard=0&dnt=1&playsinline=1&autopause=0&color=c8a24a';
@@ -50,6 +51,13 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
   const [loading, setLoading] = useState(true);
   const [unlocked, setUnlocked] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
+  const [started, setStarted] = useState(false);
+
+  // Se o autoplay for bloqueado, não deixa o indicador de carregamento girando para sempre.
+  useEffect(() => {
+    const timer = window.setTimeout(() => setLoading(false), 8000);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const sync = () => setFullscreen(document.fullscreenElement === containerRef.current);
@@ -109,11 +117,9 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
             post('addEventListener', name),
           );
           post('setVolume', 1);
-          setLoading(false);
           break;
         case 'play':
           setPlaying(true);
-          setLoading(false);
           break;
         case 'pause':
           setPlaying(false);
@@ -126,6 +132,10 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
           break;
         case 'timeupdate':
           if (typeof seconds === 'number') {
+            if (seconds > 0) {
+              setStarted(true);
+              setLoading(false);
+            }
             setCurrent(seconds);
             maybeTrigger(seconds);
           }
@@ -153,6 +163,8 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
     setUnlocked(true);
     post('setVolume', 1);
     post('play');
+    // Garantia: se o player não avisar o início da reprodução, a capa sai mesmo assim.
+    window.setTimeout(() => setStarted(true), 2500);
   }, [post]);
 
   /** Tela cheia no container (mantém a barra de avanço); no iPhone, que não aceita isso, pede ao player do Vimeo. */
@@ -230,9 +242,21 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
           title="Aula gratuita do Método Aprovação Policial"
           allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
           referrerPolicy="strict-origin-when-cross-origin"
-          onLoad={() => setLoading(false)}
           className="absolute inset-0 h-full w-full border-0"
         />
+
+        {/* Capa local: aparece na hora enquanto o player do Vimeo baixa e inicia o vídeo. */}
+        {!started && (
+          <img
+            src={POSTER_SRC}
+            alt=""
+            width={960}
+            height={540}
+            fetchPriority="high"
+            decoding="async"
+            className="pointer-events-none absolute inset-0 z-[5] h-full w-full object-cover"
+          />
+        )}
 
         {/* Camada transparente sobre o vídeo: o toque/clique alterna play e pause
             sem expor nenhum controle nativo (que estão desativados no embed). */}

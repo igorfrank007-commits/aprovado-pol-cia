@@ -23,7 +23,7 @@ export function ShowcaseVideo({ label, src, poster, captions }: Props) {
   }
 
   return <div className="relative h-full w-full bg-black">
-    <video ref={video} controls playsInline preload="metadata" poster={poster}
+    <video ref={video} controls playsInline preload="none" poster={poster}
       onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)}
       className="h-full w-full object-cover">
       <source src={src} type="video/mp4" />
