@@ -1,8 +1,11 @@
 import { BookOpen, Target, Calendar, ListChecks, Brain, Headphones, MessageCircle, Trophy, BarChart3, Scale } from 'lucide-react';
-// Destination of every "Quero ser aprovado" button: the Study Planner Pro auth page.
-export const checkoutUrl = 'https://operacaoestudei.lovable.app/auth?mode=signup';
+// Botões de compra levam direto ao checkout da Kiwify. O anual é o padrão (plano em destaque).
+export const checkoutUrl = 'https://pay.kiwify.com.br/bEh3rDi';
+export const monthlyCheckoutUrl = 'https://pay.kiwify.com.br/3AVIhO6';
+// Só o botão "Crie sua conta gratuita" leva ao cadastro gratuito da plataforma.
+export const signupUrl = 'https://operacaoestudei.lovable.app/auth?mode=signup';
 // Segunda linha dos botões de compra ("Quero ser aprovado").
-export const ctaSub = 'Criar conta gratuita';
+export const ctaSub = 'Plano anual · 12x de R$ 19,80';
 export const whatsappUrl = 'https://wa.me/5555981205146';
 export const offer = { monthly: 37.90, annualInstallments: 12, annualInstallment: 19.80, guaranteeDays: 7, supportDays: 30 };
 export const benefits = [

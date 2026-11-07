@@ -1,6 +1,6 @@
 import { CalendarClock, GraduationCap, Timer, TrendingUp, type LucideIcon } from 'lucide-react';
 import { Checkout } from '@/components/sales-checkout';
-import { ctaSub } from '@/lib/sales-content';
+import { signupUrl } from '@/lib/sales-content';
 import editalAsset from '@/assets/edital-verticalizado.png.asset.json';
 import planejamentoAsset from '@/assets/planejamento-cronograma.png.asset.json';
 import registroAsset from '@/assets/diario-estudos.png.asset.json';
@@ -82,7 +82,7 @@ export function HowItWorks() {
           </article>)}
         </div>
 
-        <div className="mt-7 flex justify-center sm:mt-9"><Checkout sub={ctaSub} shimmer>COMECE AGORA - CRIE SUA CONTA GRATUITA</Checkout></div>
+        <div className="mt-7 flex justify-center sm:mt-9"><Checkout href={signupUrl} track={false} sub="Criar conta gratuita" shimmer>COMECE AGORA - CRIE SUA CONTA GRATUITA</Checkout></div>
       </div></div></div>
     </div>
   </section>;

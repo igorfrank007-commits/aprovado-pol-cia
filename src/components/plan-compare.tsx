@@ -1,6 +1,6 @@
 import { CircleCheck, Lock, Shield } from 'lucide-react';
 import { Checkout } from '@/components/sales-checkout';
-import { included, offer, whatsappUrl } from '@/lib/sales-content';
+import { included, offer, whatsappUrl, checkoutUrl, monthlyCheckoutUrl } from '@/lib/sales-content';
 
 function brl(value: number) {
   return value.toFixed(2).replace('.', ',');
@@ -97,7 +97,7 @@ export function PlanCompare() {
                       </p>
                       <p className="mt-1.5 text-xs font-semibold leading-relaxed text-gold">{plan.tagline}</p>
                       <div className={`mt-4 flex [&>a]:w-full [&>a]:px-4 [&>a]:py-4 [&>a]:text-sm sm:[&>a]:text-base ${plan.highlight ? '' : '[&>a]:shadow-none'}`}>
-                        <Checkout pulse={false}>Quero ser aprovado</Checkout>
+                        <Checkout pulse={false} href={plan.name === 'Mensal' ? monthlyCheckoutUrl : checkoutUrl}>Quero ser aprovado</Checkout>
                       </div>
                     </article>
                   ))}
