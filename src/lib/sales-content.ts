@@ -6,6 +6,7 @@ export const monthlyCheckoutUrl = 'https://pay.kiwify.com.br/3AVIhO6';
 export const signupUrl = 'https://operacaoestudei.lovable.app/auth?mode=signup';
 // Segunda linha dos botões de compra ("Quero ser aprovado").
 export const ctaSub = 'Plano anual · 12x de R$ 19,80';
+export const monthlyCtaSub = 'Plano mensal · R$ 37,90 por mês';
 export const whatsappUrl = 'https://wa.me/5555981205146';
 export const offer = { monthly: 37.90, annualInstallments: 12, annualInstallment: 19.80, guaranteeDays: 7, supportDays: 30 };
 export const benefits = [

@@ -4,8 +4,9 @@ import { Button } from '@/components/ui/button';
 import { checkoutUrl, ctaSub } from '@/lib/sales-content';
 import { trackCheckoutClick, buildKiwifyUrl } from '@/lib/meta-pixel';
 
-export function Checkout({ children, sub, pulse = true, shimmer = false, href = checkoutUrl, track = true }: { children: ReactNode; sub?: ReactNode; pulse?: boolean; shimmer?: boolean; href?: string; track?: boolean }) {
-  const classes = [pulse ? 'animate-pulse-gold' : '', shimmer ? 'cta-shimmer' : '', 'h-auto min-h-14 w-full max-w-md whitespace-normal rounded-md bg-gradient-gold px-4 py-4 text-center font-display text-sm font-bold uppercase leading-snug text-primary-foreground shadow-gold transition-transform hover:scale-[1.02] sm:w-auto sm:px-8 sm:py-5 sm:text-lg'].filter(Boolean).join(' ');
+export function Checkout({ children, sub, pulse = true, shimmer = false, href = checkoutUrl, track = true, variant = 'gold' }: { children: ReactNode; sub?: ReactNode; pulse?: boolean; shimmer?: boolean; href?: string; track?: boolean; variant?: 'gold' | 'outline' }) {
+  const look = variant === 'outline' ? 'border-2 border-gold bg-transparent text-gold shadow-none hover:bg-gold/10' : 'bg-gradient-gold text-primary-foreground shadow-gold';
+  const classes = [pulse ? 'animate-pulse-gold' : '', shimmer ? 'cta-shimmer' : '', look, 'h-auto min-h-14 w-full max-w-md whitespace-normal rounded-md px-4 py-4 text-center font-display text-sm font-bold uppercase leading-snug transition-transform hover:scale-[1.02] sm:w-auto sm:px-8 sm:py-5 sm:text-lg'].filter(Boolean).join(' ');
   const handleCheckoutClick = () => {
     if (track) trackCheckoutClick();
   };
