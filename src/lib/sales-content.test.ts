@@ -7,7 +7,7 @@ test('the "para quem é" audience list is removed from the page content', () => 
 test('WhatsApp contact uses the supplied Brazilian phone number', () => { expect(whatsappUrl).toBe('https://wa.me/5555981205146'); });
 test('purchase buttons go straight to the Kiwify checkouts; only the free-account button goes to signup', () => {
   expect(checkoutUrl).toBe('https://pay.kiwify.com.br/bEh3rDi');
-  expect(monthlyCheckoutUrl).toBe('https://pay.kiwify.com.br/3AVIhO6');
+  expect(monthlyCheckoutUrl).toBe('https://pay.kiwify.com.br/T4LQmbg');
   expect(signupUrl).toBe('https://operacaoestudei.lovable.app/auth?mode=signup');
 });
 test('monthly plan is a one-time 37 reais payment for 30 days', () => { expect(offer.monthly).toBe(37.00); });

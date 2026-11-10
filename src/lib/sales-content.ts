@@ -1,7 +1,7 @@
 import { BookOpen, Target, Calendar, ListChecks, Brain, Headphones, MessageCircle, Trophy, BarChart3, Scale } from 'lucide-react';
 // Botões de compra levam direto ao checkout da Kiwify. O anual é o padrão (plano em destaque).
 export const checkoutUrl = 'https://pay.kiwify.com.br/bEh3rDi';
-export const monthlyCheckoutUrl = 'https://pay.kiwify.com.br/3AVIhO6';
+export const monthlyCheckoutUrl = 'https://pay.kiwify.com.br/T4LQmbg';
 // Só o botão "Crie sua conta gratuita" leva ao cadastro gratuito da plataforma.
 export const signupUrl = 'https://operacaoestudei.lovable.app/auth?mode=signup';
 // Segunda linha dos botões de compra ("Quero ser aprovado").
