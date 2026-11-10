@@ -6,9 +6,9 @@ export const monthlyCheckoutUrl = 'https://pay.kiwify.com.br/3AVIhO6';
 export const signupUrl = 'https://operacaoestudei.lovable.app/auth?mode=signup';
 // Segunda linha dos botões de compra ("Quero ser aprovado").
 export const ctaSub = 'Plano anual · 12x de R$ 19,80';
-export const monthlyCtaSub = 'Plano mensal · R$ 37,90 por mês';
+export const monthlyCtaSub = 'Plano mensal · R$ 37,00 · 30 dias de acesso';
 export const whatsappUrl = 'https://wa.me/5555981205146';
-export const offer = { monthly: 37.90, annualInstallments: 12, annualInstallment: 19.80, guaranteeDays: 7, supportDays: 30 };
+export const offer = { monthly: 37.00, annualInstallments: 12, annualInstallment: 19.80, guaranteeDays: 7, supportDays: 30 };
 export const benefits = [
  {icon:BookOpen,title:'Curso Completo em Vídeo Aulas',desc:'Curso completo em vídeo aulas em que eu mostro meu método passo a passo.'},
  {icon:Calendar,title:'Cronograma e Planejamento Automáticos',desc:'Você vai aprender como gerar automaticamente seu cronograma de estudos e planejamento. Você anexa seu edital, informa o cronograma de aulas do curso preparatório, informa quantas horas e quais dias você vai estudar e gera automaticamente seu cronograma de estudos e planejamento'},
@@ -72,7 +72,7 @@ export const faqs = [
   { question: 'O que vou aprender sobre planejamento de estudos?', answer: 'Você vai aprender a gerar automaticamente seu cronograma e planejamento a partir do edital, do cronograma de aulas do preparatório e das horas e dias disponíveis para estudar.' },
   { question: 'Como vou acompanhar meu progresso?', answer: 'Você vai aprender a gerar seu edital verticalizado com marcações e terá acesso a estatísticas para acompanhar seu progresso nos estudos.' },
   { question: 'O curso ensina técnicas de revisão e memorização?', answer: 'Sim. Você aprenderá a criar flashcards para revisão espaçada e memorização avançada da matéria.' },
-  { question: 'Qual a diferença entre os planos mensal e anual?', answer: `Os dois planos incluem os mesmos itens da oferta. A assinatura mensal custa R$ ${offer.monthly.toFixed(2).replace('.', ',')} por mês. A assinatura anual custa ${offer.annualInstallments}x de R$ ${offer.annualInstallment.toFixed(2).replace('.', ',')} e oferece 12 meses de acesso. O acesso ao curso e aos sistemas permanece durante a assinatura.` },
+  { question: 'Qual a diferença entre os planos mensal e anual?', answer: `Os dois planos incluem os mesmos itens da oferta. O plano mensal é pago uma única vez, de R$ ${offer.monthly.toFixed(2).replace('.', ',')}, e dá 30 dias de acesso sem renovação automática. A assinatura anual custa ${offer.annualInstallments}x de R$ ${offer.annualInstallment.toFixed(2).replace('.', ',')} e oferece 12 meses de acesso. O acesso ao curso e aos sistemas permanece durante a assinatura.` },
   { question: 'O curso tem garantia?', answer: `Sim. A garantia é de ${offer.guaranteeDays} dias.` },
   { question: 'Terei suporte ou tira dúvidas?', answer: `Sim. O aluno tem acesso ao suporte por ${offer.supportDays} dias após o início do curso.` },
 ];

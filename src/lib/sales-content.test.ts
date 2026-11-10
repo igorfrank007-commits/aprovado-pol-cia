@@ -10,7 +10,7 @@ test('purchase buttons go straight to the Kiwify checkouts; only the free-accoun
   expect(monthlyCheckoutUrl).toBe('https://pay.kiwify.com.br/3AVIhO6');
   expect(signupUrl).toBe('https://operacaoestudei.lovable.app/auth?mode=signup');
 });
-test('monthly subscription costs 37.90 reais per month', () => { expect(offer.monthly).toBe(37.90); });
+test('monthly plan is a one-time 37 reais payment for 30 days', () => { expect(offer.monthly).toBe(37.00); });
 test('annual subscription costs twelve payments of 19.80 reais', () => { expect([offer.annualInstallments, offer.annualInstallment]).toEqual([12, 19.80]); });
 test('the course applies to any public exam and the OAB exam', () => { expect(courseScope).toEqual({ publicExams: true, oab: true }); });
 test('reference refund guarantee is seven days', () => { expect(offer.guaranteeDays).toBe(7); });

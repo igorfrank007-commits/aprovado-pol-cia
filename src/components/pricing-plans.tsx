@@ -11,7 +11,7 @@ const plans = [
   {
     name: 'Mensal',
     price: `R$ ${brl(offer.monthly)}`,
-    tagline: 'Por mês · assinatura mensal',
+    tagline: 'Pagamento único · 30 dias de acesso',
     badge: 'Sem fidelidade',
     annual: false,
   },

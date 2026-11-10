@@ -25,7 +25,7 @@ export default defineTool({
       content: [
         {
           type: "text",
-          text: `Assinatura mensal: ${prices.monthly.label}. Assinatura anual: ${prices.annual.label}. Garantia de ${offer.guaranteeDays} dias. Suporte por ${offer.supportDays} dias.`,
+          text: `Plano mensal (compra única, 30 dias): ${prices.monthly.label}. Assinatura anual: ${prices.annual.label}. Garantia de ${offer.guaranteeDays} dias. Suporte por ${offer.supportDays} dias.`,
         },
       ],
       structuredContent: { prices },
