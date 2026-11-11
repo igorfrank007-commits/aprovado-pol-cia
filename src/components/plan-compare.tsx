@@ -42,7 +42,7 @@ export function PlanCompare() {
                   Escolha o seu plano e <span className="text-gradient-gold">comece hoje</span>
                 </h2>
                 <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
-                  Os dois planos liberam o curso completo e todos os sistemas de planejamento, questões e revisão durante a assinatura.
+                  Os dois planos liberam todas as questões, o cronograma individual e o edital verticalizado durante a assinatura.
                 </p>
               </div>
 
@@ -120,7 +120,7 @@ export function PlanCompare() {
                   </span>
                   <span className="inline-flex items-center gap-1">
                     <Shield className="size-4 text-gold" />
-                    Garantia de {offer.guaranteeDays} dias
+                    Cancele quando quiser
                   </span>
                 </div>
               </div>

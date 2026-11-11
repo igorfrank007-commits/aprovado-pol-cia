@@ -11,7 +11,7 @@ const plans = [
   {
     name: 'Mensal',
     price: `R$ ${brl(offer.monthly)}`,
-    tagline: 'Pagamento único · 30 dias de acesso',
+    tagline: 'Cobrança todo mês · cancele quando quiser',
     badge: 'Sem fidelidade',
     annual: false,
   },
@@ -36,7 +36,7 @@ export function PricingPlans() {
             Seu nome pode ser o <span className="text-gradient-gold">próximo aprovado</span>.
           </h2>
           <p className="mt-3 text-sm text-muted-foreground sm:mt-4 sm:text-lg">
-            Mas isso depende da decisão que você toma hoje. Comece agora com o método certo e transforme esforço em aprovação.
+            Comece grátis, com 10 questões de lei seca por dia, e assine quando quiser liberar tudo.
           </p>
         </div>
 
@@ -63,7 +63,7 @@ export function PricingPlans() {
               </p>
               <p className="mt-1.5 text-sm font-semibold leading-snug text-gold sm:mt-2">{plan.tagline}</p>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:mt-4">
-                Acesso ao curso e aos sistemas de planejamento, questões e revisão durante a assinatura.
+                Acesso a todas as questões, ao cronograma individual e ao edital verticalizado durante a assinatura.
               </p>
 
               <div className="mt-5 flex items-center justify-between gap-3 border-b border-border pb-2.5 text-[10px] font-bold uppercase text-gold sm:mt-6 sm:pb-3">
@@ -135,7 +135,7 @@ export function PricingPlans() {
             </span>
             <span className="inline-flex items-center gap-1">
               <Shield className="size-4 shrink-0 text-gold" />
-              Garantia de {offer.guaranteeDays} dias
+              Cancele quando quiser
             </span>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { BookOpen, Target, Calendar, ListChecks, Brain, Headphones, MessageCircle, Trophy, BarChart3, Scale } from 'lucide-react';
+import { BookOpen, Target, Calendar, ListChecks, Scale, BarChart3 } from 'lucide-react';
 // Todos os botões levam ao cadastro gratuito do Lei Seca em Questões. O anual é o padrão (plano em destaque).
 export const lawSecaSignupUrl = 'https://lei-seca-em-questoes.netlify.app/#/entrar?aba=cadastrar';
 export const checkoutUrl = lawSecaSignupUrl;
@@ -8,30 +8,28 @@ export const signupUrl = lawSecaSignupUrl;
 export const ctaSub = 'Plano anual · 12x de R$ 19,80';
 export const monthlyCtaSub = 'Plano mensal · R$ 29,90';
 export const whatsappUrl = 'https://wa.me/5555981205146';
-export const offer = { monthly: 29.90, annualInstallments: 12, annualInstallment: 19.80, guaranteeDays: 7, supportDays: 30 };
+// Preços do Lei Seca em Questões (conferidos em src/acesso.ts do site).
+export const offer = { monthly: 29.90, annualInstallments: 12, annualInstallment: 19.80, annualTotal: 237.60 };
+
+// Ferramentas do Lei Seca em Questões, na ordem da página.
 export const benefits = [
- {icon:BookOpen,title:'Curso Completo em Vídeo Aulas',desc:'Curso completo em vídeo aulas em que eu mostro meu método passo a passo.'},
- {icon:Calendar,title:'Cronograma e Planejamento Automáticos',desc:'Você vai aprender como gerar automaticamente seu cronograma de estudos e planejamento. Você anexa seu edital, informa o cronograma de aulas do curso preparatório, informa quantas horas e quais dias você vai estudar e gera automaticamente seu cronograma de estudos e planejamento'},
- {icon:ListChecks,title:'Edital Verticalizado',desc:'Aprenda a gerar automaticamente seu edital verticalizado com marcações para você acompanhar seu progresso.'},
- {icon:Scale,title:'Lei Seca em Questões',desc:'Estude a lei seca resolvendo questões de prova, artigo por artigo, em um banco com mais de 100 mil questões. Treine por artigo, use o Raio-X da Lei Seca para ver os artigos que cada banca mais cobra e estudar primeiro o que mais cai, e acompanhe seu desempenho no ranking em tempo real e no pódio mensal.'},
- {icon:Brain,title:'Flashcards e Revisão Espaçada',desc:'Aprenda a criar flashcards para revisão espaçada e memorização avançada da matéria e transforme sua mente em uma máquina de memorização.'},
- {icon:BarChart3,title:'Raio-X da Banca e Análise Estatística do Que Cai na Prova',desc:'Preveja a incidência real de cada tema e assunto na prova, com base nas estatísticas das provas anteriores'},
+ {icon:Scale,title:'Vade Mecum de Questões da Lei Seca',desc:'Resolva questões de certo ou errado artigo por artigo. Cada gabarito vem com o trecho da lei que o fundamenta, e você pode ler a lei completa.'},
+ {icon:BookOpen,title:'2,7 milhões de questões de concursos',desc:'Provas de mais de 500 bancas, de todas as matérias: Português, Matemática, Raciocínio Lógico, Informática e Direito. Filtre por disciplina, banca, cargo, órgão, ano e dificuldade, e veja o gabarito oficial e um comentário depois de responder.'},
+ {icon:Calendar,title:'Cronograma individual',desc:'Informe o concurso, os dias e as horas que você vai estudar. O site monta o cronograma com revisões de 24 horas, revisão semanal e simulados a cada 14 dias, e um cronômetro registra o tempo de cada sessão.'},
+ {icon:ListChecks,title:'Edital verticalizado',desc:'Cada tópico do seu edital com as cinco etapas de estudo e o avanço por matéria. Envie o PDF do edital para a leitura por IA (assinantes) ou cadastre as matérias à mão.'},
+ {icon:BarChart3,title:'Raio-X das provas',desc:'Veja quais assuntos a sua banca mais cobra, do mais ao menos cobrado, com os artigos de lei mais citados. Dá para baixar o relatório em PDF.'},
+ {icon:Target,title:'Cadernos, anotações e estatísticas',desc:'Separe as questões que você errou em cadernos, escreva a sua observação em cada questão e acompanhe o seu desempenho por lei e por semana.'},
 ];
 export const modules = [
- ['Mentalidade do Aprovado','Construa a base mental que separa quem passa de quem desiste.'],
- ['Como Organizar seus Estudos','Estruture seu material, seu tempo e seu ambiente de estudos.'],
- ['Ciclo de Estudos Policial','O ciclo otimizado para concursos da área policial.'],
- ['Revisões Inteligentes','Sistema de revisões espaçadas que fixam o conteúdo de verdade.'],
- ['Lei Seca Estratégica','Como ler e absorver a letra da lei sem se perder.'],
- ['Resolução de Questões','Técnica para resolver questões e aprender com cada erro.'],
- ['Controle de Desempenho','Métricas claras para saber exatamente onde melhorar.'],
- ['Planejamento Individual','Monte seu plano de estudos personalizado.'],
- ['Técnicas de Memorização','Memorize conteúdo extenso usando gatilhos comprovados.'],
- ['Estratégias de Reta Final','O que fazer nos últimos 30 dias antes da prova.'],
+ ['Vade Mecum da Lei Seca','Questões de certo ou errado artigo por artigo, com o trecho da lei que fundamenta o gabarito.'],
+ ['Questões de concursos','Mais de 2,7 milhões de questões de provas, com gabarito oficial e filtros completos.'],
+ ['Cronograma individual','Cronograma gerado a partir das suas horas e dias de estudo, com cronômetro.'],
+ ['Edital verticalizado','Cada tópico do edital com as cinco etapas de estudo.'],
+ ['Raio-X das provas','Os assuntos que a sua banca mais cobra, em PDF.'],
+ ['Cadernos e estatísticas','Questões erradas separadas em cadernos e desempenho acompanhado.'],
 ];
-export const problems = ['Dificuldade para focar em uma área ou um cargo','Estuda sem foco e sem saber se esta estudando correto','Medo de estar perdendo tempo','Incertezas de não saber se vai passar','Não sabe revisar e acaba esquecendo a matéria','Não sabe como resolver questões e simulados'];
-// Testimonials reproduced from the user-selected source, not independently verified.
-// Fotos realistas (banco de imagens) usadas apenas como ilustração dos perfis.
+export const problems = ['Não sabe por onde começar o edital','Estuda sem saber o que a banca mais cobra','Lê a lei seca e não consegue fixar o artigo','Não sabe quando revisar','Não sabe se está evoluindo','Resolve questões de várias fontes e perde o controle'];
+// Depoimentos do Operação Estudei: não são usados no Lei Seca em Questões até haver depoimentos do próprio site.
 export type Testimonial = {
   name: string;
   initial: string;
@@ -40,39 +38,42 @@ export type Testimonial = {
   time: string;
   messages: string[];
 };
-
-export const testimonials: Testimonial[] = [
- {name:'Lucas A.',initial:'L',avatar:'/uploads/aluno-lucas.jpg',role:'Aprovado — Polícia Federal',time:'09:42',messages:['Professor, passei!! 🎉','Em 7 meses seguindo o método à risca consegui minha aprovação na Polícia Federal.','Eu estava completamente perdido antes. Muito obrigado, mudou minha vida 🙏']},
- {name:'Mariana S.',initial:'M',avatar:'/uploads/aluna-mariana.jpg',role:'Aprovada — Polícia Civil',time:'14:18',messages:['Não acredito que finalmente aconteceu 😭','O cronograma e o filtro do QConcursos foram um divisor de águas pra mim.','Aprovada na Polícia Civil! Obrigada por tudo ❤️']},
- {name:'Rafael M.',initial:'R',avatar:'/uploads/aluno-rafael.jpg',role:'Aprovado — PRF',time:'21:05',messages:['Boa noite! Só passando pra dar a notícia 👮','Conciliava trabalho e estudo e achava impossível. O método encaixou na minha rotina.','Aprovado na PRF 🚔🔥']},
- {name:'Juliana P.',initial:'J',avatar:'/uploads/aluna-juliana.jpg',role:'Aprovada — Polícia Federal',time:'08:12',messages:['Bom dia, professor! 🙏','Fiz o edital verticalizado exatamente como você ensinou e foi o que virou o jogo pra mim.','Aprovada na PF na primeira tentativa depois de 2 reprovações ❤️']},
- {name:'Diego F.',initial:'D',avatar:'/uploads/aluno-diego.jpg',role:'Aprovado — Polícia Penal',time:'23:47',messages:['Passando aqui antes de dormir 🎯','As revisões espaçadas e os flashcards me fizeram lembrar de coisas que eu achava impossível.','Aprovado na Polícia Penal! Se eu consegui, você também consegue 💪']},
- {name:'Carla M.',initial:'C',avatar:'/uploads/aluna-carla.jpg',role:'Aprovada — Polícia Civil',time:'17:33',messages:['Gente, saiu o resultado!! 😭😭','Estudava 2h por dia depois do trabalho e o cronograma automático me mostrou que era possível.','Nome na lista da Polícia Civil. Obrigada, professor! 🚓']},
-];
-// Seção "Não é mentoria": pergunta do aluno e resposta do professor.
+export const testimonials: Testimonial[] = [];
+// Seção "Isso é um curso em vídeo?": resposta sobre o formato do produto.
 export const mentorship = {
-  question: 'Prof. é uma mentoria?',
-  answerLead: 'Não! É um curso em vídeo aulas em que eu ensino passo a passo o método que me fez passar 3x na Polícia Federal, 4x para Delegado de Polícia e 1x na ABIN. O aluno vai aprender:',
+  question: 'Isso é um curso em vídeo?',
+  answerLead: 'Não. É um site de estudo. Você resolve questões, monta o seu cronograma e acompanha o seu edital no navegador, no seu ritmo. O que você vai usar:',
   features: [
-    {icon:Calendar,title:'Como criar Cronograma e Planejamento Automáticos',desc:''},
-    {icon:ListChecks,title:'Como gerar o Edital Verticalizado',desc:'com estatísticas para você acompanhar seu progresso.'},
-    {icon:Target,title:'Terá acesso a Estatísticas de Progresso',desc:'Estatísticas para você acompanhar seu progresso.'},
-    {icon:Brain,title:'Aprenderá como criar Flashcards e Revisão Espaçada',desc:''},
+    {icon:Scale,title:'Vade Mecum de Questões da Lei Seca',desc:'treino artigo por artigo, com o trecho da lei que fundamenta o gabarito.'},
+    {icon:Calendar,title:'Cronograma individual',desc:'gerado a partir das suas horas e dias de estudo, com cronômetro para cada sessão.'},
+    {icon:ListChecks,title:'Edital verticalizado',desc:'cada tópico com as cinco etapas de estudo e o avanço por matéria.'},
+    {icon:BarChart3,title:'Raio-X das provas',desc:'os assuntos que a sua banca mais cobra, em PDF.'},
   ],
 };
-// Lista da oferta, mantida explicitamente: continua com os itens pedidos antes,
-// mesmo após "Diário de Estudos" e "Questões sobre a Lei Seca" saírem das seções da página,
-// e agora inclui o "Raio-X da banca" com análise estatística do que cai na prova.
-export const included = ['Curso Completo em Vídeo Aulas','Cronograma e Planejamento Automáticos','Edital Verticalizado','Estatísticas de Progresso','Diário de Estudos','Questões sobre a Lei Seca','Flashcards e Revisão Espaçada','Raio-X da Banca e Análise Estatística do Que Cai na Prova'];
+// Lista "O que está incluído" nos dois planos. O item que começa com "Raio-X" recebe o destaque.
+export const included = [
+  'Vade Mecum de Questões da Lei Seca',
+  'Questões de concursos com gabarito oficial',
+  'Cronograma individual com cronômetro',
+  'Edital verticalizado',
+  'Raio-X das provas (PDF)',
+  'Legislação estratégica com comentário e mapa mental',
+  'Cadernos, anotações e estatísticas',
+  'Progresso salvo na sua conta',
+];
 
-export const courseScope = { publicExams: true, oab: true };
+export const courseScope = { publicExams: true, oab: false };
 export const faqs = [
-  { question: 'É para concurseiros ou estudantes de qual área?', answer: 'O Estudei pode ser usado por qualquer estudante. Ele é 100% personalizável. Você pode tanto usar editais e assuntos já registrados como criar planos de estudos completamente novos e de acordo com as suas necessidades.' },
-  { question: 'O curso é uma mentoria?', answer: 'Não. É um curso em vídeo aulas em que o professor ensina passo a passo o método que utilizou para passar 3x na Polícia Federal, 4x para Delegado de Polícia e 1x na ABIN.' },
-  { question: 'O que vou aprender sobre planejamento de estudos?', answer: 'Você vai aprender a gerar automaticamente seu cronograma e planejamento a partir do edital, do cronograma de aulas do preparatório e das horas e dias disponíveis para estudar.' },
-  { question: 'Como vou acompanhar meu progresso?', answer: 'Você vai aprender a gerar seu edital verticalizado com marcações e terá acesso a estatísticas para acompanhar seu progresso nos estudos.' },
-  { question: 'O curso ensina técnicas de revisão e memorização?', answer: 'Sim. Você aprenderá a criar flashcards para revisão espaçada e memorização avançada da matéria.' },
-  { question: 'Qual a diferença entre os planos mensal e anual?', answer: `Os dois planos incluem os mesmos itens da oferta. O plano mensal é pago uma única vez, de R$ ${offer.monthly.toFixed(2).replace('.', ',')}, e dá 30 dias de acesso sem renovação automática. A assinatura anual custa ${offer.annualInstallments}x de R$ ${offer.annualInstallment.toFixed(2).replace('.', ',')} e oferece 12 meses de acesso. O acesso ao curso e aos sistemas permanece durante a assinatura.` },
-  { question: 'O curso tem garantia?', answer: `Sim. A garantia é de ${offer.guaranteeDays} dias.` },
-  { question: 'Terei suporte ou tira dúvidas?', answer: `Sim. O aluno tem acesso ao suporte por ${offer.supportDays} dias após o início do curso.` },
+  { question: 'O que é o Lei Seca em Questões?', answer: 'É um site de estudo para concursos. Você treina a lei seca artigo por artigo, resolve questões de concursos de todas as matérias e organiza a preparação com cronograma e edital verticalizado.' },
+  { question: 'Isso é um curso em vídeo?', answer: 'Não. É um site de questões e planejamento. Não há aulas gravadas: você estuda no seu ritmo, no navegador ou no celular.' },
+  { question: 'O que eu consigo fazer de graça?', answer: 'Na conta grátis você resolve até 10 questões novas de lei seca por dia, lê a lei seca completa e tem o seu progresso salvo na conta.' },
+  { question: 'Qual a diferença entre o plano mensal e o anual?', answer: `Os dois liberam o mesmo conteúdo. O mensal custa R$ ${offer.monthly.toFixed(2).replace('.', ',')} e é cobrado todo mês. O anual sai por ${offer.annualInstallments}x de R$ ${offer.annualInstallment.toFixed(2).replace('.', ',')}, o que soma R$ ${offer.annualTotal.toFixed(2).replace('.', ',')} por ano.` },
+  { question: 'Posso cancelar quando quiser?', answer: 'Sim. Você cancela a renovação pelo botão "Gerenciar assinatura" que a Kiwify envia no e-mail de confirmação do pagamento. O acesso continua até o fim do período já pago.' },
+  { question: 'Como funciona o pagamento?', answer: 'O pagamento é feito pela Kiwify, com cartão, Pix ou boleto. Assim que o pagamento é aprovado, a sua conta é liberada automaticamente.' },
+  { question: 'Como funciona o cronograma individual?', answer: 'Você informa o concurso, os dias e as horas que vai estudar. O site monta o cronograma com as matérias por peso, revisões de 24 horas, revisão semanal e mensal e simulados a cada 14 dias. Você pode baixar o cronograma em PDF.' },
+  { question: 'Como funciona o edital verticalizado?', answer: 'Você cadastra as matérias e os tópicos à mão ou envia o edital em PDF, Word, imagem ou texto para a leitura por IA, que é exclusiva para assinantes. Depois marque as cinco etapas de cada tópico e acompanhe o avanço por matéria.' },
+  { question: 'As questões de concursos são reais e atualizadas?', answer: 'Sim. São questões de provas aplicadas por mais de 500 bancas, como Cebraspe, FGV, FCC e Vunesp, com o gabarito oficial, incluindo provas de 2026. Você filtra por ano e pode treinar só com as mais recentes.' },
+  { question: 'Como funciona o comentário das questões?', answer: 'Depois que você responde uma questão de concurso, aparecem o gabarito oficial da banca e um comentário curto explicando o porquê. O comentário é gerado por inteligência artificial a partir do gabarito oficial e pode conter imprecisões; o gabarito é sempre o da banca.' },
+  { question: 'O Raio-X é uma previsão da prova?', answer: 'Não. É uma estatística das questões que já caíram: mostra onde a banca costuma colocar mais peso, para você priorizar o estudo. Ele analisa uma amostra de até 200 questões do filtro escolhido.' },
+  { question: 'Funciona no celular?', answer: 'Sim. O site funciona no navegador do celular, do tablet e do computador, e o seu progresso acompanha a sua conta em todos eles.' },
 ];
