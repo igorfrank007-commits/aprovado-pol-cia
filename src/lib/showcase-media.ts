@@ -1,4 +1,7 @@
 import { benefits } from '@/lib/sales-content';
+// Prints da landing que mostram as mesmas telas de cronograma e edital (o Lei Seca tem as mesmas funções).
+import editalAsset from '@/assets/edital-verticalizado.png.asset.json';
+import planejamentoAsset from '@/assets/planejamento-cronograma.png.asset.json';
 
 // Mídia exibida na moldura de cada aba da vitrine.
 // ratio = largura/altura original da mídia; stretch estica a largura para preencher a moldura.
@@ -29,14 +32,12 @@ const mediaByTitle: Record<string, ShowcaseMedia[]> = {
     { kind: 'image', label: 'Questões de concursos', ratio: TELA, stretch: 1, asset: { url: '/lei-seca/concursos.jpg' } },
   ],
   'Cronograma individual': [
-    { kind: 'image', label: 'Cronograma individual', ratio: TELA, stretch: 1, asset: { url: '/lei-seca/cronograma.jpg' } },
+    { kind: 'image', label: 'Cronograma individual', ratio: 733 / 1920, stretch: 1, maxW: 380, asset: planejamentoAsset },
   ],
   'Edital verticalizado': [
-    { kind: 'image', label: 'Edital verticalizado', ratio: TELA, stretch: 1, asset: { url: '/lei-seca/edital.jpg' } },
+    { kind: 'image', label: 'Edital verticalizado', ratio: 1740 / 907, stretch: 1, asset: editalAsset },
   ],
-  'Raio-X das provas': [
-    { kind: 'image', label: 'Raio-X das provas', ratio: TELA, stretch: 1, asset: { url: '/lei-seca/raio-x.jpg' } },
-  ],
+  // Raio-X sem print por enquanto: a vitrine mostra o aviso "Imagem em breve".
   'Cadernos, anotações e estatísticas': [
     { kind: 'image', label: 'Cadernos', ratio: TELA, stretch: 1, asset: { url: '/lei-seca/cadernos.jpg' } },
   ],
