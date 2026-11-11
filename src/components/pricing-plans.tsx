@@ -111,7 +111,7 @@ export function PricingPlans() {
                 <a href={buildKiwifyUrl(plan.annual ? checkoutUrl : monthlyCheckoutUrl)} onClick={() => trackSignupClick()} target="_blank" rel="noopener noreferrer">
                   <span className="flex flex-col items-center gap-1 leading-tight">
                     <span className="flex items-center gap-2">
-                      Quero ser aprovado
+                      Criar conta gratuita
                       <ArrowRight className="size-4 shrink-0 sm:size-5" />
                     </span>
                     <span className="font-sans text-[10px] font-semibold normal-case tracking-wide opacity-90 sm:text-xs">{plan.annual ? ctaSub : `Plano mensal · R$ ${offer.monthly.toFixed(2).replace('.', ',')}/mês`}</span>

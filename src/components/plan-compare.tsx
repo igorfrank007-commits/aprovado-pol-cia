@@ -97,7 +97,7 @@ export function PlanCompare() {
                       </p>
                       <p className="mt-1.5 text-xs font-semibold leading-relaxed text-gold">{plan.tagline}</p>
                       <div className={`mt-4 flex [&>a]:w-full [&>a]:px-4 [&>a]:py-4 [&>a]:text-sm sm:[&>a]:text-base ${plan.highlight ? '' : '[&>a]:shadow-none'}`}>
-                        <Checkout pulse={false} href={plan.name === 'Mensal' ? monthlyCheckoutUrl : checkoutUrl}>Quero ser aprovado</Checkout>
+                        <Checkout pulse={false} href={plan.name === 'Mensal' ? monthlyCheckoutUrl : checkoutUrl}>Criar conta gratuita</Checkout>
                       </div>
                     </article>
                   ))}

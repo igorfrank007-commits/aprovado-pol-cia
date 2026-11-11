@@ -4,7 +4,7 @@ export const lawSecaSignupUrl = 'https://lei-seca-em-questoes.netlify.app/#/entr
 export const checkoutUrl = lawSecaSignupUrl;
 export const monthlyCheckoutUrl = lawSecaSignupUrl;
 export const signupUrl = lawSecaSignupUrl;
-// Segunda linha dos botões de compra ("Quero ser aprovado").
+// Segunda linha dos botões ("Criar conta gratuita"): o preço do plano aparece aqui.
 export const ctaSub = 'Plano anual · 12x de R$ 19,80';
 export const monthlyCtaSub = 'Plano mensal · R$ 29,90';
 export const whatsappUrl = 'https://wa.me/5555981205146';

@@ -14,5 +14,5 @@ export function Checkout({ children, sub, pulse = true, shimmer = false, href = 
 }
 
 export function SectionCheckout() {
-  return <div className="relative mt-6 flex justify-center px-4"><Checkout sub={ctaSub}>Quero ser aprovado</Checkout></div>;
+  return <div className="relative mt-6 flex justify-center px-4"><Checkout sub={ctaSub}>Criar conta gratuita</Checkout></div>;
 }

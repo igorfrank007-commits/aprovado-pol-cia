@@ -62,7 +62,7 @@ export function PlatformShowcase() {
               <span className="px-3 text-center text-xs sm:text-sm">Imagem em breve</span>
             </div>
           </div>}
-          <div className="mt-3 flex justify-center sm:mt-4"><Checkout>Quero acessar o site</Checkout></div>
+          <div className="mt-3 flex justify-center sm:mt-4"><Checkout>Criar conta gratuita</Checkout></div>
           <div className="mx-auto mt-4 max-w-2xl px-1 text-center"><h3 className="text-lg font-bold leading-snug sm:text-2xl">{feature.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:mt-3">{feature.desc}</p></div>
         </div>
       </div>
