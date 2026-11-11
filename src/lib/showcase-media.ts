@@ -37,7 +37,9 @@ const mediaByTitle: Record<string, ShowcaseMedia[]> = {
   'Edital verticalizado': [
     { kind: 'image', label: 'Edital verticalizado', ratio: 1740 / 907, stretch: 1, asset: editalAsset },
   ],
-  // Raio-X sem print por enquanto: a vitrine mostra o aviso "Imagem em breve".
+  'Raio-X das provas': [
+    { kind: 'image', label: 'Relatório de Raio-X do Lei Seca em Questões', ratio: 720 / 1018, stretch: 1, maxW: 420, asset: { url: '/lei-seca/raio-x.jpg' } },
+  ],
   'Cadernos, anotações e estatísticas': [
     { kind: 'image', label: 'Cadernos', ratio: TELA, stretch: 1, asset: { url: '/lei-seca/cadernos.jpg' } },
   ],

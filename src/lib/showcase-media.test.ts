@@ -6,11 +6,14 @@ test('the showcase lists the six tools of the Lei Seca em Questões site', () =>
   expect(showcaseFeatures.map(({ title }) => title)).toEqual(['Vade Mecum de Questões da Lei Seca', '2,7 milhões de questões de concursos', 'Cronograma individual', 'Edital verticalizado', 'Raio-X das provas', 'Cadernos, anotações e estatísticas']);
 });
 
-test('every tool has demonstration media, except Raio-X, which shows the "Imagem em breve" placeholder', () => {
+test('every tool has demonstration media', () => {
   for (const { title } of showcaseFeatures) {
-    if (title === 'Raio-X das provas') expect(showcaseMediaFor(title).length).toBe(0);
-    else expect(showcaseMediaFor(title).length).toBeGreaterThan(0);
+    expect(showcaseMediaFor(title).length).toBeGreaterThan(0);
   }
+});
+
+test('the Raio-X tab shows the Lei Seca report page', () => {
+  expect(showcaseMediaFor('Raio-X das provas')[0].asset.url).toBe('/lei-seca/raio-x.jpg');
 });
 
 test('the Vade Mecum tab references the presentation video of the Lei Seca site, with its cover', () => {
