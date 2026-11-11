@@ -1,14 +1,14 @@
 import { BookOpen, Target, Calendar, ListChecks, Brain, Headphones, MessageCircle, Trophy, BarChart3, Scale } from 'lucide-react';
-// Botões de compra levam direto ao checkout da Kiwify. O anual é o padrão (plano em destaque).
-export const checkoutUrl = 'https://pay.kiwify.com.br/bEh3rDi';
-export const monthlyCheckoutUrl = 'https://pay.kiwify.com.br/T4LQmbg';
-// Só o botão "Crie sua conta gratuita" leva ao cadastro gratuito da plataforma.
-export const signupUrl = 'https://operacaoestudei.lovable.app/auth?mode=signup';
+// Todos os botões levam ao cadastro gratuito do Lei Seca em Questões. O anual é o padrão (plano em destaque).
+export const lawSecaSignupUrl = 'https://lei-seca-em-questoes.netlify.app/#/entrar?aba=cadastrar';
+export const checkoutUrl = lawSecaSignupUrl;
+export const monthlyCheckoutUrl = lawSecaSignupUrl;
+export const signupUrl = lawSecaSignupUrl;
 // Segunda linha dos botões de compra ("Quero ser aprovado").
 export const ctaSub = 'Plano anual · 12x de R$ 19,80';
-export const monthlyCtaSub = 'Plano mensal · R$ 37,00 · 30 dias de acesso';
+export const monthlyCtaSub = 'Plano mensal · R$ 29,90';
 export const whatsappUrl = 'https://wa.me/5555981205146';
-export const offer = { monthly: 37.00, annualInstallments: 12, annualInstallment: 19.80, guaranteeDays: 7, supportDays: 30 };
+export const offer = { monthly: 29.90, annualInstallments: 12, annualInstallment: 19.80, guaranteeDays: 7, supportDays: 30 };
 export const benefits = [
  {icon:BookOpen,title:'Curso Completo em Vídeo Aulas',desc:'Curso completo em vídeo aulas em que eu mostro meu método passo a passo.'},
  {icon:Calendar,title:'Cronograma e Planejamento Automáticos',desc:'Você vai aprender como gerar automaticamente seu cronograma de estudos e planejamento. Você anexa seu edital, informa o cronograma de aulas do curso preparatório, informa quantas horas e quais dias você vai estudar e gera automaticamente seu cronograma de estudos e planejamento'},

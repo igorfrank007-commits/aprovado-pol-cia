@@ -1,16 +1,16 @@
 /// <reference types="bun" />
 import { test, expect } from 'bun:test';
-import { checkoutUrl, monthlyCheckoutUrl, signupUrl, offer, whatsappUrl, benefits, included, mentorship, ctaSub, courseScope } from './sales-content';
+import { checkoutUrl, monthlyCheckoutUrl, signupUrl, offer, whatsappUrl, benefits, included, mentorship, ctaSub, monthlyCtaSub, courseScope } from './sales-content';
 import * as salesContent from './sales-content';
 test('the mentorship section answers the student question with the requested reply', () => { expect(mentorship.question).toBe('Prof. é uma mentoria?'); expect(mentorship.answerLead.startsWith('Não! É um curso em vídeo aulas')).toBe(true); });
 test('the "para quem é" audience list is removed from the page content', () => { expect('audience' in salesContent).toBe(false); });
 test('WhatsApp contact uses the supplied Brazilian phone number', () => { expect(whatsappUrl).toBe('https://wa.me/5555981205146'); });
-test('purchase buttons go straight to the Kiwify checkouts; only the free-account button goes to signup', () => {
-  expect(checkoutUrl).toBe('https://pay.kiwify.com.br/bEh3rDi');
-  expect(monthlyCheckoutUrl).toBe('https://pay.kiwify.com.br/T4LQmbg');
-  expect(signupUrl).toBe('https://operacaoestudei.lovable.app/auth?mode=signup');
+test('every button goes to the Lei Seca em Questões free-account signup', () => {
+  expect(checkoutUrl).toBe('https://lei-seca-em-questoes.netlify.app/#/entrar?aba=cadastrar');
+  expect(monthlyCheckoutUrl).toBe('https://lei-seca-em-questoes.netlify.app/#/entrar?aba=cadastrar');
+  expect(signupUrl).toBe('https://lei-seca-em-questoes.netlify.app/#/entrar?aba=cadastrar');
 });
-test('monthly plan is a one-time 37 reais payment for 30 days', () => { expect(offer.monthly).toBe(37.00); });
+test('monthly plan shows R$ 29,90 on the buttons', () => { expect(offer.monthly).toBe(29.90); expect(monthlyCtaSub).toBe('Plano mensal · R$ 29,90'); });
 test('annual subscription costs twelve payments of 19.80 reais', () => { expect([offer.annualInstallments, offer.annualInstallment]).toEqual([12, 19.80]); });
 test('the course applies to any public exam and the OAB exam', () => { expect(courseScope).toEqual({ publicExams: true, oab: true }); });
 test('reference refund guarantee is seven days', () => { expect(offer.guaranteeDays).toBe(7); });
