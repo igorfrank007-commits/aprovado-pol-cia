@@ -1,12 +1,4 @@
 import { benefits } from '@/lib/sales-content';
-import aula03Video from '@/assets/aula-03-planejamento-edital.mp4.asset.json';
-import aula03Poster from '@/assets/aula-03-poster.webp.asset.json';
-import aula03EditalVideo from '@/assets/aula-03-edital-verticalizado.mp4.asset.json';
-import aula03EditalPoster from '@/assets/aula-03-edital-poster.webp.asset.json';
-import flashcardsReview from '@/assets/flashcards-revisao-banner.png.asset.json';
-import aula02Video from '@/assets/aula-02-visao-geral.mp4.asset.json';
-import aula02Poster from '@/assets/aula-02-poster.webp.asset.json';
-import aula02Captions from '@/assets/aula-02-visao-geral.vtt.asset.json';
 
 // Mídia exibida na moldura de cada aba da vitrine.
 // ratio = largura/altura original da mídia; stretch estica a largura para preencher a moldura.
@@ -21,22 +13,33 @@ export type ShowcaseMedia = {
   captions?: { url: string };
 };
 
-// Recursos exibidos na vitrine: sem "Diário de Estudos" e sem "Questões sobre a Lei Seca".
-const removedTitles = ['Diário de Estudos', 'Questões sobre a Lei Seca'];
-export const showcaseFeatures = benefits.filter(({ title }) => !removedTitles.includes(title));
+// Recursos exibidos na vitrine: os mesmos da seção de benefícios (ferramentas do Lei Seca em Questões).
+export const showcaseFeatures = benefits;
+
+// Prints das telas do Lei Seca em Questões (pasta public/lei-seca) e o vídeo de apresentação do próprio site, referenciado pelo endereço dele.
+const LEI_SECA = 'https://lei-seca-em-questoes.netlify.app';
+const TELA = 941 / 463; // proporção dos prints tirados do site
 
 const mediaByTitle: Record<string, ShowcaseMedia[]> = {
-  'Curso Completo em Vídeo Aulas': [
-    { kind: 'video', label: 'Aula 02 - Visão Geral da Plataforma', ratio: 1920 / 1080, stretch: 1, maxW: 960, asset: aula02Video, poster: aula02Poster, captions: aula02Captions },
+  'Vade Mecum de Questões da Lei Seca': [
+    { kind: 'video', label: 'Vídeo de apresentação', ratio: 1080 / 1350, stretch: 1, maxW: 420, asset: { url: `${LEI_SECA}/video-home.mp4` }, poster: { url: `${LEI_SECA}/video-home.jpg` } },
+    { kind: 'image', label: 'Questões da lei seca', ratio: TELA, stretch: 1, asset: { url: '/lei-seca/questoes.jpg' } },
   ],
-  // Aula 03 com as legendas já gravadas no próprio vídeo (sem trilha VTT para não duplicar).
-  'Cronograma e Planejamento Automáticos': [
-    { kind: 'video', label: 'Aula 03 - Planejamento e Edital Verticalizado', ratio: 1920 / 1080, stretch: 1, maxW: 960, asset: aula03Video, poster: aula03Poster },
+  '2,7 milhões de questões de concursos': [
+    { kind: 'image', label: 'Questões de concursos', ratio: TELA, stretch: 1, asset: { url: '/lei-seca/concursos.jpg' } },
   ],
-  // Aula 03 (trecho do edital) com as legendas gravadas no próprio vídeo.
-  'Edital Verticalizado': [{ kind: 'video', label: 'Aula 03 - Edital Verticalizado', ratio: 1920 / 1080, stretch: 1, maxW: 960, asset: aula03EditalVideo, poster: aula03EditalPoster }],
-  'Lei Seca em Questões': [{ kind: 'image', label: 'Lei Seca em Questões', ratio: 522 / 392, stretch: 1, maxW: 640, asset: { url: '/uploads/lei-seca-em-questoes.jpg' } }],
-  'Flashcards e Revisão Espaçada': [{ kind: 'image', label: 'Flashcards e Revisão Espaçada', ratio: 1536 / 1024, stretch: 1, asset: flashcardsReview }],
+  'Cronograma individual': [
+    { kind: 'image', label: 'Cronograma individual', ratio: TELA, stretch: 1, asset: { url: '/lei-seca/cronograma.jpg' } },
+  ],
+  'Edital verticalizado': [
+    { kind: 'image', label: 'Edital verticalizado', ratio: TELA, stretch: 1, asset: { url: '/lei-seca/edital.jpg' } },
+  ],
+  'Raio-X das provas': [
+    { kind: 'image', label: 'Raio-X das provas', ratio: TELA, stretch: 1, asset: { url: '/lei-seca/raio-x.jpg' } },
+  ],
+  'Cadernos, anotações e estatísticas': [
+    { kind: 'image', label: 'Cadernos', ratio: TELA, stretch: 1, asset: { url: '/lei-seca/cadernos.jpg' } },
+  ],
 };
 
 export function showcaseMediaFor(title: string): ShowcaseMedia[] {

@@ -2,41 +2,25 @@
 import { test, expect } from 'bun:test';
 import { showcaseFeatures, showcaseMediaFor } from './showcase-media';
 
-test('the showcase keeps the six platform features', () => {
-  expect(showcaseFeatures.map(({ title }) => title)).toEqual(['Curso Completo em Vídeo Aulas', 'Cronograma e Planejamento Automáticos', 'Edital Verticalizado', 'Lei Seca em Questões', 'Flashcards e Revisão Espaçada', 'Raio-X da Banca e Análise Estatística do Que Cai na Prova']);
+test('the showcase lists the six tools of the Lei Seca em Questões site', () => {
+  expect(showcaseFeatures.map(({ title }) => title)).toEqual(['Vade Mecum de Questões da Lei Seca', '2,7 milhões de questões de concursos', 'Cronograma individual', 'Edital verticalizado', 'Raio-X das provas', 'Cadernos, anotações e estatísticas']);
 });
 
-test('the vídeo aulas tab shows the supplied lesson video instead of an image', () => {
-  const media = showcaseMediaFor('Curso Completo em Vídeo Aulas');
-  expect(media.map(({ kind }) => kind)).toEqual(['video']);
-  expect(media[0].asset.url.endsWith('/aula-02-visao-geral.mp4')).toBe(true);
-});
-
-test('the lesson video carries the attached captions and its cover image', () => {
-  const [video] = showcaseMediaFor('Curso Completo em Vídeo Aulas');
-  expect(video.captions?.url.endsWith('/aula-02-visao-geral.vtt')).toBe(true);
-  expect(video.poster?.url.endsWith('/aula-02-poster.webp')).toBe(true);
-});
-
-test('the cronograma tab shows the Aula 03 video with its cover instead of an image', () => {
-  const media = showcaseMediaFor('Cronograma e Planejamento Automáticos');
-  expect(media.map(({ kind }) => kind)).toEqual(['video']);
-  expect(media[0].asset.url.endsWith('/aula-03-planejamento-edital.mp4')).toBe(true);
-  expect(media[0].poster?.url.endsWith('/aula-03-poster.webp')).toBe(true);
-});
-
-test('the edital verticalizado tab shows the captioned Aula 03 video instead of an image', () => {
-  const media = showcaseMediaFor('Edital Verticalizado');
-  expect(media.map(({ kind }) => kind)).toEqual(['video']);
-  expect(media[0].asset.url.endsWith('/aula-03-edital-verticalizado.mp4')).toBe(true);
-  expect(media[0].poster?.url.endsWith('/aula-03-edital-poster.webp')).toBe(true);
-});
-
-test('the other tabs keep their demonstration images', () => {
-  const others = ['Lei Seca em Questões','Flashcards e Revisão Espaçada'];
-  for (const title of others) {
-    const media = showcaseMediaFor(title);
-    expect(media.length).toBeGreaterThan(0);
-    expect(media.every(({ kind }) => kind === 'image')).toBe(true);
+test('every tool has at least one demonstration media', () => {
+  for (const { title } of showcaseFeatures) {
+    expect(showcaseMediaFor(title).length).toBeGreaterThan(0);
   }
+});
+
+test('the Vade Mecum tab references the presentation video of the Lei Seca site, with its cover', () => {
+  const [video] = showcaseMediaFor('Vade Mecum de Questões da Lei Seca');
+  expect(video.kind).toBe('video');
+  expect(video.asset.url).toBe('https://lei-seca-em-questoes.netlify.app/video-home.mp4');
+  expect(video.poster?.url).toBe('https://lei-seca-em-questoes.netlify.app/video-home.jpg');
+});
+
+test('the planning, edital and Raio-X tabs show screenshots of the Lei Seca site', () => {
+  expect(showcaseMediaFor('Cronograma individual')[0].asset.url).toBe('/lei-seca/cronograma.jpg');
+  expect(showcaseMediaFor('Edital verticalizado')[0].asset.url).toBe('/lei-seca/edital.jpg');
+  expect(showcaseMediaFor('Raio-X das provas')[0].asset.url).toBe('/lei-seca/raio-x.jpg');
 });

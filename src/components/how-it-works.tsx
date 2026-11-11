@@ -65,7 +65,7 @@ export function HowItWorks() {
           </article>)}
         </div>
 
-        <div className="mt-7 flex justify-center sm:mt-9"><Checkout href={signupUrl} track={false} sub="Criar conta gratuita" shimmer>COMECE AGORA - CRIE SUA CONTA GRATUITA</Checkout></div>
+        <div className="mt-7 flex justify-center sm:mt-9"><Checkout href={signupUrl} sub="Criar conta gratuita" shimmer>COMECE AGORA - CRIE SUA CONTA GRATUITA</Checkout></div>
       </div></div></div>
     </div>
   </section>;

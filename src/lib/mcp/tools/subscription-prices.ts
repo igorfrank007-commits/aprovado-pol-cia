@@ -23,7 +23,7 @@ export default defineTool({
       content: [
         {
           type: "text",
-          text: `Plano mensal (cobrança todo mês, cancele quando quiser): ${prices.monthly.label}. Plano anual: ${prices.annual.label}, total de R$ ${offer.annualTotal.toFixed(2).replace(".", ",")} por ano.`,
+          text: `Plano mensal (cobrança todo mês, cancele quando quiser): ${prices.monthly.label}. Plano anual: ${prices.annual.label}, total de R$ ${offer.annualTotal.toFixed(2).replace(".", ",")} por ano. Garantia de ${offer.guaranteeDays} dias, com devolução integral.`,
         },
       ],
       structuredContent: { prices },

@@ -120,7 +120,7 @@ export function PlanCompare() {
                   </span>
                   <span className="inline-flex items-center gap-1">
                     <Shield className="size-4 text-gold" />
-                    Cancele quando quiser
+                    Garantia de {offer.guaranteeDays} dias
                   </span>
                 </div>
               </div>

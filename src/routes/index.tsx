@@ -5,21 +5,20 @@ import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Checkout, SectionCheckout } from '@/components/sales-checkout';
 import { HowItWorks } from '@/components/how-it-works';
+import { PlatformShowcase } from '@/components/platform-showcase';
 import { PricingPlans } from '@/components/pricing-plans';
 import { VslPlayer } from '@/components/vsl-player';
 import { MobileCtaBar } from '@/components/mobile-cta-bar';
 import { CookieBanner } from '@/components/cookie-banner';
 import { useScrollReveal } from '@/hooks/use-scroll-reveal';
 import { useMetaPixelTracking } from '@/hooks/use-meta-pixel';
-import { benefits, whatsappUrl, mentorship, ctaSub, monthlyCtaSub, monthlyCheckoutUrl, faqs } from '@/lib/sales-content';
+import { benefits, whatsappUrl, mentorship, offer, ctaSub, monthlyCtaSub, monthlyCheckoutUrl, faqs } from '@/lib/sales-content';
 // ---------------------------------------------------------------------------
 // VÍDEO DE VENDAS
-// O vídeo atual (VSL) ainda é da aula do Operação Estudei, então fica desligado.
-// Para voltar a mostrar, troque para true e, se for o caso, ajuste o vídeo em vsl-player.tsx.
-// Com o vídeo desligado, as seções abaixo aparecem logo de início.
+// O vídeo atual (VSL) ainda é o da aula do Operação Estudei. Fica ligado até gravar um vídeo do Lei Seca.
+// Com o vídeo ligado, as seções abaixo ficam ocultas e são liberadas após o tempo de `delaySeconds`.
 // ---------------------------------------------------------------------------
-const MOSTRAR_VSL = false;
-// Com o vídeo ligado: as seções abaixo ficam ocultas e são liberadas após este tempo (em segundos).
+const MOSTRAR_VSL = true;
 const delaySeconds = 90;
 
 export const Route = createFileRoute('/')({
@@ -53,7 +52,7 @@ function Index() {
  <section className="relative overflow-hidden bg-gradient-hero"><div aria-hidden className="grid-bg absolute inset-0 opacity-40" /><div className="relative mx-auto flex max-w-4xl flex-col items-center px-4 pb-10 pt-8 text-center sm:px-6 sm:py-14">
   <div className="w-full animate-fade-up"><div className="flex flex-wrap items-center justify-center gap-2"><Kicker><Shield className="mr-1.5 inline size-3.5" />Lei seca artigo por artigo</Kicker><Kicker><MessageCircle className="mr-1.5 inline size-3.5" />Não é curso em vídeo</Kicker></div><h1 className="mt-4 font-display text-[1.45rem] font-bold uppercase leading-[1.14] sm:mt-5 sm:text-4xl sm:leading-[1.08] md:text-5xl">TREINE A LEI SECA E RESOLVA <Gold>2,7 MILHÕES DE QUESTÕES</Gold> DE CONCURSOS NO MESMO LUGAR. <Gold>COMECE GRÁTIS.</Gold></h1></div>
   {MOSTRAR_VSL ? <div className="mt-6 w-full max-w-3xl sm:mt-8"><VslPlayer onOfferReached={scrollToOffer} /></div> : <p className="mt-5 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:mt-6 sm:text-lg">Questões com gabarito oficial das bancas, cronograma individual e edital verticalizado. Você entra com uma conta grátis e assina quando quiser liberar tudo.</p>}
-  <div id="cta-oferta-principal" className="mt-6 flex w-full max-w-3xl flex-col items-center gap-2.5 sm:gap-3"><div className="flex w-full flex-col items-center justify-center gap-3 sm:flex-row sm:items-stretch"><Checkout sub={ctaSub} pulse shimmer>Quero ser aprovado</Checkout><Checkout href={monthlyCheckoutUrl} sub={monthlyCtaSub} pulse={false} variant="outline">Quero ser aprovado</Checkout></div><span className="text-center text-[10px] uppercase leading-relaxed text-muted-foreground sm:text-xs">Conta grátis para começar · Cancele quando quiser</span></div>
+  <div id="cta-oferta-principal" className="mt-6 flex w-full max-w-3xl flex-col items-center gap-2.5 sm:gap-3"><div className="flex w-full flex-col items-center justify-center gap-3 sm:flex-row sm:items-stretch"><Checkout sub={ctaSub} pulse shimmer>Quero ser aprovado</Checkout><Checkout href={monthlyCheckoutUrl} sub={monthlyCtaSub} pulse={false} variant="outline">Quero ser aprovado</Checkout></div><span className="text-center text-[10px] uppercase leading-relaxed text-muted-foreground sm:text-xs">Acesso imediato · Garantia de {offer.guaranteeDays} dias com devolução integral</span></div>
   <ul className="mt-7 grid w-full max-w-md gap-2 text-sm sm:mt-8 sm:max-w-none sm:text-base">{['10 questões de lei seca grátis por dia','Gabarito oficial das bancas, com filtros por cargo, órgão e ano','Cronograma e edital verticalizado na mesma conta'].map(t=><li key={t} className="flex items-center justify-center gap-2 text-balance"><CircleCheck className="size-5 shrink-0 text-gold" />{t}</li>)}</ul>
  </div></section>
  <div id="conteudo-liberado" className={sectionsVisible ? 'animate-fade-up' : 'hidden'}>
@@ -65,6 +64,7 @@ function Index() {
     <div className="mt-6 grid gap-4 text-left sm:mt-8 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">{benefits.map(({icon:Icon,title,desc})=><article key={title} className="rounded-xl border border-gold/15 bg-card/70 p-4 backdrop-blur-sm transition hover:-translate-y-1 hover:border-gold/40 hover:shadow-gold sm:p-6"><div className="grid size-10 place-items-center rounded-lg border border-gold/20 bg-gold/10 text-gold sm:size-12"><Icon className="size-5 sm:size-6" /></div><h3 className="mt-3 text-base font-bold leading-snug sm:mt-4 sm:text-lg">{title}</h3><p className="mt-1.5 text-sm leading-relaxed text-muted-foreground sm:mt-2">{desc}</p></article>)}</div>
    </div></div></div>
   </div><SectionCheckout /></section>
+  <PlatformShowcase />
   {/* Como funciona? */}
   <HowItWorks />
   {/* Investimento */}

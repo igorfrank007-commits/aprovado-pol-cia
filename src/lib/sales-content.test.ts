@@ -13,10 +13,11 @@ test('annual plan is twelve payments of 19.80 reais', () => { expect([offer.annu
 test('the tools listed match the Lei Seca em Questões site', () => { const titles = benefits.map(({ title }) => title); expect(titles).toEqual(['Vade Mecum de Questões da Lei Seca','2,7 milhões de questões de concursos','Cronograma individual','Edital verticalizado','Raio-X das provas','Cadernos, anotações e estatísticas']); });
 test('the included list names only tools the site has', () => { expect(included).toContain('Cronograma individual com cronômetro'); expect(included).toContain('Edital verticalizado'); expect(included.some((item) => item.includes('Flashcards') || item.includes('vídeo') || item.includes('Diário'))).toBe(false); });
 test('purchase buttons carry the annual plan subtext', () => { expect(ctaSub).toBe('Plano anual · 12x de R$ 19,80'); });
-test('the FAQ does not promise a refund guarantee or support period that the site does not state', () => {
-  const answers = faqs.map(({ answer }) => answer).join(' ');
-  expect(answers.includes('garantia')).toBe(false);
-  expect(answers.includes('suporte por')).toBe(false);
+test('the guarantee is seven days with full refund, and the FAQ states it', () => {
+  expect(offer.guaranteeDays).toBe(7);
+  const item = faqs.find(({ question }) => question === 'O curso tem garantia?');
+  expect(item?.answer.includes('7 dias')).toBe(true);
+  expect(item?.answer.includes('devolvido integralmente')).toBe(true);
 });
 test('the FAQ says the product is not a video course', () => {
   const item = faqs.find(({ question }) => question === 'Isso é um curso em vídeo?');

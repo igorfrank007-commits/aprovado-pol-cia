@@ -30,7 +30,7 @@ export function PlatformShowcase() {
     <div className="mx-auto max-w-7xl px-4 sm:px-6">
       <div className="relative overflow-hidden rounded-2xl bg-gradient-plan p-px shadow-gold sm:rounded-3xl"><div className="relative overflow-hidden rounded-[calc(var(--radius-2xl)-1px)] bg-gradient-plan-soft px-3 py-9 sm:rounded-[calc(var(--radius-3xl)-1px)] sm:px-6 sm:py-12"><div aria-hidden className="grid-bg absolute inset-0 opacity-25" /><div aria-hidden className="absolute -top-28 left-1/2 h-56 w-[42rem] max-w-full -translate-x-1/2 rounded-full bg-gold/25 blur-3xl" /><div className="relative">
       <div className="mx-auto mb-5 max-w-3xl px-1 text-center sm:mb-6">
-        <h2 id="platform-title" className="text-[1.6rem] font-bold uppercase leading-tight sm:text-4xl md:text-5xl">CONHEÇA UM POUCO <span className="text-gradient-gold">DO CURSO</span></h2>
+        <h2 id="platform-title" className="text-[1.6rem] font-bold uppercase leading-tight sm:text-4xl md:text-5xl">CONHEÇA POR DENTRO O <span className="text-gradient-gold">LEI SECA EM QUESTÕES</span></h2>
       </div>
       <div className="flex flex-wrap items-center justify-between gap-3 border-y border-border bg-gradient-dark px-3 py-3 sm:px-6 sm:py-4">
         <div className="min-w-0 flex-1"><p className="text-sm font-semibold leading-snug sm:text-base">{feature.title}</p><p className="mt-0.5 text-[10px] font-bold uppercase text-gold">{deviceLabel}</p></div>
@@ -62,7 +62,7 @@ export function PlatformShowcase() {
               <span className="px-3 text-center text-xs sm:text-sm">Imagem em breve</span>
             </div>
           </div>}
-          <div className="mt-3 flex justify-center sm:mt-4"><Checkout>Quero acessar o curso</Checkout></div>
+          <div className="mt-3 flex justify-center sm:mt-4"><Checkout>Quero acessar o site</Checkout></div>
           <div className="mx-auto mt-4 max-w-2xl px-1 text-center"><h3 className="text-lg font-bold leading-snug sm:text-2xl">{feature.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:mt-3">{feature.desc}</p></div>
         </div>
       </div>

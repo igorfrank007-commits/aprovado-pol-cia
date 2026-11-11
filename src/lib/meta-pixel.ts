@@ -148,6 +148,19 @@ export function trackCheckoutClick(params?: Record<string, unknown>): void {
   });
 }
 
+/**
+ * Clique em um botão que leva ao cadastro gratuito do Lei Seca em Questões.
+ * Dispara "Lead" (intenção de cadastro). O cadastro concluído é registrado pelo próprio
+ * site do Lei Seca, com CompleteRegistration, para não contar duas vezes.
+ */
+export function trackSignupClick(params?: Record<string, unknown>): void {
+  trackMetaEvent('Lead', {
+    content_name: 'Lei Seca em Questões — cadastro gratuito',
+    content_category: 'cadastro_gratuito',
+    ...params,
+  });
+}
+
 function isEnabled(): boolean {
   if (IS_PRODUCTION) return true;
   return ENABLED_IN_DEV;

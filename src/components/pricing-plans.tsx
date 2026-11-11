@@ -1,7 +1,7 @@
 import { ArrowRight, CircleCheck, Lock, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { checkoutUrl, monthlyCheckoutUrl, ctaSub, included, offer, whatsappUrl } from '@/lib/sales-content';
-import { buildKiwifyUrl, trackCheckoutClick } from '@/lib/meta-pixel';
+import { buildKiwifyUrl, trackSignupClick } from '@/lib/meta-pixel';
 
 function brl(value: number) {
   return value.toFixed(2).replace('.', ',');
@@ -108,7 +108,7 @@ export function PricingPlans() {
                 asChild
                 className="mt-auto h-auto min-h-14 w-full whitespace-normal rounded-md bg-gradient-gold px-4 py-4 font-display text-sm font-bold uppercase leading-snug text-primary-foreground shadow-gold transition-transform hover:scale-[1.02] sm:text-base"
               >
-                <a href={buildKiwifyUrl(plan.annual ? checkoutUrl : monthlyCheckoutUrl)} onClick={() => trackCheckoutClick()} target="_blank" rel="noopener noreferrer">
+                <a href={buildKiwifyUrl(plan.annual ? checkoutUrl : monthlyCheckoutUrl)} onClick={() => trackSignupClick()} target="_blank" rel="noopener noreferrer">
                   <span className="flex flex-col items-center gap-1 leading-tight">
                     <span className="flex items-center gap-2">
                       Quero ser aprovado
@@ -135,7 +135,7 @@ export function PricingPlans() {
             </span>
             <span className="inline-flex items-center gap-1">
               <Shield className="size-4 shrink-0 text-gold" />
-              Cancele quando quiser
+              Garantia de {offer.guaranteeDays} dias
             </span>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { checkoutUrl, ctaSub } from '@/lib/sales-content';
-import { buildKiwifyUrl, trackCheckoutClick } from '@/lib/meta-pixel';
+import { buildKiwifyUrl, trackSignupClick } from '@/lib/meta-pixel';
 
 /**
  * Barra fixa de CTA para celular e tablet.
@@ -27,7 +27,7 @@ export function MobileCtaBar() {
     >
       <a
         href={buildKiwifyUrl(checkoutUrl)}
-        onClick={() => trackCheckoutClick()}
+        onClick={() => trackSignupClick()}
         target="_blank"
         rel="noopener noreferrer"
         className="flex w-full items-center justify-center rounded-md bg-gradient-gold px-4 py-3 text-center font-display text-sm font-bold uppercase leading-tight text-primary-foreground shadow-gold"
