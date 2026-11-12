@@ -23,6 +23,9 @@ const VIMEO_SRC =
 /** Momento do vídeo que dispara a rolagem suave até a oferta: 18 minutos e 53 segundos. */
 const TRIGGER_SECONDS = 18 * 60 + 53;
 
+/** O avanço do vídeo só fica liberado depois de 90 segundos assistidos. */
+const SEEK_UNLOCK_SECONDS = 90;
+
 type VimeoMessage = {
   event?: string;
   data?: { seconds?: number; duration?: number };
@@ -50,6 +53,7 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
   const [duration, setDuration] = useState(0);
   const [loading, setLoading] = useState(true);
   const [unlocked, setUnlocked] = useState(false);
+  const [seekUnlocked, setSeekUnlocked] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
   const [started, setStarted] = useState(false);
 
@@ -137,6 +141,7 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
               setLoading(false);
             }
             setCurrent(seconds);
+            if (seconds >= SEEK_UNLOCK_SECONDS) setSeekUnlocked(true);
             maybeTrigger(seconds);
           }
           break;
@@ -181,7 +186,7 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
   }, [post]);
 
   const seekToRatio = (ratio: number) => {
-    if (!duration) return;
+    if (!duration || !seekUnlocked) return;
     const clamped = Math.min(1, Math.max(0, ratio));
     setCurrent(clamped * duration);
     post('setCurrentTime', clamped * duration);
@@ -316,6 +321,7 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
             role="slider"
             tabIndex={0}
             aria-label="Avançar o vídeo"
+            aria-disabled={!seekUnlocked}
             aria-valuemin={0}
             aria-valuemax={Math.round(duration) || 0}
             aria-valuenow={Math.round(current)}
