@@ -1,6 +1,6 @@
 import { BookOpen, Target, Calendar, ListChecks, Scale, BarChart3 } from 'lucide-react';
-// Todos os botões levam ao cadastro gratuito do Lei Seca em Questões. O anual é o padrão (plano em destaque).
-export const lawSecaSignupUrl = 'https://lei-seca-em-questoes.netlify.app/#/entrar?aba=cadastrar';
+// Todos os botões levam ao cadastro gratuito do Legislação Estratégica em Questões. O anual é o padrão (plano em destaque).
+export const lawSecaSignupUrl = 'https://legislacao-estrategica-em-questoes.netlify.app/#/entrar?aba=cadastrar';
 export const checkoutUrl = lawSecaSignupUrl;
 export const monthlyCheckoutUrl = lawSecaSignupUrl;
 export const signupUrl = lawSecaSignupUrl;
@@ -8,10 +8,10 @@ export const signupUrl = lawSecaSignupUrl;
 export const ctaSub = 'Plano anual · 12x de R$ 19,80';
 export const monthlyCtaSub = 'Plano mensal · R$ 29,90';
 export const whatsappUrl = 'https://wa.me/5555981205146';
-// Preços do Lei Seca em Questões (conferidos em src/acesso.ts do site).
+// Preços do Legislação Estratégica em Questões (conferidos em src/acesso.ts do site).
 export const offer = { monthly: 29.90, annualInstallments: 12, annualInstallment: 19.80, annualTotal: 237.60, guaranteeDays: 7 };
 
-// Ferramentas do Lei Seca em Questões, na ordem da página.
+// Ferramentas do Legislação Estratégica em Questões, na ordem da página.
 export const benefits = [
  {icon:Scale,title:'Vade Mecum de Questões da Lei Seca',desc:'Resolva questões de certo ou errado artigo por artigo. Cada gabarito vem com o trecho da lei que o fundamenta, e você pode ler a lei completa.'},
  {icon:BookOpen,title:'2,7 milhões de questões de concursos',desc:'Provas de mais de 500 bancas, de todas as matérias: Português, Matemática, Raciocínio Lógico, Informática e Direito. Filtre por disciplina, banca, cargo, órgão, ano e dificuldade, e veja o gabarito oficial e um comentário depois de responder.'},
@@ -29,7 +29,7 @@ export const modules = [
  ['Cadernos e estatísticas','Questões erradas separadas em cadernos e desempenho acompanhado.'],
 ];
 export const problems = ['Não sabe por onde começar o edital','Estuda sem saber o que a banca mais cobra','Lê a lei seca e não consegue fixar o artigo','Não sabe quando revisar','Não sabe se está evoluindo','Resolve questões de várias fontes e perde o controle'];
-// Depoimentos do Operação Estudei: não são usados no Lei Seca em Questões até haver depoimentos do próprio site.
+// Depoimentos do Operação Estudei: não são usados no Legislação Estratégica em Questões até haver depoimentos do próprio site.
 export type Testimonial = {
   name: string;
   initial: string;
@@ -64,7 +64,7 @@ export const included = [
 
 export const courseScope = { publicExams: true, oab: false };
 export const faqs = [
-  { question: 'O que é o Lei Seca em Questões?', answer: 'É um site de estudo para concursos. Você treina a lei seca artigo por artigo, resolve questões de concursos de todas as matérias e organiza a preparação com cronograma e edital verticalizado.' },
+  { question: 'O que é o Legislação Estratégica em Questões?', answer: 'É um site de estudo para concursos. Você treina a lei seca artigo por artigo, resolve questões de concursos de todas as matérias e organiza a preparação com cronograma e edital verticalizado.' },
   { question: 'Isso é um curso em vídeo?', answer: 'Não. É um site de questões e planejamento. Não há aulas gravadas: você estuda no seu ritmo, no navegador ou no celular.' },
   { question: 'O que eu consigo fazer de graça?', answer: 'Na conta grátis você resolve até 10 questões novas de lei seca por dia, lê a lei seca completa e tem o seu progresso salvo na conta.' },
   { question: 'Qual a diferença entre o plano mensal e o anual?', answer: `Os dois liberam o mesmo conteúdo. O mensal custa R$ ${offer.monthly.toFixed(2).replace('.', ',')} e é cobrado todo mês. O anual sai por ${offer.annualInstallments}x de R$ ${offer.annualInstallment.toFixed(2).replace('.', ',')}, o que soma R$ ${offer.annualTotal.toFixed(2).replace('.', ',')} por ano.` },

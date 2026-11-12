@@ -14,8 +14,8 @@
     "tools": [
       {
         "name": "course_features",
-        "title": "O que você recebe no curso",
-        "description": "Lists the resources included in the police-exam course, each with its title and full description.",
+        "title": "O que você recebe no Legislação Estratégica em Questões",
+        "description": "Lists the resources included in the Legislação Estratégica em Questões study site, each with its title and full description.",
         "annotations": {
           "readOnlyHint": true,
           "idempotentHint": true,
@@ -27,7 +27,7 @@
       {
         "name": "subscription_prices",
         "title": "Planos e preços da assinatura",
-        "description": "Returns the course subscription prices in Brazilian reais: the monthly plan, the annual plan split into installments, plus the refund guarantee and support periods in days.",
+        "description": "Returns the Legislação Estratégica em Questões subscription prices in Brazilian reais: the monthly plan (charged every month) and the annual plan split into installments.",
         "annotations": {
           "readOnlyHint": true,
           "idempotentHint": true,
@@ -39,7 +39,7 @@
       {
         "name": "purchase_and_contact_links",
         "title": "Link de compra e WhatsApp",
-        "description": "Returns the checkout page where the course subscription is purchased and the WhatsApp link used to ask questions before buying.",
+        "description": "Returns the Legislação Estratégica em Questões signup page (free account, subscription from there) and the WhatsApp link used to ask questions before buying.",
         "annotations": {
           "readOnlyHint": true,
           "idempotentHint": true,

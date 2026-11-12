@@ -5,7 +5,7 @@ export default defineTool({
   name: "purchase_and_contact_links",
   title: "Link de compra e WhatsApp",
   description:
-    "Returns the Lei Seca em Questões signup page (free account, subscription from there) and the WhatsApp link used to ask questions before buying.",
+    "Returns the Legislação Estratégica em Questões signup page (free account, subscription from there) and the WhatsApp link used to ask questions before buying.",
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: true },
   handler: () => ({
     content: [

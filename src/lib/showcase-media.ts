@@ -1,5 +1,5 @@
 import { benefits } from '@/lib/sales-content';
-// Prints da landing que mostram as mesmas telas de cronograma e edital (o Lei Seca tem as mesmas funções).
+// Prints da landing que mostram as mesmas telas de cronograma e edital (o Legislação Estratégica em Questões tem as mesmas funções).
 import editalAsset from '@/assets/edital-verticalizado.png.asset.json';
 import planejamentoAsset from '@/assets/planejamento-cronograma.png.asset.json';
 
@@ -16,11 +16,11 @@ export type ShowcaseMedia = {
   captions?: { url: string };
 };
 
-// Recursos exibidos na vitrine: os mesmos da seção de benefícios (ferramentas do Lei Seca em Questões).
+// Recursos exibidos na vitrine: os mesmos da seção de benefícios (ferramentas do Legislação Estratégica em Questões).
 export const showcaseFeatures = benefits;
 
-// Prints das telas do Lei Seca em Questões (pasta public/lei-seca) e o vídeo de apresentação do próprio site, referenciado pelo endereço dele.
-const LEI_SECA = 'https://lei-seca-em-questoes.netlify.app';
+// Prints das telas do Legislação Estratégica em Questões (pasta public/lei-seca) e o vídeo de apresentação do próprio site, referenciado pelo endereço dele.
+const LEI_SECA = 'https://legislacao-estrategica-em-questoes.netlify.app';
 const TELA = 941 / 463; // proporção dos prints tirados do site
 
 const mediaByTitle: Record<string, ShowcaseMedia[]> = {
@@ -38,7 +38,7 @@ const mediaByTitle: Record<string, ShowcaseMedia[]> = {
     { kind: 'image', label: 'Edital verticalizado', ratio: 1740 / 907, stretch: 1, asset: editalAsset },
   ],
   'Raio-X das provas': [
-    { kind: 'image', label: 'Relatório de Raio-X do Lei Seca em Questões', ratio: 720 / 1018, stretch: 1, maxW: 420, asset: { url: '/lei-seca/raio-x.jpg' } },
+    { kind: 'image', label: 'Relatório de Raio-X do Legislação Estratégica em Questões', ratio: 720 / 1018, stretch: 1, maxW: 420, asset: { url: '/lei-seca/raio-x.jpg' } },
   ],
   'Cadernos, anotações e estatísticas': [
     { kind: 'image', label: 'Cadernos', ratio: TELA, stretch: 1, asset: { url: '/lei-seca/cadernos.jpg' } },
