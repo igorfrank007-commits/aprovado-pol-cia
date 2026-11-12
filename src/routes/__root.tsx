@@ -75,11 +75,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lei Seca em Questões | Questões de concursos, cronograma e edital verticalizado" },
+      { title: "Legislação Estratégica em Questões | Questões de concursos, cronograma e edital verticalizado" },
       { name: "description", content: "Treine a lei seca artigo por artigo e resolva 2,7 milhões de questões de concursos, com gabarito oficial, cronograma individual e edital verticalizado." },
       { name: "author", content: "Igor Andrade" },
       { name: "facebook-domain-verification", content: "v27qo6lfv5jt5qq0yhhmsoq1rw5ftr" },
-      { property: "og:title", content: "Lei Seca em Questões | Questões de concursos, cronograma e edital verticalizado" },
+      { property: "og:title", content: "Legislação Estratégica em Questões | Questões de concursos, cronograma e edital verticalizado" },
       { property: "og:description", content: "Treine a lei seca artigo por artigo e resolva 2,7 milhões de questões de concursos, com gabarito oficial, cronograma individual e edital verticalizado." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
