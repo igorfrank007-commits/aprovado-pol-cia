@@ -143,7 +143,7 @@ export function trackViewContent(params?: Record<string, unknown>): void {
  */
 export function trackCheckoutClick(params?: Record<string, unknown>): void {
   trackMetaEvent('CheckoutClick', {
-    content_name: 'Método Aprovado — CTA Comprar',
+    content_name: 'Lei Seca em Questões — CTA Comprar',
     ...params,
   });
 }
