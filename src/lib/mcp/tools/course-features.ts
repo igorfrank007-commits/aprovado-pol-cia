@@ -3,9 +3,9 @@ import { benefits } from "@/lib/sales-content";
 
 export default defineTool({
   name: "course_features",
-  title: "O que você recebe no Lei Seca em Questões",
+  title: "O que você recebe no Legislação Estratégica em Questões",
   description:
-    "Lists the resources included in the Lei Seca em Questões study site, each with its title and full description.",
+    "Lists the resources included in the Legislação Estratégica em Questões study site, each with its title and full description.",
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
   handler: () => {
     const features = benefits.map(({ title, desc }) => ({ title, description: desc }));

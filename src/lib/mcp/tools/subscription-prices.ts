@@ -7,7 +7,7 @@ export default defineTool({
   name: "subscription_prices",
   title: "Planos e preços da assinatura",
   description:
-    "Returns the Lei Seca em Questões subscription prices in Brazilian reais: the monthly plan (charged every month) and the annual plan split into installments.",
+    "Returns the Legislação Estratégica em Questões subscription prices in Brazilian reais: the monthly plan (charged every month) and the annual plan split into installments.",
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
   handler: () => {
     const prices = {
