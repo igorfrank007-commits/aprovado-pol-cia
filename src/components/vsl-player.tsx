@@ -18,7 +18,7 @@ const VIMEO_ORIGIN = 'https://player.vimeo.com';
 const POSTER_SRC = '/uploads/vsl-capa.jpg';
 const VIMEO_SRC =
   `${VIMEO_ORIGIN}/video/${VIMEO_ID}` +
-  '?autoplay=1&muted=1&controls=0&title=0&byline=0&portrait=0&pip=0&keyboard=0&dnt=1&playsinline=1&autopause=0&color=c8a24a';
+  '?api=1&autoplay=1&muted=1&controls=0&title=0&byline=0&portrait=0&pip=0&keyboard=0&dnt=1&playsinline=1&autopause=0&color=c8a24a';
 
 /** Momento do vídeo que dispara a rolagem suave até a oferta: 18 minutos e 53 segundos. */
 const TRIGGER_SECONDS = 18 * 60 + 53;
