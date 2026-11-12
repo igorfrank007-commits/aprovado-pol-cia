@@ -16,10 +16,10 @@ import { benefits, whatsappUrl, mentorship, offer, faqs } from '@/lib/sales-cont
 // ---------------------------------------------------------------------------
 // VÍDEO DE VENDAS
 // O vídeo (VSL) ainda é o da aula do Operação Estudei, até gravar um vídeo do Lei Seca.
-// O botão e o restante da página só aparecem depois de VSL_REVEAL_SECONDS de vídeo tocado.
+// O botão e o restante da página só aparecem depois de VSL_REVEAL_SECONDS (80) de vídeo tocado.
 // ---------------------------------------------------------------------------
 const MOSTRAR_VSL = true;
-const VSL_REVEAL_SECONDS = 90;
+const VSL_REVEAL_SECONDS = 80;
 const VIMEO_ORIGIN = 'https://player.vimeo.com';
 
 export const Route = createFileRoute('/')({
@@ -38,14 +38,16 @@ function Index() {
  useMetaPixelTracking();
  // Animações de entrada (fade-in + slide) via IntersectionObserver, após a liberação das seções.
  useScrollReveal(sectionsVisible);
- // Com o vídeo ligado, libera o botão e o restante da página quando o vídeo chega a 90 segundos de reprodução.
+ // Com o vídeo ligado, libera o botão e o restante da página quando o vídeo chega a 80 segundos de reprodução.
  useEffect(() => {
   if (!MOSTRAR_VSL) return;
   const onMessage = (event: MessageEvent) => {
    if (event.origin !== VIMEO_ORIGIN) return;
    let payload: { event?: string; data?: { seconds?: number } } | null = null;
    try { payload = typeof event.data === 'string' ? JSON.parse(event.data) : event.data; } catch { return; }
-   if (payload?.event === 'timeupdate' && (payload.data?.seconds ?? 0) >= VSL_REVEAL_SECONDS) setSectionsVisible(true);
+   // O Vimeo manda o tempo como "playProgress" (com api=1) ou "timeupdate" (SDK): vale qualquer evento com `seconds`.
+   const seconds = payload?.data?.seconds;
+   if (typeof seconds === 'number' && seconds >= VSL_REVEAL_SECONDS) setSectionsVisible(true);
   };
   window.addEventListener('message', onMessage);
   // Pede ao player do Vimeo os eventos de tempo. O iframe pode responder antes do componente
@@ -54,7 +56,7 @@ function Index() {
   const pedir = () => {
    tentativas += 1;
    document.querySelectorAll<HTMLIFrameElement>('iframe[src*="player.vimeo.com"]').forEach((frame) => {
-    frame.contentWindow?.postMessage(JSON.stringify({ method: 'addEventListener', value: 'timeupdate' }), VIMEO_ORIGIN);
+    ['timeupdate', 'playProgress'].forEach((value) => frame.contentWindow?.postMessage(JSON.stringify({ method: 'addEventListener', value }), VIMEO_ORIGIN));
    });
    if (tentativas > 600) window.clearInterval(timer);
   };

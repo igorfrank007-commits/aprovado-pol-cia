@@ -101,7 +101,7 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
 
   /** Pede ao Vimeo os eventos que alimentam a barra de avanço e o estado de play/pause. */
   const subscribe = useCallback(() => {
-    ['play', 'pause', 'ended', 'timeupdate', 'bufferstart', 'bufferend'].forEach((name) =>
+    ['play', 'pause', 'ended', 'finish', 'timeupdate', 'playProgress', 'bufferstart', 'bufferend'].forEach((name) =>
       post('addEventListener', name),
     );
   }, [post]);
@@ -164,6 +164,8 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
         case 'bufferend':
           setLoading(false);
           break;
+        // Com api=1 o Vimeo manda o tempo como "playProgress"; "timeupdate" é o nome do SDK.
+        case 'playProgress':
         case 'timeupdate':
           if (typeof seconds === 'number') {
             if (seconds > 0) {
@@ -177,6 +179,7 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
             maybeTrigger(seconds);
           }
           break;
+        case 'finish':
         case 'ended':
           setPlaying(false);
           fireOffer();
