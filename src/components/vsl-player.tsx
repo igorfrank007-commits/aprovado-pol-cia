@@ -47,7 +47,10 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const firedRef = useRef(false);
   const draggingRef = useRef(false);
+  const apiReadyRef = useRef(false);
+  const pausedRef = useRef(false);
 
+  const [apiReady, setApiReady] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [current, setCurrent] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -96,6 +99,28 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
     );
   }, []);
 
+  /** Pede ao Vimeo os eventos que alimentam a barra de avanço e o estado de play/pause. */
+  const subscribe = useCallback(() => {
+    ['play', 'pause', 'ended', 'timeupdate', 'bufferstart', 'bufferend'].forEach((name) =>
+      post('addEventListener', name),
+    );
+  }, [post]);
+
+  // O iframe vem no HTML e pode avisar "ready" antes de este componente começar a escutar.
+  // Por isso a inscrição é repetida até o player responder com algum evento.
+  useEffect(() => {
+    let tries = 0;
+    const timer = window.setInterval(() => {
+      if (apiReadyRef.current || ++tries > 40) {
+        window.clearInterval(timer);
+        return;
+      }
+      subscribe();
+    }, 500);
+    subscribe();
+    return () => window.clearInterval(timer);
+  }, [subscribe]);
+
   // Escuta os eventos do player do Vimeo: tempo, duração, play/pause e buffer.
   // É isso que alimenta a barra de avanço própria (o Vimeo não mostra nada).
   useEffect(() => {
@@ -115,17 +140,22 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
       const seconds = payload.data?.seconds;
       if (typeof total === 'number' && total > 0) setDuration(total);
 
+      if (payload.event !== 'ready') {
+        apiReadyRef.current = true;
+        setApiReady(true);
+      }
+
       switch (payload.event) {
         case 'ready':
-          ['play', 'pause', 'ended', 'timeupdate', 'bufferstart', 'bufferend'].forEach((name) =>
-            post('addEventListener', name),
-          );
+          subscribe();
           post('setVolume', 1);
           break;
         case 'play':
+          pausedRef.current = false;
           setPlaying(true);
           break;
         case 'pause':
+          pausedRef.current = true;
           setPlaying(false);
           break;
         case 'bufferstart':
@@ -139,6 +169,8 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
             if (seconds > 0) {
               setStarted(true);
               setLoading(false);
+              // Cobre o caso em que o evento "play" veio antes da inscrição.
+              if (!pausedRef.current) setPlaying(true);
             }
             setCurrent(seconds);
             if (seconds >= SEEK_UNLOCK_SECONDS) setSeekUnlocked(true);
@@ -156,7 +188,7 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
 
     window.addEventListener('message', handleMessage);
     return () => window.removeEventListener('message', handleMessage);
-  }, [fireOffer, maybeTrigger, post]);
+  }, [fireOffer, maybeTrigger, post, subscribe]);
 
   const togglePlay = useCallback(() => {
     if (playing) post('pause');
@@ -273,7 +305,7 @@ export function VslPlayer({ onOfferReached }: VslPlayerProps) {
         />
 
         {/* Indicador discreto de play quando o vídeo está pausado */}
-        {unlocked && !playing && !loading && (
+        {unlocked && apiReady && !playing && !loading && (
           <div className="pointer-events-none absolute inset-0 z-20 grid place-items-center">
             <span className="grid size-14 place-items-center rounded-full border border-gold/60 bg-black/45 shadow-gold sm:size-20">
               <Play className="size-6 translate-x-0.5 fill-current text-gold sm:size-8" />
