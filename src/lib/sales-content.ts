@@ -7,9 +7,10 @@ export const signupUrl = lawSecaSignupUrl;
 // Segunda linha dos botões ("Criar conta gratuita"): o preço do plano aparece aqui.
 export const ctaSub = 'Plano anual · 12x de R$ 19,80';
 export const monthlyCtaSub = 'Plano mensal · R$ 29,90';
+export const avulsoCtaSub = 'Avulso 30 dias · R$ 37,00';
 export const whatsappUrl = 'https://wa.me/5555981205146';
 // Preços do Legislação Estratégica em Questões (conferidos em src/acesso.ts do site).
-export const offer = { monthly: 29.90, annualInstallments: 12, annualInstallment: 19.80, annualTotal: 237.60, guaranteeDays: 7 };
+export const offer = { avulso: 37.00, avulsoDays: 30, monthly: 29.90, annualInstallments: 12, annualInstallment: 19.80, annualTotal: 237.60, guaranteeDays: 7 };
 
 // Ferramentas do Legislação Estratégica em Questões, na ordem da página.
 export const benefits = [
@@ -69,6 +70,7 @@ export const faqs = [
   { question: 'O que eu consigo fazer de graça?', answer: 'Na conta grátis você resolve até 10 questões novas de lei seca por dia, lê a lei seca completa e tem o seu progresso salvo na conta.' },
   { question: 'Qual a diferença entre o plano mensal e o anual?', answer: `Os dois liberam o mesmo conteúdo. O mensal custa R$ ${offer.monthly.toFixed(2).replace('.', ',')} e é cobrado todo mês. O anual sai por ${offer.annualInstallments}x de R$ ${offer.annualInstallment.toFixed(2).replace('.', ',')}, o que soma R$ ${offer.annualTotal.toFixed(2).replace('.', ',')} por ano.` },
   { question: 'O curso tem garantia?', answer: `Sim. A garantia é de ${offer.guaranteeDays} dias. Se não for para você, peça o reembolso dentro desse prazo e o valor é devolvido integralmente.` },
+  { question: 'Qual a diferença do plano avulso?', answer: `O avulso custa R$ ${offer.avulso.toFixed(2).replace('.', ',')} uma única vez e libera o conteúdo por ${offer.avulsoDays} dias. Ele não renova sozinho: depois do prazo, o acesso volta ao plano gratuito, a menos que você escolha outro plano.` },
   { question: 'Posso cancelar quando quiser?', answer: 'Sim. Você cancela a renovação pelo botão "Gerenciar assinatura" que a Kiwify envia no e-mail de confirmação do pagamento. O acesso continua até o fim do período já pago.' },
   { question: 'Como funciona o pagamento?', answer: 'O pagamento é feito pela Kiwify, com cartão, Pix ou boleto. Assim que o pagamento é aprovado, a sua conta é liberada automaticamente.' },
   { question: 'Como funciona o cronograma individual?', answer: 'Você informa o concurso, os dias e as horas que vai estudar. O site monta o cronograma com as matérias por peso, revisões de 24 horas, revisão semanal e mensal e simulados a cada 14 dias. Você pode baixar o cronograma em PDF.' },
