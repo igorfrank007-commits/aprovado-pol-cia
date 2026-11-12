@@ -12,14 +12,15 @@ import { MobileCtaBar } from '@/components/mobile-cta-bar';
 import { CookieBanner } from '@/components/cookie-banner';
 import { useScrollReveal } from '@/hooks/use-scroll-reveal';
 import { useMetaPixelTracking } from '@/hooks/use-meta-pixel';
-import { benefits, whatsappUrl, mentorship, offer, ctaSub, monthlyCtaSub, monthlyCheckoutUrl, faqs } from '@/lib/sales-content';
+import { benefits, whatsappUrl, mentorship, offer, faqs } from '@/lib/sales-content';
 // ---------------------------------------------------------------------------
 // VÍDEO DE VENDAS
-// O vídeo atual (VSL) ainda é o da aula do Operação Estudei. Fica ligado até gravar um vídeo do Lei Seca.
-// Com o vídeo ligado, as seções abaixo ficam ocultas e são liberadas após o tempo de `delaySeconds`.
+// O vídeo (VSL) ainda é o da aula do Operação Estudei, até gravar um vídeo do Lei Seca.
+// O botão e o restante da página só aparecem depois de VSL_REVEAL_SECONDS de vídeo tocado.
 // ---------------------------------------------------------------------------
 const MOSTRAR_VSL = true;
-const delaySeconds = 90;
+const VSL_REVEAL_SECONDS = 90;
+const VIMEO_ORIGIN = 'https://player.vimeo.com';
 
 export const Route = createFileRoute('/')({
  head: () => ({meta:[
@@ -37,23 +38,27 @@ function Index() {
  useMetaPixelTracking();
  // Animações de entrada (fade-in + slide) via IntersectionObserver, após a liberação das seções.
  useScrollReveal(sectionsVisible);
- // Com o vídeo ligado, libera as seções abaixo dele após `delaySeconds`.
+ // Com o vídeo ligado, libera o botão e o restante da página quando o vídeo chega a 90 segundos de reprodução.
  useEffect(() => {
   if (!MOSTRAR_VSL) return;
-  const timer = window.setTimeout(() => setSectionsVisible(true), delaySeconds * 1000);
-  return () => window.clearTimeout(timer);
+  const onMessage = (event: MessageEvent) => {
+   if (event.origin !== VIMEO_ORIGIN) return;
+   let payload: { event?: string; data?: { seconds?: number } } | null = null;
+   try { payload = typeof event.data === 'string' ? JSON.parse(event.data) : event.data; } catch { return; }
+   if (payload?.event === 'timeupdate' && (payload.data?.seconds ?? 0) >= VSL_REVEAL_SECONDS) setSectionsVisible(true);
+  };
+  window.addEventListener('message', onMessage);
+  return () => window.removeEventListener('message', onMessage);
  }, []);
- // Gatilho do player (só com o vídeo ligado): libera o restante da página e rola até o botão de compra.
- function scrollToOffer() { setSectionsVisible(true); document.getElementById('cta-oferta-principal')?.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
 
  return <main className="min-h-screen overflow-x-hidden bg-background text-foreground">
  <MobileCtaBar />
  <CookieBanner />
  <section className="relative overflow-hidden bg-gradient-hero"><div aria-hidden className="grid-bg absolute inset-0 opacity-40" /><div className="relative mx-auto flex max-w-4xl flex-col items-center px-4 pb-10 pt-8 text-center sm:px-6 sm:py-14">
-  <div className="w-full animate-fade-up"><div className="flex flex-wrap items-center justify-center gap-2"><Kicker><Shield className="mr-1.5 inline size-3.5" />Lei seca artigo por artigo</Kicker><Kicker><MessageCircle className="mr-1.5 inline size-3.5" />Não é curso em vídeo</Kicker></div><h1 className="mt-4 font-display text-[1.45rem] font-bold uppercase leading-[1.14] sm:mt-5 sm:text-4xl sm:leading-[1.08] md:text-5xl">TREINE A LEI SECA E RESOLVA <Gold>2,7 MILHÕES DE QUESTÕES</Gold> DE CONCURSOS NO MESMO LUGAR. <Gold>COMECE GRÁTIS.</Gold></h1></div>
-  {MOSTRAR_VSL ? <div className="mt-6 w-full max-w-3xl sm:mt-8"><VslPlayer onOfferReached={scrollToOffer} /></div> : <p className="mt-5 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:mt-6 sm:text-lg">Questões com gabarito oficial das bancas, cronograma individual e edital verticalizado. Você entra com uma conta grátis e assina quando quiser liberar tudo.</p>}
-  <div id="cta-oferta-principal" className="mt-6 flex w-full max-w-3xl flex-col items-center gap-2.5 sm:gap-3"><div className="flex w-full flex-col items-center justify-center gap-3 sm:flex-row sm:items-stretch"><Checkout sub={ctaSub} pulse shimmer>Criar conta gratuita</Checkout><Checkout href={monthlyCheckoutUrl} sub={monthlyCtaSub} pulse={false} variant="outline">Criar conta gratuita</Checkout></div><span className="text-center text-[10px] uppercase leading-relaxed text-muted-foreground sm:text-xs">Acesso imediato · Garantia de {offer.guaranteeDays} dias com devolução integral</span></div>
-  <ul className="mt-7 grid w-full max-w-md gap-2 text-sm sm:mt-8 sm:max-w-none sm:text-base">{['10 questões de lei seca grátis por dia','Gabarito oficial das bancas, com filtros por cargo, órgão e ano','Cronograma e edital verticalizado na mesma conta'].map(t=><li key={t} className="flex items-center justify-center gap-2 text-balance"><CircleCheck className="size-5 shrink-0 text-gold" />{t}</li>)}</ul>
+  <div className="w-full animate-fade-up"><div className="flex flex-wrap items-center justify-center gap-2"><Kicker><Shield className="mr-1.5 inline size-3.5" />Lei seca artigo por artigo</Kicker><Kicker><MessageCircle className="mr-1.5 inline size-3.5" />Não é curso em vídeo</Kicker></div><h1 className="mt-4 font-display text-[1.45rem] font-bold uppercase leading-[1.14] sm:mt-5 sm:text-4xl sm:leading-[1.08] md:text-5xl">Conheça a plataforma mais completa para alcançar sua aprovação em concursos!</h1><p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:mt-5 sm:text-lg">Com ela, fui aprovado <Gold>3x na Polícia Federal</Gold>, <Gold>1x na ABIN</Gold>, <Gold>1x na Polícia Penal</Gold> e <Gold>4x para Delegado de Polícia</Gold>.</p></div>
+  {MOSTRAR_VSL ? <div className="mt-6 w-full max-w-3xl sm:mt-8"><VslPlayer /></div> : <p className="mt-5 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:mt-6 sm:text-lg">Questões com gabarito oficial das bancas, cronograma individual e edital verticalizado. Você entra com uma conta grátis e assina quando quiser liberar tudo.</p>}
+  <div className={sectionsVisible ? 'animate-fade-up' : 'hidden'}><div id="cta-oferta-principal" className="mt-6 flex w-full max-w-3xl flex-col items-center gap-2.5 sm:gap-3"><Checkout pulse shimmer>Criar conta gratuita</Checkout><span className="text-center text-[10px] uppercase leading-relaxed text-muted-foreground sm:text-xs">Acesso imediato · Garantia de {offer.guaranteeDays} dias com devolução integral</span></div>
+  <ul className="mt-7 grid w-full max-w-md gap-2 text-sm sm:mt-8 sm:max-w-none sm:text-base">{['10 questões de lei seca grátis por dia','Gabarito oficial das bancas, com filtros por cargo, órgão e ano','Cronograma e edital verticalizado na mesma conta'].map(t=><li key={t} className="flex items-center justify-center gap-2 text-balance"><CircleCheck className="size-5 shrink-0 text-gold" />{t}</li>)}</ul></div>
  </div></section>
  <div id="conteudo-liberado" className={sectionsVisible ? 'animate-fade-up' : 'hidden'}>
   <section className="bg-secondary/30 py-10 sm:py-14"><div className="mx-auto max-w-7xl px-4 sm:px-6">
