@@ -48,7 +48,22 @@ function Index() {
    if (payload?.event === 'timeupdate' && (payload.data?.seconds ?? 0) >= VSL_REVEAL_SECONDS) setSectionsVisible(true);
   };
   window.addEventListener('message', onMessage);
-  return () => window.removeEventListener('message', onMessage);
+  // Pede ao player do Vimeo os eventos de tempo. O iframe pode responder antes do componente
+  // estar escutando, então o pedido é repetido até o vídeo começar a mandar o tempo.
+  let tentativas = 0;
+  const pedir = () => {
+   tentativas += 1;
+   document.querySelectorAll<HTMLIFrameElement>('iframe[src*="player.vimeo.com"]').forEach((frame) => {
+    frame.contentWindow?.postMessage(JSON.stringify({ method: 'addEventListener', value: 'timeupdate' }), VIMEO_ORIGIN);
+   });
+   if (tentativas > 600) window.clearInterval(timer);
+  };
+  const timer = window.setInterval(pedir, 500);
+  pedir();
+  return () => {
+   window.clearInterval(timer);
+   window.removeEventListener('message', onMessage);
+  };
  }, []);
 
  return <main className="min-h-screen overflow-x-hidden bg-background text-foreground">
